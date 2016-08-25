@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 @import SambaPlayer;
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController<SambaPlayerDelegate>
 
 @end
 
