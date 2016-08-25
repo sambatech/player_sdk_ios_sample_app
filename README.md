@@ -40,29 +40,7 @@ Em seguida, arraste os frameworks da pasta de saída (Carthage/Build/iOS/) para 
 
 ![readme1](https://cloud.githubusercontent.com/assets/484062/16528649/85e947ce-3f94-11e6-8806-6020775d8d02.gif)
 
-Efetue as seguintes configurações em *Target -> Build Settings*:
-
-- Frameworks com código em Swift precisam ser informados
-<br>*Build Options -> Embedded Content Contains Swift Code -> __Yes__*
-- O processo de assinatura de aplicativos [é "raso" e não abrange as dependências](http://stackoverflow.com/a/17396143/3688598)
-<br>*Code Signing -> Other Code Signing Flags -> __--deep__*
-
-E finalmente, em *Target -> Build Phases*:
-
-- Garanta que o framework será copiado junto ao aplicativo
- 1. Clique no botão "+" (na área superior) -> *__New Copy Files Phase__*
- 1. Escolha o local de destino ou *Destination -> __Frameworks__*
- 1. Inclua o SambaPlayer.framework à __lista__ (área inferior)
-
-Será necessário permitir acesso à internet para o aplicativo, o que pode ser feito desabilitando os requerimentos de segurança do iOS para comunicações em HTTP (ATS - App Transport Security). Para isto, adicione o seguinte ao `Info.plist`:
-
-```xml
-<key>NSAppTransportSecurity</key>
-<dict>
-	<key>NSAllowsArbitraryLoads</key>
-	<true/>
-</dict>
-```
+Uma vez que o projeto já está preconfigurado não é necessário efetuar outras configurações. Para visualizar todas as etapas de configuração acesse o [repositório do SambaPlayer SDK](https://github.com/sambatech/player_sdk_ios).
 
 ## Suporte
 Qualquer pergunta, sugestão ou notificação de bugs, basta criar uma [nova issue](https://github.com/sambatech/player_sdk_ios_sample_app/issues/new) que responderemos assim que possível.
