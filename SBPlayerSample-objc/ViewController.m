@@ -22,7 +22,6 @@
 @implementation ViewController
 
 SambaPlayer *p;
-BOOL asdf;
 
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
