@@ -29,7 +29,7 @@ SambaPlayer *p;
 	if (p != nil) return;
 	
 	p = [[SambaPlayer alloc] initWithParentViewController:self andParentView:_container];
-	SambaMedia *media = [[SambaMedia alloc] init:@"http://pvbps-sambavideos.akamaized.net/account/100/6/2015-12-09/video/354849d292e105b3937e262f7caa9ed0/Wildlife_240p.mp4"];
+	SambaMedia *media = [[SambaMedia alloc] init:@"http://svbps-sambavideos.akamaized.net/voda/_definst_/amlst%3Astg.test%3B100243%2C530%2C24a89d4aa21fc48385d3412341df8cbd%3Bhidden32%3BWRDYQCD63MQ25BTVKRMEJXYREOJKRTB4OWNZJWDOLOZSNOKZ6QON6R6MPG2CEKS5JJBWBCNHHF4QIWNV6DC75KAABII4Y7T5UNN3W5RS56JJQX5TDS6GXSOH3EZINJFIC4HHUTOXOJFJ3LZWZE7G2WKT7T2FCWZYKVBGTRCEAHLS7XA7FKBA%3D%3D%3D%3D/playlist.m3u8"];
 	
 	p.media = media;
 	//p.controlsVisible = NO;
@@ -86,12 +86,12 @@ SambaPlayer *p;
 }
 - (IBAction)rwHandler {
 	if (p == nil) return;
-	int pos = _seekBy.text.integerValue - p.currentTime;
+	int pos = p.currentTime - _seekBy.text.integerValue;
 	[p seek:pos > 0 ? pos : 0];
 }
 - (IBAction)fwHandler {
 	if (p == nil) return;
-	int pos = _seekBy.text.integerValue + p.currentTime;
+	int pos = p.currentTime + _seekBy.text.integerValue;
 	[p seek:pos < p.duration ? pos : p.duration];
 }
 
