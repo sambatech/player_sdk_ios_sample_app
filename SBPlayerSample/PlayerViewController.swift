@@ -73,6 +73,10 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 	}
 	
 	func onLoad() {
+		if let time = sambaPlayer?.duration {
+			duration.text = secondsToHoursMinutesSeconds(time)
+		}
+		
 		eventName.text = "load"
 	}
 	
@@ -89,8 +93,11 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 	}
 	
 	func onProgress() {
-		guard let time = sambaPlayer?.currentTime else { return }
-		currentTime.text = secondsToHoursMinutesSeconds(time)
+		if let time = sambaPlayer?.currentTime {
+			currentTime.text = secondsToHoursMinutesSeconds(time)
+		}
+		
+		eventName.text = "progress"
 	}
 	
 	func onFinish() {
@@ -135,10 +142,8 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 	
 	//MARK: utils
 	
-	private func secondsToHoursMinutesSeconds (seconds : Float) -> (String) {
-		let hours = Int(seconds/3600) > 9 ? String(Int(seconds/3600)) : "0" + String(Int(seconds/3600))
-		let minutes = Int((seconds % 3600) / 60) > 9 ? String(Int((seconds % 3600) / 60)) : "0" + String(Int((seconds % 3600) / 60))
-		let second = Int((seconds % 3600) % 60) > 9 ? String(Int((seconds % 3600) % 60)) : "0" + String(Int((seconds % 3600) % 60))
-		return hours + ":" + minutes + ":" + second
+	private func secondsToHoursMinutesSeconds(seconds : Float) -> (String) {
+		let s = Int(seconds)
+		return String(format: "%02d:%02d:%02d", s/3600%60, s/60%60, s%60)
 	}
 }
