@@ -70,7 +70,7 @@ SambaPlayer *p;
 }
 - (IBAction)seekHandler {
 	if (p == nil) return;
-	[p seek:_seekTo.text.integerValue];
+	[p seek:_seekTo.text.floatValue];
 }
 - (IBAction)playHandler {
 	if (p == nil) return;
@@ -86,12 +86,12 @@ SambaPlayer *p;
 }
 - (IBAction)rwHandler {
 	if (p == nil) return;
-	int pos = p.currentTime - _seekBy.text.integerValue;
+	float pos = p.currentTime - _seekBy.text.floatValue;
 	[p seek:pos > 0 ? pos : 0];
 }
 - (IBAction)fwHandler {
 	if (p == nil) return;
-	int pos = p.currentTime + _seekBy.text.integerValue;
+	float pos = p.currentTime + _seekBy.text.floatValue;
 	[p seek:pos < p.duration ? pos : p.duration];
 }
 

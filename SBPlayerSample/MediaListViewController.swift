@@ -10,14 +10,15 @@ import AVKit
 
 class MediaListViewController : UITableViewController {
 	
-	@IBOutlet weak var liveToggleButton: UIButton!
-	@IBOutlet weak var dfpToggleButton: UIButton!
+	@IBOutlet var liveToggleButton: UIButton!
+	@IBOutlet var dfpToggleButton: UIButton!
 	@IBOutlet var dfpTextField: UITextField!
 	
 	private var mediaList = [MediaInfo]()
 	private let defaultDfp: String = "4xtfj"
 	private var dfpActive: Bool = false
 	private var liveActive: Bool = false
+	private var isAutoStart: Bool = true
 	
 	override func viewDidLoad() {
 		self.tableView.backgroundColor = UIColor.clearColor()
@@ -35,7 +36,10 @@ class MediaListViewController : UITableViewController {
 	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 		if segue.identifier != "ListItemToDetail" { return }
 		
-		(segue.destinationViewController as! PlayerViewController).mediaInfo = mediaList[(tableView.indexPathForSelectedRow?.row)!]
+		let mediaInfo = mediaList[(tableView.indexPathForSelectedRow?.row)!]
+		mediaInfo.isAutoStart = isAutoStart
+		
+		(segue.destinationViewController as! PlayerViewController).mediaInfo = mediaInfo
 	}
 	
 	override func tableView(tableView: UITableView?, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -293,6 +297,11 @@ class MediaListViewController : UITableViewController {
 			fillLive()
 		}
 	}
+	
+	@IBAction func autoStartHandler(sender: UIButton) {
+		sender.tintColor = isAutoStart ? UIColor.lightGrayColor() : UIColor(colorLiteralRed: 0, green: 0.4, blue: 1, alpha: 1)
+		isAutoStart = !isAutoStart
+	}
 }
 
 class MediaInfo {
@@ -305,6 +314,7 @@ class MediaInfo {
 	var description:String?
 	let mediaURL:String?
 	let isLiveAudio: Bool?
+	var isAutoStart = true
 	
 	init(title:String, thumb:String, projectHash:String, mediaId:String? = nil, isAudio:Bool = false, description:String? = nil, mediaAd:String? = nil, mediaURL:String? = nil, isLiveAudio: Bool? = false) {
 		self.title = title

@@ -11,17 +11,21 @@ import SambaPlayer
 
 class PlayerViewController: UIViewController, SambaPlayerDelegate {
 	
-	@IBOutlet weak var playerContainer: UIView!
-	@IBOutlet weak var progressLabel: UILabel!
-	@IBOutlet weak var timeField: UITextField!
+	@IBOutlet var playerContainer: UIView!
+	@IBOutlet var eventName: UILabel!
+	@IBOutlet var currentTime: UILabel!
+	@IBOutlet var duration: UILabel!
+	@IBOutlet var seekTo: UITextField!
+	@IBOutlet var seekBy: UITextField!
 	
-	var sambaPlayer: SambaPlayer!
 	var mediaInfo: MediaInfo?
+	
+	private var sambaPlayer: SambaPlayer?
 	
 	override func viewDidAppear(animated: Bool) {
 		super.viewDidAppear(animated)
 		
-		guard let m = self.mediaInfo else {
+		guard let m = mediaInfo else {
 			print("Error: No media info found!")
 			return
 		}
@@ -33,7 +37,7 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 			self.initPlayer(media)
 		}
 		
-		if (m.mediaId != nil) {
+		if m.mediaId != nil {
 			SambaApi().requestMedia(SambaMediaRequest(
 				projectHash: m.projectHash,
 				mediaId: m.mediaId!), callback: callback)
@@ -52,54 +56,86 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 		}
 
 		if media.isAudio {
-			var frame = self.playerContainer.frame
+			var frame = playerContainer.frame
 			frame.size.height = media.isLive ? 100 : 50
-			self.playerContainer.frame = frame
+			playerContainer.frame = frame
 		}
 		
-		self.sambaPlayer = SambaPlayer(parentViewController: self, andParentView: self.playerContainer)
-		self.sambaPlayer.delegate = self
-		self.sambaPlayer.media = media
-		self.sambaPlayer.play()
+		let player = SambaPlayer(parentViewController: self, andParentView: playerContainer)
+		player.delegate = self
+		player.media = media
+		
+		if let mediaInfo = mediaInfo where mediaInfo.isAutoStart {
+			player.play()
+		}
+		
+		sambaPlayer = player
 	}
 	
 	func onLoad() {
-		self.progressLabel.text = "load"
+		eventName.text = "load"
 	}
 	
 	func onStart() {
-		self.progressLabel.text = "start"
+		eventName.text = "start"
 	}
 	
 	func onResume() {
-		self.progressLabel.text = "resume"
+		eventName.text = "resume"
 	}
 	
 	func onPause() {
-		self.progressLabel.text = "pause"
+		eventName.text = "pause"
 	}
 	
 	func onProgress() {
-		self.timeField.text = self.secondsToHoursMinutesSeconds(self.sambaPlayer.currentTime)
+		guard let time = sambaPlayer?.currentTime else { return }
+		currentTime.text = secondsToHoursMinutesSeconds(time)
 	}
 	
 	func onFinish() {
-		self.progressLabel.text = "finish"
+		eventName.text = "finish"
 	}
 	
 	func onDestroy() {}
 	
 	//MARK: actions
-	@IBAction func playAction(sender: AnyObject) {
-		self.sambaPlayer.play()
+	
+	@IBAction func playHandler() {
+		sambaPlayer?.play()
 	}
 	
-	@IBAction func pauseAction(sender: AnyObject) {
-		self.sambaPlayer.pause()
+	@IBAction func pauseHandler() {
+		sambaPlayer?.pause()
+	}
+	
+	@IBAction func stopHandler() {
+		sambaPlayer?.stop()
+	}
+	
+	@IBAction func seekHandler() {
+		guard let posStr = seekTo.text,
+			pos = Float(posStr) else { return }
+		sambaPlayer?.seek(pos)
+	}
+	
+	@IBAction func rwHandler() {
+		guard let byStr = seekBy.text,
+			time = sambaPlayer?.currentTime,
+			by = Float(byStr) else { return }
+		sambaPlayer?.seek(time - by)
+	}
+	
+	@IBAction func fwHandler() {
+		guard let byStr = seekBy.text,
+			time = sambaPlayer?.currentTime,
+			by = Float(byStr) else { return }
+		sambaPlayer?.seek(time + by)
 	}
 	
 	//MARK: utils
-	func secondsToHoursMinutesSeconds (seconds : Float) -> (String) {
+	
+	private func secondsToHoursMinutesSeconds (seconds : Float) -> (String) {
 		let hours = Int(seconds/3600) > 9 ? String(Int(seconds/3600)) : "0" + String(Int(seconds/3600))
 		let minutes = Int((seconds % 3600) / 60) > 9 ? String(Int((seconds % 3600) / 60)) : "0" + String(Int((seconds % 3600) / 60))
 		let second = Int((seconds % 3600) % 60) > 9 ? String(Int((seconds % 3600) % 60)) : "0" + String(Int((seconds % 3600) % 60))
