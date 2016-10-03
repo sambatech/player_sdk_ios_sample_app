@@ -14,82 +14,78 @@ class MediaListViewController : UITableViewController {
 	@IBOutlet var dfpToggleButton: UIButton!
 	@IBOutlet var dfpTextField: UITextField!
 	
-	private var mediaList = [MediaInfo]()
-	private let defaultDfp: String = "4xtfj"
-	private var dfpActive: Bool = false
-	private var liveActive: Bool = false
-	private var isAutoStart: Bool = true
+	fileprivate var mediaList = [MediaInfo]()
+	fileprivate let defaultDfp: String = "4xtfj"
+	fileprivate var dfpActive: Bool = false
+	fileprivate var liveActive: Bool = false
+	fileprivate var isAutoStart: Bool = true
 	
 	override func viewDidLoad() {
-		self.tableView.backgroundColor = UIColor.clearColor()
+		self.tableView.backgroundColor = UIColor.clear
 		makeInitialRequests()
 		
 		//Button dfp
-		let dfpIcon = dfpToggleButton.currentBackgroundImage?.tintPhoto(UIColor.lightGrayColor())
-		dfpToggleButton.setImage(dfpIcon, forState: UIControlState.Normal)
+		let dfpIcon = dfpToggleButton.currentBackgroundImage?.tintPhoto(UIColor.lightGray)
+		dfpToggleButton.setImage(dfpIcon, for: UIControlState())
 		
 		//Button live
-		let liveIcon = liveToggleButton.currentBackgroundImage?.tintPhoto(UIColor.lightGrayColor())
-		liveToggleButton.setImage(liveIcon, forState: UIControlState.Normal)
+		let liveIcon = liveToggleButton.currentBackgroundImage?.tintPhoto(UIColor.lightGray)
+		liveToggleButton.setImage(liveIcon, for: UIControlState())
 	}
 	
-	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if segue.identifier != "ListItemToDetail" { return }
 		
-		let mediaInfo = mediaList[(tableView.indexPathForSelectedRow?.row)!]
+		let mediaInfo = mediaList[((tableView.indexPathForSelectedRow as NSIndexPath?)?.row)!]
 		mediaInfo.isAutoStart = isAutoStart
 		
-		(segue.destinationViewController as! PlayerViewController).mediaInfo = mediaInfo
+		(segue.destination as! PlayerViewController).mediaInfo = mediaInfo
 	}
 	
-	override func tableView(tableView: UITableView?, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+	override func tableView(_ tableView: UITableView?, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellIdentifier = "MediaListTableViewCell"
-		let cell = tableView!.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! MediaListTableViewCell
+		let cell = tableView!.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! MediaListTableViewCell
 		
-		let media = mediaList[indexPath.row]
+		let media = mediaList[(indexPath as NSIndexPath).row]
 		
 		cell.mediaTitle.text = media.title
         cell.mediaDesc.text = media.description ?? ""
 		
-		cell.contentView.backgroundColor = UIColor(indexPath.row & 1 == 0 ? 0xEEEEEE : 0xFFFFFF)
+		cell.contentView.backgroundColor = UIColor((indexPath as NSIndexPath).row & 1 == 0 ? 0xEEEEEE : 0xFFFFFF)
 
         load_image(media.thumb, cell: cell)
 
 		return cell
 	}
     
-    func load_image(urlString:String, cell:MediaListTableViewCell) {
-        
-        let imgURL: NSURL = NSURL(string: urlString)!
-        let request: NSURLRequest = NSURLRequest(URL: imgURL)
-    
-        NSURLConnection.sendAsynchronousRequest(
-            request, queue: NSOperationQueue.mainQueue(),
-            completionHandler: {(response: NSURLResponse?, data: NSData?, error: NSError?) -> Void in
-                if error == nil {
-                    cell.mediaThumb?.image = UIImage(data: data!)
-                }
-        })
+    func load_image(_ urlString:String, cell:MediaListTableViewCell) {
+		Helpers.requestURL(urlString) { (data: Data?) in
+			DispatchQueue.main.async {
+				if let data = data {
+					cell.mediaThumb?.image = UIImage(data: data)
+				}
+			}
+        }
         
     }
 	
-	override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return mediaList.count
 	}
 	
-	override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+	override func numberOfSections(in tableView: UITableView) -> Int {
 		return 1
 	}
 	
-	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-		self.tableView.deselectRowAtIndexPath(indexPath, animated: false)
+	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		self.tableView.deselectRow(at: indexPath, animated: false)
 	}
 	
-	private func makeInitialRequests() {
+	fileprivate func makeInitialRequests() {
 		requestMediaSet([String.init(4421), String.init(4460)])
 	}
 	
-	private func requestMediaSet(pids:[String]) {
+	fileprivate func requestMediaSet(_ pids:[String]) {
 		var i = 0
 
 		func request() {
@@ -97,13 +93,13 @@ class MediaListViewController : UITableViewController {
 			let url = "\(Helpers.settings["svapi_endpoint"]!)medias?access_token=\(Helpers.settings["svapi_token"]!)&pid=\(pid)&published=true"
 			
 			Helpers.requestURLJson(url) { json in
-				guard let json = json else { return }
+				guard let json = json as? [AnyObject] else { return }
 				
 				for jsonNode in json {
 					var isAudio = false
 					
 					// skip non video or audio media
-					switch (jsonNode["qualifier"] as? String ?? "").lowercaseString {
+					switch (jsonNode["qualifier"] as? String ?? "").lowercased() {
 					case "audio":
 						isAudio = true
 						fallthrough
@@ -135,7 +131,9 @@ class MediaListViewController : UITableViewController {
 				i += 1
 				
 				if i == pids.count {
-					self.tableView.reloadData()
+					DispatchQueue.main.async {
+						self.tableView.reloadData()
+					}
 					return
 				}
 				
@@ -149,30 +147,31 @@ class MediaListViewController : UITableViewController {
 		}
 	}
 	
-	private func requestAds(hash: String) {
+	fileprivate func requestAds(_ hash: String) {
 		let url = "\(Helpers.settings["myjson_endpoint"]!)\(hash)"
 		
 		Helpers.requestURLJson(url) { json in
-			guard let json = json else {
-				self.enableDfpButton(false)
-				return
-			}
-			
-			var dfpIndex = 0
-			
-			for media in self.mediaList where !media.isAudio {
-				dfpIndex = dfpIndex < json.count - 1 ? dfpIndex + 1 : 0
+			DispatchQueue.main.async {
+				guard let json = json as? [AnyObject] else {
+					self.enableDfpButton(false)
+					return
+				}
 				
-				media.description = json[dfpIndex]["name"] as? String
-				media.mediaAd = json[dfpIndex]["url"] as? String
+				var dfpIndex = 0
+				
+				for media in self.mediaList where !media.isAudio {
+					dfpIndex = dfpIndex < json.count - 1 ? dfpIndex + 1 : 0
+					
+					media.description = json[dfpIndex]["name"] as? String
+					media.mediaAd = json[dfpIndex]["url"] as? String
+				}
+				
+				self.tableView.reloadData()
 			}
-			
-			self.tableView.reloadData()
-			
 		}
 	}
 	
-	private func enableDfpButton(state: Bool) {
+	fileprivate func enableDfpButton(_ state: Bool) {
 		guard state != dfpActive else { return }
 		
 		// disabling ads
@@ -185,13 +184,13 @@ class MediaListViewController : UITableViewController {
 			self.tableView.reloadData()
 		}
 		
-		let dfpIcon = dfpToggleButton.currentBackgroundImage?.tintPhoto(state ? UIColor.clearColor() : UIColor.lightGrayColor())
-		dfpToggleButton.setImage(dfpIcon, forState: UIControlState.Normal)
+		let dfpIcon = dfpToggleButton.currentBackgroundImage?.tintPhoto(state ? UIColor.clear : UIColor.lightGray)
+		dfpToggleButton.setImage(dfpIcon, for: UIControlState())
 		
 		dfpActive = state
 	}
 	
-	private func enableLiveButton(state: Bool) {
+	fileprivate func enableLiveButton(_ state: Bool) {
 		guard state != liveActive else { return }
 		
 		mediaList = [MediaInfo]()
@@ -200,14 +199,14 @@ class MediaListViewController : UITableViewController {
 			enableDfpButton(false)
 		}
 		
-		let liveIcon = liveToggleButton.currentBackgroundImage?.tintPhoto(state ? UIColor.clearColor() : UIColor.lightGrayColor())
-		liveToggleButton.setImage(liveIcon, forState: UIControlState.Normal)
+		let liveIcon = liveToggleButton.currentBackgroundImage?.tintPhoto(state ? UIColor.clear : UIColor.lightGray)
+		liveToggleButton.setImage(liveIcon, for: UIControlState())
 		
 		liveActive = state
 	}
 	
 	//Fill live
-	private func fillLive() {
+	fileprivate func fillLive() {
 		let thumbURL = "http://www.impactmobile.com/files/2012/09/icon64-broadcasts.png"
 		let ph = "bc6a17435f3f389f37a514c171039b75"
 		
@@ -290,7 +289,7 @@ class MediaListViewController : UITableViewController {
 		enableDfpButton(false)
 	}
 	
-	@IBAction func liveTapped(sender: AnyObject) {
+	@IBAction func liveTapped(_ sender: AnyObject) {
 		enableLiveButton(!liveActive)
 		
 		if liveActive {
@@ -298,8 +297,8 @@ class MediaListViewController : UITableViewController {
 		}
 	}
 	
-	@IBAction func autoStartHandler(sender: UIButton) {
-		sender.tintColor = isAutoStart ? UIColor.lightGrayColor() : UIColor(colorLiteralRed: 0, green: 0.4, blue: 1, alpha: 1)
+	@IBAction func autoStartHandler(_ sender: UIButton) {
+		sender.tintColor = isAutoStart ? UIColor.lightGray : UIColor(colorLiteralRed: 0, green: 0.4, blue: 1, alpha: 1)
 		isAutoStart = !isAutoStart
 	}
 }

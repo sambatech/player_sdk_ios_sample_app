@@ -20,9 +20,9 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 	
 	var mediaInfo: MediaInfo?
 	
-	private var sambaPlayer: SambaPlayer?
+	fileprivate var sambaPlayer: SambaPlayer?
 	
-	override func viewDidAppear(animated: Bool) {
+	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 		
 		guard let m = mediaInfo else {
@@ -49,7 +49,7 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 		}
 	}
 	
-	private func initPlayer(media: SambaMedia) {
+	fileprivate func initPlayer(_ media: SambaMedia) {
 		// if ad injection
 		if let url = mediaInfo?.mediaAd {
 			media.adUrl = url
@@ -65,7 +65,7 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 		player.delegate = self
 		player.media = media
 		
-		if let mediaInfo = mediaInfo where mediaInfo.isAutoStart {
+		if let mediaInfo = mediaInfo , mediaInfo.isAutoStart {
 			player.play()
 		}
 		
@@ -122,27 +122,27 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 	
 	@IBAction func seekHandler() {
 		guard let posStr = seekTo.text,
-			pos = Float(posStr) else { return }
+			let pos = Float(posStr) else { return }
 		sambaPlayer?.seek(pos)
 	}
 	
 	@IBAction func rwHandler() {
 		guard let byStr = seekBy.text,
-			time = sambaPlayer?.currentTime,
-			by = Float(byStr) else { return }
+			let time = sambaPlayer?.currentTime,
+			let by = Float(byStr) else { return }
 		sambaPlayer?.seek(time - by)
 	}
 	
 	@IBAction func fwHandler() {
 		guard let byStr = seekBy.text,
-			time = sambaPlayer?.currentTime,
-			by = Float(byStr) else { return }
+			let time = sambaPlayer?.currentTime,
+			let by = Float(byStr) else { return }
 		sambaPlayer?.seek(time + by)
 	}
 	
 	//MARK: utils
 	
-	private func secondsToHoursMinutesSeconds(seconds : Float) -> (String) {
+	fileprivate func secondsToHoursMinutesSeconds(_ seconds : Float) -> (String) {
 		let s = Int(seconds)
 		return String(format: "%02d:%02d:%02d", s/3600%60, s/60%60, s%60)
 	}
