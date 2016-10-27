@@ -20,7 +20,7 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 	
 	var mediaInfo: MediaInfo?
 	
-	fileprivate var sambaPlayer: SambaPlayer?
+	private var sambaPlayer: SambaPlayer?
 	
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
@@ -34,22 +34,43 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 		
 		let callback = { (media: SambaMedia?) in
 			guard let media = media else { return }
+			
+			if let valReq = m.validationRequest {
+				Helpers.requestURL(valReq.request) { (response: String?) in
+					valReq.callback(response)
+					self.initPlayer(media)
+				}
+				return
+			}
+			
 			self.initPlayer(media)
 		}
 		
-		if m.mediaId != nil {
+		guard let ph = m.projectHash else {
+			if let url = m.mediaURL {
+				let media = SambaMediaConfig()
+				media.url = url
+				media.title = m.title
+				media.thumb = m.thumb
+				callback(media)
+			}
+			
+			return
+		}
+		
+		if let mId = m.mediaId {
 			SambaApi().requestMedia(SambaMediaRequest(
-				projectHash: m.projectHash,
-				mediaId: m.mediaId!), callback: callback)
+				projectHash: ph,
+				mediaId: mId), callback: callback)
 		}
 		else {
 			SambaApi().requestMedia(SambaMediaRequest(
-				projectHash: m.projectHash,
+				projectHash: ph,
 				streamUrl: m.mediaURL!, isLiveAudio: m.isLiveAudio), callback: callback)
 		}
 	}
 	
-	fileprivate func initPlayer(_ media: SambaMedia) {
+	private func initPlayer(_ media: SambaMedia) {
 		// if ad injection
 		if let url = mediaInfo?.mediaAd {
 			media.adUrl = url
@@ -142,7 +163,7 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 	
 	//MARK: utils
 	
-	fileprivate func secondsToHoursMinutesSeconds(_ seconds : Float) -> (String) {
+	private func secondsToHoursMinutesSeconds(_ seconds : Float) -> (String) {
 		let s = Int(seconds)
 		return String(format: "%02d:%02d:%02d", s/3600%60, s/60%60, s%60)
 	}

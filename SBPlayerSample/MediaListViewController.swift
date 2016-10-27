@@ -14,11 +14,26 @@ class MediaListViewController : UITableViewController {
 	@IBOutlet var dfpToggleButton: UIButton!
 	@IBOutlet var dfpTextField: UITextField!
 	
-	fileprivate var mediaList = [MediaInfo]()
-	fileprivate let defaultDfp: String = "4xtfj"
-	fileprivate var dfpActive: Bool = false
-	fileprivate var liveActive: Bool = false
-	fileprivate var isAutoStart: Bool = true
+	private var mediaList = [MediaInfo]()
+	private let defaultDfp: String = "4xtfj"
+	private var dfpActive: Bool = false
+	private var liveActive: Bool = false
+	private var isAutoStart: Bool = true
+	private let irdetoRequest: ValidationRequest
+	
+	required init?(coder aDecoder: NSCoder) {
+		var req = URLRequest(url: URL(string: "http://sambatech.stage.ott.irdeto.com/services/CreateSession?CrmId=sambatech&UserId=smbUserTest")!)
+		
+		req.httpMethod = "POST"
+		req.addValue("app@sambatech.com", forHTTPHeaderField: "MAN-user-id")
+		req.addValue("c5kU6DCTmomi9fU", forHTTPHeaderField: "MAN-user-password")
+		
+		irdetoRequest = ValidationRequest(req) { (response: String?) in
+			print(response)
+		}
+		
+		super.init(coder: aDecoder)
+	}
 	
 	override func viewDidLoad() {
 		self.tableView.backgroundColor = UIColor.clear
@@ -50,24 +65,12 @@ class MediaListViewController : UITableViewController {
 		
 		cell.mediaTitle.text = media.title
         cell.mediaDesc.text = media.description ?? ""
+		media.imageView = cell.mediaThumb
 		
 		cell.contentView.backgroundColor = UIColor((indexPath as NSIndexPath).row & 1 == 0 ? 0xEEEEEE : 0xFFFFFF)
-
-        load_image(media.thumb, cell: cell)
-
+		
 		return cell
 	}
-    
-    func load_image(_ urlString:String, cell:MediaListTableViewCell) {
-		Helpers.requestURL(urlString) { (data: Data?) in
-			DispatchQueue.main.async {
-				if let data = data {
-					cell.mediaThumb?.image = UIImage(data: data)
-				}
-			}
-        }
-        
-    }
 	
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return mediaList.count
@@ -81,13 +84,26 @@ class MediaListViewController : UITableViewController {
 		self.tableView.deselectRow(at: indexPath, animated: false)
 	}
 	
-	fileprivate func makeInitialRequests() {
+	private func makeInitialRequests() {
 		requestMediaSet([String.init(4421), String.init(4460)])
 	}
 	
-	fileprivate func requestMediaSet(_ pids:[String]) {
+	private func requestMediaSet(_ pids:[String]) {
 		var i = 0
 
+		// INJECTED MEDIA
+		
+		let m = MediaInfo(
+			title: "DRM Cisco",
+			thumb: "http://pcgamingwiki.com/images/thumb/b/b3/DRM-free_icon.svg/120px-DRM-free_icon.svg.png",
+			projectHash: nil,
+			mediaId: nil,
+			isAudio: false,
+			mediaURL: "http://webdrm.cisco.com/mkravchik/test/roku.m3u8"
+		)
+		m.validationRequest = irdetoRequest
+		self.mediaList.append(m)
+		
 		func request() {
 			let pid = pids[i]
 			let url = "\(Helpers.settings["svapi_endpoint"]!)medias?access_token=\(Helpers.settings["svapi_token"]!)&pid=\(pid)&published=true"
@@ -119,9 +135,9 @@ class MediaListViewController : UITableViewController {
 
 					let m = MediaInfo(
 						title: jsonNode["title"] as? String ?? "",
-						thumb: (!isAudio) ? thumbUrl: "https://cdn4.iconfinder.com/data/icons/defaulticon/icons/png/256x256/media-volume-2.png",
+						thumb: isAudio ? "https://cdn4.iconfinder.com/data/icons/defaulticon/icons/png/256x256/media-volume-2.png" : thumbUrl,
 						projectHash: Helpers.settings["pid_" + pid]!,
-						mediaId: jsonNode["id"] as? String ?? "",
+						mediaId: jsonNode["id"] as? String ?? nil,
 						isAudio: isAudio
 					)
 					
@@ -138,7 +154,6 @@ class MediaListViewController : UITableViewController {
 				}
 				
 				request()
-				return
 			}
 		}
 		
@@ -147,7 +162,7 @@ class MediaListViewController : UITableViewController {
 		}
 	}
 	
-	fileprivate func requestAds(_ hash: String) {
+	private func requestAds(_ hash: String) {
 		let url = "\(Helpers.settings["myjson_endpoint"]!)\(hash)"
 		
 		Helpers.requestURLJson(url) { json in
@@ -171,7 +186,7 @@ class MediaListViewController : UITableViewController {
 		}
 	}
 	
-	fileprivate func enableDfpButton(_ state: Bool) {
+	private func enableDfpButton(_ state: Bool) {
 		guard state != dfpActive else { return }
 		
 		// disabling ads
@@ -190,7 +205,7 @@ class MediaListViewController : UITableViewController {
 		dfpActive = state
 	}
 	
-	fileprivate func enableLiveButton(_ state: Bool) {
+	private func enableLiveButton(_ state: Bool) {
 		guard state != liveActive else { return }
 		
 		mediaList = [MediaInfo]()
@@ -206,7 +221,7 @@ class MediaListViewController : UITableViewController {
 	}
 	
 	//Fill live
-	fileprivate func fillLive() {
+	private func fillLive() {
 		let thumbURL = "http://www.impactmobile.com/files/2012/09/icon64-broadcasts.png"
 		let ph = "bc6a17435f3f389f37a514c171039b75"
 		
@@ -305,8 +320,7 @@ class MediaListViewController : UITableViewController {
 
 class MediaInfo {
 	let title:String
-	let thumb:String
-	let projectHash:String
+	let projectHash:String?
 	let mediaId:String?
 	let isAudio:Bool
 	var mediaAd:String?
@@ -314,10 +328,32 @@ class MediaInfo {
 	let mediaURL:String?
 	let isLiveAudio: Bool?
 	var isAutoStart = true
+	var validationRequest: ValidationRequest?
 	
-	init(title:String, thumb:String, projectHash:String, mediaId:String? = nil, isAudio:Bool = false, description:String? = nil, mediaAd:String? = nil, mediaURL:String? = nil, isLiveAudio: Bool? = false) {
+	var thumb:UIImage? {
+		didSet {
+			if let imageView = imageView {
+				self.imageView = imageView
+			}
+		}
+	}
+	
+	var imageView: UIImageView? {
+		didSet {
+			guard let imageView = imageView else { return }
+			
+			if let thumb = thumb {
+				DispatchQueue.main.async {
+					imageView.image = thumb
+				}
+			}
+		}
+	}
+	
+	init(title:String, thumb:String? = nil, projectHash:String? = nil, mediaId:String? = nil,
+	     isAudio:Bool = false, description:String? = nil, mediaAd:String? = nil,
+	     mediaURL:String? = nil, isLiveAudio: Bool? = false) {
 		self.title = title
-		self.thumb = thumb
 		self.projectHash = projectHash
 		self.mediaId = mediaId
 		self.isAudio = isAudio
@@ -325,5 +361,29 @@ class MediaInfo {
 		self.mediaAd = mediaAd
 		self.mediaURL = mediaURL
 		self.isLiveAudio = isLiveAudio
+		
+		load_image(thumb)
+	}
+	
+	private func load_image(_ url: String?) {
+		guard let url = url else { return }
+		
+		Helpers.requestURL(url) { (data: Data?) in
+			if let data = data,
+				let img = UIImage(data: data) {
+				self.thumb = img
+			}
+		}
+	}
+}
+
+class ValidationRequest {
+	
+	let request: URLRequest
+	let callback: (String?) -> Void
+	
+	init(_ request: URLRequest, _ callback: @escaping (String?) -> Void) {
+		self.request = request
+		self.callback = callback
 	}
 }

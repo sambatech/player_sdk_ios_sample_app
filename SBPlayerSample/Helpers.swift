@@ -12,13 +12,17 @@ import UIKit
 class Helpers {
 	static let settings = NSDictionary.init(contentsOfFile: Bundle.main.path(forResource: "Configs", ofType: "plist")!)! as! [String:String]
 	
-	static func requestURL<T>(_ url: String, _ callback: ((T?) -> ())? = nil) {
+	static func requestURL<T>(_ url: String, _ callback: ((T?) -> Void)? = nil) {
 		guard let url = URL(string: url) else {
 			print("\(type(of: self)) Error: Invalid URL format.")
 			return
 		}
 		
-		let requestTask = URLSession.shared.dataTask(with: URLRequest(url: url), completionHandler: { data, response, error in
+		requestURL(URLRequest(url: url), callback)
+	}
+	
+	static func requestURL<T>(_ urlRequest: URLRequest, _ callback: ((T?) -> Void)? = nil) {
+		let requestTask = URLSession.shared.dataTask(with: urlRequest, completionHandler: { data, response, error in
 			if let error = error {
 				print("\(type(of: self)) Error: \(error.localizedDescription)")
 				return
@@ -58,7 +62,7 @@ class Helpers {
 		requestTask.resume()
 	}
 	
-	static func requestURLJson(_ url: String, _ callback: @escaping ((AnyObject?) -> ())) {
+	static func requestURLJson(_ url: String, _ callback: @escaping (AnyObject?) -> Void) {
 		requestURL(url) { (data: Data?) in
 			var jsonOpt: AnyObject?
 			
@@ -157,11 +161,11 @@ public extension UIImage {
 	/**
 	Modified Image Context, apply modification on image
 	
-	- parameter draw: (CGContext, CGRect) -> ())
+	- parameter draw: (CGContext, CGRect) -> Void)
 	
 	- returns: UIImage
 	*/
-	fileprivate func modifiedImage(_ draw: (CGContext, CGRect) -> ()) -> UIImage {
+	fileprivate func modifiedImage(_ draw: (CGContext, CGRect) -> Void) -> UIImage {
 		
 		// using scale correctly preserves retina images
 		UIGraphicsBeginImageContextWithOptions(size, false, scale)
