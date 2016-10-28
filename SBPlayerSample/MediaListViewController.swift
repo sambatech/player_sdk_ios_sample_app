@@ -7,8 +7,9 @@
 //
 
 import AVKit
+import SambaPlayer
 
-class MediaListViewController : UITableViewController {
+class MediaListViewController : UITableViewController, XMLParserDelegate {
 	
 	@IBOutlet var liveToggleButton: UIButton!
 	@IBOutlet var dfpToggleButton: UIButton!
@@ -19,24 +20,31 @@ class MediaListViewController : UITableViewController {
 	private var dfpActive: Bool = false
 	private var liveActive: Bool = false
 	private var isAutoStart: Bool = true
-	private let irdetoRequest: ValidationRequest
+	private var irdetoRequest: ValidationRequest?
+	private var asdf: XmlToDrmDelegate = XmlToDrmDelegate()
 	
-	required init?(coder aDecoder: NSCoder) {
+	private func initIrdetoRequest() {
 		var req = URLRequest(url: URL(string: "http://sambatech.stage.ott.irdeto.com/services/CreateSession?CrmId=sambatech&UserId=smbUserTest")!)
 		
 		req.httpMethod = "POST"
 		req.addValue("app@sambatech.com", forHTTPHeaderField: "MAN-user-id")
 		req.addValue("c5kU6DCTmomi9fU", forHTTPHeaderField: "MAN-user-password")
 		
-		irdetoRequest = ValidationRequest(req) { (response: String?) in
-			print(response)
+		irdetoRequest = ValidationRequest(req) { (media: SambaMedia, response: Data?) in
+			guard let data = response,
+				let media = media as? SambaMediaConfig
+				else { return }
+			
+			let xml = XMLParser(data: data)
+			self.asdf.media = media
+			xml.delegate = self.asdf
+			xml.parse()
 		}
-		
-		super.init(coder: aDecoder)
 	}
 	
 	override func viewDidLoad() {
 		self.tableView.backgroundColor = UIColor.clear
+		initIrdetoRequest()
 		makeInitialRequests()
 		
 		//Button dfp
@@ -94,12 +102,10 @@ class MediaListViewController : UITableViewController {
 		// INJECTED MEDIA
 		
 		let m = MediaInfo(
-			title: "DRM Cisco",
+			title: "DRM Irdeto",
 			thumb: "http://pcgamingwiki.com/images/thumb/b/b3/DRM-free_icon.svg/120px-DRM-free_icon.svg.png",
-			projectHash: nil,
-			mediaId: nil,
-			isAudio: false,
-			mediaURL: "http://webdrm.cisco.com/mkravchik/test/roku.m3u8"
+			projectHash: "b00772b75e3677dba5a59e09598b7a0d",
+			mediaId: "4a48d2ea922217a3d91771f2acf56fdf"
 		)
 		m.validationRequest = irdetoRequest
 		self.mediaList.append(m)
@@ -380,10 +386,25 @@ class MediaInfo {
 class ValidationRequest {
 	
 	let request: URLRequest
-	let callback: (String?) -> Void
+	let callback: (SambaMedia, Data?) -> Void
 	
-	init(_ request: URLRequest, _ callback: @escaping (String?) -> Void) {
+	init(_ request: URLRequest, _ callback: @escaping (SambaMedia, Data?) -> Void) {
 		self.request = request
 		self.callback = callback
+	}
+}
+
+class XmlToDrmDelegate : NSObject, XMLParserDelegate {
+	
+	var media: SambaMediaConfig?
+	
+	func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String: String] = [:]) {
+		if elementName == "Session",
+			let sessionId = attributeDict["SessionId"],
+			let ticket = attributeDict["Ticket"],
+			let drm = media?.drmRequest {
+			drm.urlParam["SessionId"] = sessionId
+			drm.urlParam["Ticket"] = ticket
+		}
 	}
 }

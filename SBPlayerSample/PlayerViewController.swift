@@ -36,8 +36,8 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 			guard let media = media else { return }
 			
 			if let valReq = m.validationRequest {
-				Helpers.requestURL(valReq.request) { (response: String?) in
-					valReq.callback(response)
+				Helpers.requestURL(valReq.request) { (response: Data?) in
+					valReq.callback(media, response)
 					self.initPlayer(media)
 				}
 				return
