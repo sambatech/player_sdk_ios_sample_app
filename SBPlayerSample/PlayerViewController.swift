@@ -58,16 +58,24 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 			return
 		}
 		
+		let req: SambaMediaRequest
+
 		if let mId = m.mediaId {
-			SambaApi().requestMedia(SambaMediaRequest(
+			req = SambaMediaRequest(
 				projectHash: ph,
-				mediaId: mId), callback: callback)
+				mediaId: mId)
 		}
 		else {
-			SambaApi().requestMedia(SambaMediaRequest(
+			req = SambaMediaRequest(
 				projectHash: ph,
-				streamUrl: m.mediaURL!, isLiveAudio: m.isLiveAudio), callback: callback)
+				streamUrl: m.mediaURL!, isLiveAudio: m.isLiveAudio)
 		}
+		
+		if let env = m.environment {
+			req.environment = env
+		}
+		
+		SambaApi().requestMedia(req, callback: callback)
 	}
 	
 	private func initPlayer(_ media: SambaMedia) {

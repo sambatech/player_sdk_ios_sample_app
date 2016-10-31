@@ -108,6 +108,7 @@ class MediaListViewController : UITableViewController, XMLParserDelegate {
 			mediaId: "4a48d2ea922217a3d91771f2acf56fdf"
 		)
 		m.validationRequest = irdetoRequest
+		m.environment = .test
 		self.mediaList.append(m)
 		
 		func request() {
@@ -335,6 +336,7 @@ class MediaInfo {
 	let isLiveAudio: Bool?
 	var isAutoStart = true
 	var validationRequest: ValidationRequest?
+	var environment: SambaMediaRequest.Environment?
 	
 	var thumb:UIImage? {
 		didSet {
