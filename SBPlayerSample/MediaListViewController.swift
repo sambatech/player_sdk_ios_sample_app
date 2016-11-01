@@ -405,8 +405,8 @@ class XmlToDrmDelegate : NSObject, XMLParserDelegate {
 			let sessionId = attributeDict["SessionId"],
 			let ticket = attributeDict["Ticket"],
 			let drm = media?.drmRequest {
-			drm.urlParam["SessionId"] = sessionId
-			drm.urlParam["Ticket"] = ticket
+			drm.licenseUrlParams["SessionId"] = sessionId
+			drm.licenseUrlParams["Ticket"] = ticket
 		}
 	}
 }
