@@ -101,13 +101,22 @@ class MediaListViewController : UITableViewController, XMLParserDelegate {
 
 		// INJECTED MEDIA
 		
-		let m = MediaInfo(
+		var m = MediaInfo(
 			title: "DRM Irdeto",
 			thumb: "http://pcgamingwiki.com/images/thumb/b/b3/DRM-free_icon.svg/120px-DRM-free_icon.svg.png",
 			projectHash: "b00772b75e3677dba5a59e09598b7a0d",
 			mediaId: "4a48d2ea922217a3d91771f2acf56fdf"
 		)
 		m.validationRequest = irdetoRequest
+		m.environment = .test
+		self.mediaList.append(m)
+		
+		m = MediaInfo(
+			title: "Geoblock (dev)",
+			thumb: "https://www.wowza.com/uploads/blog/icon-geo-ip-blocking.png",
+			projectHash: "90fe205bd667e40036dd56619d69359f",
+			mediaId: "316acbc528936927423ffe066be0d05a"
+		)
 		m.environment = .test
 		self.mediaList.append(m)
 		
