@@ -12,13 +12,15 @@ import SambaPlayer
 class PlayerViewController: UIViewController, SambaPlayerDelegate {
 	
 	@IBOutlet var playerContainer: UIView!
-	@IBOutlet var eventName: UILabel!
+	@IBOutlet var status: UILabel!
 	@IBOutlet var currentTime: UILabel!
 	@IBOutlet var duration: UILabel!
 	@IBOutlet var seekTo: UITextField!
 	@IBOutlet var seekBy: UITextField!
+	@IBOutlet var drmControlbar: UIView!
 	
 	var mediaInfo: MediaInfo?
+	var valReq: ValidationRequest?
 	
 	private var sambaPlayer: SambaPlayer?
 	
@@ -35,15 +37,19 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 		let callback = { (media: SambaMedia?) in
 			guard let media = media else { return }
 			
+			// DRM media
 			if let valReq = m.validationRequest {
-				Helpers.requestURL(valReq.request) { (response: Data?) in
-					valReq.callback(media, response)
-					self.initPlayer(media)
+				valReq.media = media as? SambaMediaConfig
+				self.valReq = valReq
+				
+				DispatchQueue.main.async {
+					self.drmControlbar.isHidden = false
+					self.drmControlbar.setNeedsDisplay()
 				}
-				return
 			}
-			
-			self.initPlayer(media)
+			else {
+				self.initPlayer(media)
+			}
 		}
 		
 		guard let ph = m.projectHash else {
@@ -79,7 +85,12 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 	}
 	
 	private func initPlayer(_ media: SambaMedia) {
-		// if ad injection
+		// media URL injection
+		if let url = mediaInfo?.mediaURL {
+			media.url = url
+		}
+		
+		// ad injection
 		if let url = mediaInfo?.mediaAd {
 			media.adUrl = url
 		}
@@ -106,19 +117,19 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 			duration.text = secondsToHoursMinutesSeconds(time)
 		}
 		
-		eventName.text = "load"
+		status.text = "load"
 	}
 	
 	func onStart() {
-		eventName.text = "start"
+		status.text = "start"
 	}
 	
 	func onResume() {
-		eventName.text = "resume"
+		status.text = "resume"
 	}
 	
 	func onPause() {
-		eventName.text = "pause"
+		status.text = "pause"
 	}
 	
 	func onProgress() {
@@ -126,11 +137,11 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 			currentTime.text = secondsToHoursMinutesSeconds(time)
 		}
 		
-		eventName.text = "progress"
+		status.text = "progress"
 	}
 	
 	func onFinish() {
-		eventName.text = "finish"
+		status.text = "finish"
 	}
 	
 	func onDestroy() {}
@@ -147,6 +158,69 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 	
 	@IBAction func stopHandler() {
 		sambaPlayer?.stop()
+	}
+	
+	@IBAction func createSessionHandler() {
+		guard let valReq = valReq,
+			let drm = valReq.media?.drmRequest else {
+			print("No validation request to create session for DRM media.")
+			return
+		}
+		
+		status.text = "Creating session..."
+		
+		var req = URLRequest(url: URL(string: "http://sambatech.stage.ott.irdeto.com/services/CreateSession?CrmId=sambatech&UserId=smbUserTest")!)
+		req.httpMethod = "POST"
+		req.addValue("app@sambatech.com", forHTTPHeaderField: "MAN-user-id")
+		req.addValue("c5kU6DCTmomi9fU", forHTTPHeaderField: "MAN-user-password")
+		
+		let xmlToDrmDelegate: XmlToDrmDelegate = XmlToDrmDelegate(drm) {
+			DispatchQueue.main.async {
+				self.status.text = "Session created!"
+			}
+		}
+		
+		Helpers.requestURL(req) { (response: Data?) in
+			guard let data = response else { return }
+			
+			let xml = XMLParser(data: data)
+			xml.delegate = xmlToDrmDelegate
+			xml.parse()
+		}
+	}
+	
+	@IBAction func authorizeHandler() {
+		guard let valReq = valReq,
+			let drm = valReq.media?.drmRequest,
+			let sessionId = drm.licenseUrlParams["SessionId"],
+			let ticket = drm.licenseUrlParams["Ticket"] else {
+			print("No validation request or session created to authorize DRM media.")
+			return
+		}
+		
+		status.text = "Authorizing..."
+		
+		var req = URLRequest(url: URL(string: "http://sambatech.stage.ott.irdeto.com/services/Authorize?CrmId=sambatech&AccountId=sambatech&PackageId=\(valReq.packageId)&SessionId=\(sessionId)&Ticket=\(ticket)")!)
+		req.httpMethod = "POST"
+		req.addValue("app@sambatech.com", forHTTPHeaderField: "MAN-user-id")
+		req.addValue("c5kU6DCTmomi9fU", forHTTPHeaderField: "MAN-user-password")
+		
+		Helpers.requestURL(req) { (response: String?) in
+			DispatchQueue.main.async {
+				self.status.text = "Authorized"
+			}
+		}
+	}
+	
+	@IBAction func loadHandler() {
+		guard let media = valReq?.media else {
+			print("Invalid DRM media request.")
+			return
+		}
+		
+		status.text = "Loading..."
+		
+		initPlayer(media)
 	}
 	
 	@IBAction func seekHandler() {
@@ -174,5 +248,27 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 	private func secondsToHoursMinutesSeconds(_ seconds : Float) -> (String) {
 		let s = Int(seconds)
 		return String(format: "%02d:%02d:%02d", s/3600%60, s/60%60, s%60)
+	}
+}
+
+class XmlToDrmDelegate : NSObject, XMLParserDelegate {
+	
+	let drmRequest: DrmRequest
+	let callback: () -> Void
+
+	init(_ drmRequest: DrmRequest, callback: @escaping () -> Void) {
+		self.drmRequest = drmRequest
+		self.callback = callback
+	}
+	
+	func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String: String] = [:]) {
+		guard elementName == "Session",
+			let sessionId = attributeDict["SessionId"],
+			let ticket = attributeDict["Ticket"]
+			else { return }
+		
+		drmRequest.licenseUrlParams["SessionId"] = sessionId
+		drmRequest.licenseUrlParams["Ticket"] = ticket
+		callback()
 	}
 }

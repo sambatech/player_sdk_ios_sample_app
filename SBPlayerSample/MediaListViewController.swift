@@ -9,7 +9,7 @@
 import AVKit
 import SambaPlayer
 
-class MediaListViewController : UITableViewController, XMLParserDelegate {
+class MediaListViewController : UITableViewController {
 	
 	@IBOutlet var liveToggleButton: UIButton!
 	@IBOutlet var dfpToggleButton: UIButton!
@@ -20,31 +20,9 @@ class MediaListViewController : UITableViewController, XMLParserDelegate {
 	private var dfpActive: Bool = false
 	private var liveActive: Bool = false
 	private var isAutoStart: Bool = true
-	private var irdetoRequest: ValidationRequest?
-	private var asdf: XmlToDrmDelegate = XmlToDrmDelegate()
-	
-	private func initIrdetoRequest() {
-		var req = URLRequest(url: URL(string: "http://sambatech.stage.ott.irdeto.com/services/CreateSession?CrmId=sambatech&UserId=smbUserTest")!)
-		
-		req.httpMethod = "POST"
-		req.addValue("app@sambatech.com", forHTTPHeaderField: "MAN-user-id")
-		req.addValue("c5kU6DCTmomi9fU", forHTTPHeaderField: "MAN-user-password")
-		
-		irdetoRequest = ValidationRequest(req) { (media: SambaMedia, response: Data?) in
-			guard let data = response,
-				let media = media as? SambaMediaConfig
-				else { return }
-			
-			let xml = XMLParser(data: data)
-			self.asdf.media = media
-			xml.delegate = self.asdf
-			xml.parse()
-		}
-	}
 	
 	override func viewDidLoad() {
 		self.tableView.backgroundColor = UIColor.clear
-		initIrdetoRequest()
 		makeInitialRequests()
 		
 		//Button dfp
@@ -102,14 +80,48 @@ class MediaListViewController : UITableViewController, XMLParserDelegate {
 		// INJECTED MEDIA
 		
 		var m = MediaInfo(
-			title: "DRM Irdeto",
+			title: "DRM Irdeto (pol#7)",
 			thumb: "http://pcgamingwiki.com/images/thumb/b/b3/DRM-free_icon.svg/120px-DRM-free_icon.svg.png",
 			projectHash: "b00772b75e3677dba5a59e09598b7a0d",
 			mediaId: "4a48d2ea922217a3d91771f2acf56fdf"
 		)
-		m.validationRequest = irdetoRequest
+		m.mediaURL = "http://52.32.88.36/sambatech/stage/MrPoppersPenguins.ism/MrPoppersPenguins.m3u8"
+		m.validationRequest = ValidationRequest(packageId: 10)
 		m.environment = .test
-		self.mediaList.append(m)
+		mediaList.append(m)
+		
+		m = MediaInfo(
+			title: "DRM Samba (pol#7)",
+			thumb: "http://pcgamingwiki.com/images/thumb/b/b3/DRM-free_icon.svg/120px-DRM-free_icon.svg.png",
+			projectHash: "b00772b75e3677dba5a59e09598b7a0d",
+			mediaId: "4a48d2ea922217a3d91771f2acf56fdf"
+		)
+		m.mediaURL = "http://107.21.208.27/vodd/_definst_/mp4:myMovie.mp4/playlist.m3u8"
+		m.validationRequest = ValidationRequest(packageId: 10)
+		m.environment = .test
+		mediaList.append(m)
+		
+		m = MediaInfo(
+			title: "DRM Samba (pol#8)",
+			thumb: "http://pcgamingwiki.com/images/thumb/b/b3/DRM-free_icon.svg/120px-DRM-free_icon.svg.png",
+			projectHash: "b00772b75e3677dba5a59e09598b7a0d",
+			mediaId: "4a48d2ea922217a3d91771f2acf56fdf"
+		)
+		m.mediaURL = "http://107.21.208.27/vodd/_definst_/mp4:chaves3_480p.mp4/playlist.m3u8"
+		m.validationRequest = ValidationRequest(packageId: 10)
+		m.environment = .test
+		mediaList.append(m)
+		
+		m = MediaInfo(
+			title: "DRM Samba (pol#9)",
+			thumb: "http://pcgamingwiki.com/images/thumb/b/b3/DRM-free_icon.svg/120px-DRM-free_icon.svg.png",
+			projectHash: "b00772b75e3677dba5a59e09598b7a0d",
+			mediaId: "4a48d2ea922217a3d91771f2acf56fdf"
+		)
+		m.mediaURL = "http://107.21.208.27/vodd/_definst_/mp4:agdq.mp4/playlist.m3u8"
+		m.validationRequest = ValidationRequest(packageId: 10)
+		m.environment = .test
+		mediaList.append(m)
 		
 		m = MediaInfo(
 			title: "Geoblock (dev)",
@@ -118,7 +130,7 @@ class MediaListViewController : UITableViewController, XMLParserDelegate {
 			mediaId: "316acbc528936927423ffe066be0d05a"
 		)
 		m.environment = .test
-		self.mediaList.append(m)
+		mediaList.append(m)
 		
 		func request() {
 			let pid = pids[i]
@@ -335,13 +347,14 @@ class MediaListViewController : UITableViewController, XMLParserDelegate {
 }
 
 class MediaInfo {
+	
 	let title:String
 	let projectHash:String?
 	let mediaId:String?
 	let isAudio:Bool
 	var mediaAd:String?
 	var description:String?
-	let mediaURL:String?
+	var mediaURL:String?
 	let isLiveAudio: Bool?
 	var isAutoStart = true
 	var validationRequest: ValidationRequest?
@@ -396,26 +409,10 @@ class MediaInfo {
 
 class ValidationRequest {
 	
-	let request: URLRequest
-	let callback: (SambaMedia, Data?) -> Void
-	
-	init(_ request: URLRequest, _ callback: @escaping (SambaMedia, Data?) -> Void) {
-		self.request = request
-		self.callback = callback
-	}
-}
-
-class XmlToDrmDelegate : NSObject, XMLParserDelegate {
-	
+	let packageId: Int
 	var media: SambaMediaConfig?
 	
-	func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String: String] = [:]) {
-		if elementName == "Session",
-			let sessionId = attributeDict["SessionId"],
-			let ticket = attributeDict["Ticket"],
-			let drm = media?.drmRequest {
-			drm.licenseUrlParams["SessionId"] = sessionId
-			drm.licenseUrlParams["Ticket"] = ticket
-		}
+	init(packageId: Int) {
+		self.packageId = packageId
 	}
 }

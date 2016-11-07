@@ -12,7 +12,7 @@ import UIKit
 class Helpers {
 	static let settings = NSDictionary.init(contentsOfFile: Bundle.main.path(forResource: "Configs", ofType: "plist")!)! as! [String:String]
 	
-	static func requestURL<T>(_ url: String, _ callback: ((T?) -> Void)? = nil) {
+	static func requestURL<T>(_ url: String, _ callback: ((T?) -> Void)?) {
 		guard let url = URL(string: url) else {
 			print("\(type(of: self)) Error: Invalid URL format.")
 			return
@@ -21,8 +21,12 @@ class Helpers {
 		requestURL(URLRequest(url: url), callback)
 	}
 	
-	static func requestURL<T>(_ urlRequest: URLRequest, _ callback: ((T?) -> Void)? = nil) {
-		let requestTask = URLSession.shared.dataTask(with: urlRequest, completionHandler: { data, response, error in
+	static func requestURL(_ url: String) {
+		requestURL(url, nil as ((Data?) -> Void)?)
+	}
+	
+	static func requestURL<T>(_ urlRequest: URLRequest, _ callback: ((T?) -> Void)?) {
+		let requestTask = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
 			if let error = error {
 				print("\(type(of: self)) Error: \(error.localizedDescription)")
 				return
@@ -57,9 +61,13 @@ class Helpers {
 			default:
 				callback?(nil)
 			}
-		})
+		}
 		
 		requestTask.resume()
+	}
+	
+	static func requestURL(_ urlRequest: URLRequest) {
+		requestURL(urlRequest, nil as ((Data?) -> Void)?)
 	}
 	
 	static func requestURLJson(_ url: String, _ callback: @escaping (AnyObject?) -> Void) {
