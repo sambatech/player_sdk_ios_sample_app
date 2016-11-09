@@ -86,7 +86,7 @@ class MediaListViewController : UITableViewController {
 	}
 	
 	private func makeInitialRequests() {
-		requestMediaSet([String.init(4421), String.init(4460)])
+		requestMediaSet([String(6050), String(4421), String(4460)])
 	}
 	
 	private func requestMediaSet(pids:[String]) {
@@ -94,7 +94,7 @@ class MediaListViewController : UITableViewController {
 
 		func request() {
 			let pid = pids[i]
-			let url = "\(Helpers.settings["svapi_endpoint"]!)medias?access_token=\(Helpers.settings["svapi_token"]!)&pid=\(pid)&published=true"
+			let url = "\(Helpers.settings["svapi_prod"]!)medias?access_token=\(Helpers.settings["svapi_token_prod"]!)&pid=\(pid)&published=true"
 			
 			Helpers.requestURLJson(url) { json in
 				guard let json = json else { return }
