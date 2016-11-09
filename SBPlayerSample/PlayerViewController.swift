@@ -88,6 +88,7 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 		// media URL injection
 		if let url = mediaInfo?.mediaURL {
 			media.url = url
+			media.outputs?.removeAll()
 		}
 		
 		// ad injection

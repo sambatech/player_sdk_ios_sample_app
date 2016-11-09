@@ -153,22 +153,18 @@
                                         <state key="normal" title="CreateSession"/>
                                         <connections>
                                             <action selector="createSessionHandler" destination="9Et-Yp-bwl" eventType="touchUpInside" id="4gh-uz-pta"/>
-                                            <action selector="stopHandler" destination="9Et-Yp-bwl" eventType="touchUpInside" id="Hcf-r3-Vvq"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="58D-JB-Diq">
                                         <state key="normal" title="Authorize"/>
                                         <connections>
-                                            <action selector="authorizeHandler" destination="9Et-Yp-bwl" eventType="touchUpInside" id="hev-En-iJS"/>
-                                            <action selector="stopHandler" destination="9Et-Yp-bwl" eventType="touchUpInside" id="sLD-1V-uRJ"/>
+                                            <action selector="authorizeHandler" destination="9Et-Yp-bwl" eventType="touchUpInside" id="vLO-IB-Ogp"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xwD-Dt-SqQ">
                                         <state key="normal" title="Load"/>
                                         <connections>
-                                            <action selector="authorizeHandler" destination="9Et-Yp-bwl" eventType="touchUpInside" id="eYZ-Qg-Tfz"/>
                                             <action selector="loadHandler" destination="9Et-Yp-bwl" eventType="touchUpInside" id="zhs-z8-7j3"/>
-                                            <action selector="stopHandler" destination="9Et-Yp-bwl" eventType="touchUpInside" id="wyN-31-bdC"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -226,7 +222,7 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="90"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EMB-Za-OGB" id="kww-Pq-5BW">
-                                    <frame key="frameInset" width="375" height="89"/>
+                                    <frame key="frameInset" width="375" height="90"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bee" translatesAutoresizingMaskIntoConstraints="NO" id="uJJ-iu-RAS">
