@@ -106,7 +106,7 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 		player.delegate = self
 		player.media = media
 		
-		if let mediaInfo = mediaInfo , mediaInfo.isAutoStart {
+		if let mediaInfo = mediaInfo, mediaInfo.isAutoStart {
 			player.play()
 		}
 		
@@ -147,6 +147,10 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 	
 	func onDestroy() {}
 	
+	func onError(error: SambaPlayerError) {
+		status.text = error.localizedDescription
+	}
+	
 	//MARK: actions
 	
 	@IBAction func playHandler() {
@@ -175,9 +179,12 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 		req.addValue("app@sambatech.com", forHTTPHeaderField: "MAN-user-id")
 		req.addValue("c5kU6DCTmomi9fU", forHTTPHeaderField: "MAN-user-password")
 		
-		let xmlToDrmDelegate: XmlToDrmDelegate = XmlToDrmDelegate(drm) {
+		let xmlToDrmDelegate: XmlToDrmDelegate = XmlToDrmDelegate() { (sessionId: String, ticket: String) in
+			drm.licenseUrlParams["SessionId"] = sessionId
+			drm.licenseUrlParams["Ticket"] = ticket
+			
 			DispatchQueue.main.async {
-				self.status.text = "Session created!"
+				self.status.text = "Session created: \(sessionId)"
 			}
 		}
 		
@@ -194,18 +201,30 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 		guard let valReq = valReq,
 			let drm = valReq.media?.drmRequest,
 			let sessionId = drm.licenseUrlParams["SessionId"],
-			let ticket = drm.licenseUrlParams["Ticket"] else {
+			let ticket = drm.licenseUrlParams["Ticket"],
+			valReq.contentId != nil || valReq.packageId != nil else {
 			print("No validation request or session created to authorize DRM media.")
 			return
 		}
 		
 		status.text = "Authorizing..."
 		
-		var req = URLRequest(url: URL(string: "http://sambatech.stage.ott.irdeto.com/services/Authorize?CrmId=sambatech&AccountId=sambatech&PackageId=\(valReq.packageId)&SessionId=\(sessionId)&Ticket=\(ticket)")!)
+		var url = "http://sambatech.stage.ott.irdeto.com/services/Authorize?CrmId=sambatech&AccountId=sambatech&SessionId=\(sessionId)&Ticket=\(ticket)"
+		
+		if !valReq.policyOnly,
+			let contentId = valReq.contentId {
+			url += "&ContentId=\(contentId)"
+		}
+		
+		if let packageId = valReq.packageId {
+			url += "&\(valReq.contentId == nil ? "PackageId" : "OptionId")=\(packageId)"
+		}
+		
+		var req = URLRequest(url: URL(string: url)!)
 		req.httpMethod = "POST"
 		req.addValue("app@sambatech.com", forHTTPHeaderField: "MAN-user-id")
 		req.addValue("c5kU6DCTmomi9fU", forHTTPHeaderField: "MAN-user-password")
-		
+		print(req)
 		Helpers.requestURL(req) { (response: String?) in
 			DispatchQueue.main.async {
 				self.status.text = "Authorized"
@@ -254,11 +273,9 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 
 class XmlToDrmDelegate : NSObject, XMLParserDelegate {
 	
-	let drmRequest: DrmRequest
-	let callback: () -> Void
+	let callback: (_: String, _: String) -> Void
 
-	init(_ drmRequest: DrmRequest, callback: @escaping () -> Void) {
-		self.drmRequest = drmRequest
+	init(callback: @escaping (_: String, _: String) -> Void) {
 		self.callback = callback
 	}
 	
@@ -268,8 +285,6 @@ class XmlToDrmDelegate : NSObject, XMLParserDelegate {
 			let ticket = attributeDict["Ticket"]
 			else { return }
 		
-		drmRequest.licenseUrlParams["SessionId"] = sessionId
-		drmRequest.licenseUrlParams["Ticket"] = ticket
-		callback()
+		callback(sessionId, ticket)
 	}
 }

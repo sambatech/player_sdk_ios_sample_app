@@ -80,57 +80,57 @@ class MediaListViewController : UITableViewController {
 		// INJECTED MEDIA
 		
 		var m = MediaInfo(
-			title: "DRM Irdeto (pol#7)",
+			title: "DRM Irdeto (p#7)",
 			thumb: "http://pcgamingwiki.com/images/thumb/b/b3/DRM-free_icon.svg/120px-DRM-free_icon.svg.png",
 			projectHash: "b00772b75e3677dba5a59e09598b7a0d",
 			mediaId: "4a48d2ea922217a3d91771f2acf56fdf"
 		)
 		m.mediaURL = "http://52.32.88.36/sambatech/stage/MrPoppersPenguins.ism/MrPoppersPenguins.m3u8"
-		m.validationRequest = ValidationRequest(packageId: 10)
+		m.validationRequest = ValidationRequest(contentId: "MrPoppersPenguins")
 		m.environment = .test
 		mediaList.append(m)
 		
 		m = MediaInfo(
-			title: "DRM Samba (pol#7)",
+			title: "DRM Samba (p#7)",
 			thumb: "http://pcgamingwiki.com/images/thumb/b/b3/DRM-free_icon.svg/120px-DRM-free_icon.svg.png",
 			projectHash: "b00772b75e3677dba5a59e09598b7a0d",
 			mediaId: "4a48d2ea922217a3d91771f2acf56fdf"
 		)
 		m.mediaURL = "http://107.21.208.27/vodd/_definst_/mp4:myMovie.mp4/playlist.m3u8"
-		m.validationRequest = ValidationRequest(packageId: 10)
+		m.validationRequest = ValidationRequest(contentId: "samba_p7_test")
 		m.environment = .test
 		mediaList.append(m)
 		
 		m = MediaInfo(
-			title: "DRM Samba (pol#8)",
+			title: "DRM Samba (p#8)",
 			thumb: "http://pcgamingwiki.com/images/thumb/b/b3/DRM-free_icon.svg/120px-DRM-free_icon.svg.png",
 			projectHash: "b00772b75e3677dba5a59e09598b7a0d",
 			mediaId: "4a48d2ea922217a3d91771f2acf56fdf"
 		)
 		m.mediaURL = "http://107.21.208.27/vodd/_definst_/mp4:chaves3_480p.mp4/playlist.m3u8"
-		m.validationRequest = ValidationRequest(packageId: 10)
+		m.validationRequest = ValidationRequest(contentId: "samba_p8_test", packageId: 10, policyOnly: true)
 		m.environment = .test
 		mediaList.append(m)
 		
 		m = MediaInfo(
-			title: "DRM Samba (pol#9)",
+			title: "DRM Samba (p#9)",
 			thumb: "http://pcgamingwiki.com/images/thumb/b/b3/DRM-free_icon.svg/120px-DRM-free_icon.svg.png",
 			projectHash: "b00772b75e3677dba5a59e09598b7a0d",
 			mediaId: "4a48d2ea922217a3d91771f2acf56fdf"
 		)
 		m.mediaURL = "http://107.21.208.27/vodd/_definst_/mp4:agdq.mp4/playlist.m3u8"
-		m.validationRequest = ValidationRequest(packageId: 10)
+		m.validationRequest = ValidationRequest(contentId: "samba_p9_test", packageId: 11)
 		m.environment = .test
 		mediaList.append(m)
 		
-		m = MediaInfo(
+		/*m = MediaInfo(
 			title: "Geoblock (dev)",
 			thumb: "https://www.wowza.com/uploads/blog/icon-geo-ip-blocking.png",
 			projectHash: "90fe205bd667e40036dd56619d69359f",
 			mediaId: "316acbc528936927423ffe066be0d05a"
 		)
 		m.environment = .test
-		mediaList.append(m)
+		mediaList.append(m)*/
 		
 		func request() {
 			let pid = pids[i]
@@ -409,10 +409,22 @@ class MediaInfo {
 
 class ValidationRequest {
 	
-	let packageId: Int
+	let contentId: String?
+	let packageId: Int?
+	let policyOnly: Bool
 	var media: SambaMediaConfig?
 	
-	init(packageId: Int) {
+	convenience init(contentId: String) {
+		self.init(contentId: contentId, packageId: nil)
+	}
+	
+	convenience init(contentId: String?, packageId: Int?) {
+		self.init(contentId: contentId, packageId: packageId, policyOnly: false)
+	}
+	
+	init(contentId: String?, packageId: Int?, policyOnly: Bool) {
+		self.contentId = contentId
 		self.packageId = packageId
+		self.policyOnly = policyOnly
 	}
 }
