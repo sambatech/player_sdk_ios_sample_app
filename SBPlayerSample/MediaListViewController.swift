@@ -71,7 +71,7 @@ class MediaListViewController : UITableViewController {
 	}
 	
 	private func makeInitialRequests() {
-		requestMediaSet([String(6050), String(4421), String(4460)])
+		requestMediaSet([String(543), String(562), String(4421), String(6050), String(5952), String(5719)])
 	}
 	
 	private func requestMediaSet(_ pids:[String]) {
@@ -134,7 +134,8 @@ class MediaListViewController : UITableViewController {
 		
 		func request() {
 			let pid = pids[i]
-			let url = "\(Helpers.settings["svapi_stage"]!)medias?access_token=\(Helpers.settings["svapi_token_prod"]!)&pid=\(pid)&published=true"
+			let isDev = pid == "543" || pid == "562"
+			let url = "\(Helpers.settings[isDev ? "svapi_dev" : "svapi_stage"]!)medias?access_token=\(Helpers.settings[isDev ? "svapi_token_dev" : "svapi_token_prod"]!)&pid=\(pid)&published=true"
 			
 			Helpers.requestURLJson(url) { json in
 				guard let json = json as? [AnyObject] else { return }
@@ -168,6 +169,14 @@ class MediaListViewController : UITableViewController {
 						mediaId: jsonNode["id"] as? String ?? nil,
 						isAudio: isAudio
 					)
+					
+					m.environment = isDev ? .test : .staging
+					
+					if pid == "5952" || pid == "6050" || pid == "5719",
+						let id = m.mediaId {
+						// if subscription project/policy, don't include content ID
+						m.validationRequest = ValidationRequest(contentId: id, packageId: 10, policyOnly: pid == "5952")
+					}
 					
 					self.mediaList.append(m)
 				}
@@ -259,7 +268,7 @@ class MediaListViewController : UITableViewController {
 			projectHash: ph,
 			mediaId: nil,
 			isAudio: false,
-			mediaURL: "http://gbbrlive2.sambatech.com.br/liveevent/sbt3_8fcdc5f0f8df8d4de56b22a2c6660470/livestream/manifest.m3u8"
+			mediaURL: "http://liveabr2.sambatech.com.br/abr/sbtabr_8fcdc5f0f8df8d4de56b22a2c6660470/livestreamabrsbt.m3u8"
 		)
 		
 		self.mediaList.append(m)
@@ -409,7 +418,7 @@ class MediaInfo {
 
 class ValidationRequest {
 	
-	let contentId: String?
+	let contentId: String
 	let packageId: Int?
 	let policyOnly: Bool
 	var media: SambaMediaConfig?
@@ -418,11 +427,11 @@ class ValidationRequest {
 		self.init(contentId: contentId, packageId: nil)
 	}
 	
-	convenience init(contentId: String?, packageId: Int?) {
+	convenience init(contentId: String, packageId: Int?) {
 		self.init(contentId: contentId, packageId: packageId, policyOnly: false)
 	}
 	
-	init(contentId: String?, packageId: Int?, policyOnly: Bool) {
+	init(contentId: String, packageId: Int?, policyOnly: Bool) {
 		self.contentId = contentId
 		self.packageId = packageId
 		self.policyOnly = policyOnly

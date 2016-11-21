@@ -68,6 +68,9 @@ SambaPlayer *p;
 	self.duration.text = [[NSNumber numberWithInt:(int)p.duration] stringValue];
 	NSLog(@"start");
 }
+- (void)onError:(enum SambaPlayerError)error {
+	NSLog(@"Error: %ld", (long)error);
+}
 - (IBAction)seekHandler {
 	if (p == nil) return;
 	[p seek:_seekTo.text.floatValue];

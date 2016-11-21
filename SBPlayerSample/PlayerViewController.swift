@@ -180,8 +180,8 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 		req.addValue("c5kU6DCTmomi9fU", forHTTPHeaderField: "MAN-user-password")
 		
 		let xmlToDrmDelegate: XmlToDrmDelegate = XmlToDrmDelegate() { (sessionId: String, ticket: String) in
-			drm.licenseUrlParams["SessionId"] = sessionId
-			drm.licenseUrlParams["Ticket"] = ticket
+			drm.addLicenseParam(key: "SessionId", value: sessionId)
+			drm.addLicenseParam(key: "Ticket", value: ticket)
 			
 			DispatchQueue.main.async {
 				self.status.text = "Session created: \(sessionId)"
@@ -200,9 +200,8 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 	@IBAction func authorizeHandler() {
 		guard let valReq = valReq,
 			let drm = valReq.media?.drmRequest,
-			let sessionId = drm.licenseUrlParams["SessionId"],
-			let ticket = drm.licenseUrlParams["Ticket"],
-			valReq.contentId != nil || valReq.packageId != nil else {
+			let sessionId = drm.getLicenseParam(key: "SessionId"),
+			let ticket = drm.getLicenseParam(key: "Ticket") else {
 			print("No validation request or session created to authorize DRM media.")
 			return
 		}
@@ -211,13 +210,12 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 		
 		var url = "http://sambatech.stage.ott.irdeto.com/services/Authorize?CrmId=sambatech&AccountId=sambatech&SessionId=\(sessionId)&Ticket=\(ticket)"
 		
-		if !valReq.policyOnly,
-			let contentId = valReq.contentId {
-			url += "&ContentId=\(contentId)"
+		if !valReq.policyOnly {
+			url += "&ContentId=\(valReq.contentId)"
 		}
 		
 		if let packageId = valReq.packageId {
-			url += "&\(valReq.contentId == nil ? "PackageId" : "OptionId")=\(packageId)"
+			url += "&\(valReq.policyOnly ? "PackageId" : "OptionId")=\(packageId)"
 		}
 		
 		var req = URLRequest(url: URL(string: url)!)

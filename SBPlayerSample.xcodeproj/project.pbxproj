@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9A16C9EC1DE3781300F0600A /* SambaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A2B49221DD3B1E8002EC4EC /* SambaPlayer.framework */; };
+		9A16C9ED1DE3781300F0600A /* SambaPlayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9A2B49221DD3B1E8002EC4EC /* SambaPlayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9A16C9EE1DE3782200F0600A /* GoogleInteractiveMediaAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A2B49271DD3B281002EC4EC /* GoogleInteractiveMediaAds.framework */; };
 		9A2B49231DD3B1E8002EC4EC /* SambaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A2B49221DD3B1E8002EC4EC /* SambaPlayer.framework */; };
 		9A2B49241DD3B1E8002EC4EC /* SambaPlayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9A2B49221DD3B1E8002EC4EC /* SambaPlayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9A2B49281DD3B281002EC4EC /* GoogleInteractiveMediaAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A2B49271DD3B281002EC4EC /* GoogleInteractiveMediaAds.framework */; };
@@ -45,6 +48,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				9A16C9ED1DE3781300F0600A /* SambaPlayer.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -92,6 +96,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A16C9EC1DE3781300F0600A /* SambaPlayer.framework in Frameworks */,
+				9A16C9EE1DE3782200F0600A /* GoogleInteractiveMediaAds.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -224,6 +230,7 @@
 					};
 					9AD5AAE91D66489D0052E278 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = GP968EQAM9;
 					};
 				};
 			};
@@ -460,6 +467,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = GP968EQAM9;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -476,6 +484,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = GP968EQAM9;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
