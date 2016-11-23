@@ -40,36 +40,30 @@ SambaPlayer *p;
 
 - (void)onLoad {
 	self.eventName.text = @"load";
-	NSLog(@"load");
 }
 - (void)onProgress {
 	self.eventName.text = @"progress";
 	self.currentTime.text = [[NSNumber numberWithInt:(int)p.currentTime] stringValue];
-	NSLog(@"progress");
 }
 - (void)onDestroy {
 	self.eventName.text = @"destroy";
-	NSLog(@"destroy");
 }
 - (void)onFinish {
 	self.eventName.text = @"finish";
-	NSLog(@"finish");
 }
 - (void)onResume {
 	self.eventName.text = @"resume";
-	NSLog(@"resume");
 }
 - (void)onPause {
 	self.eventName.text = @"pause";
-	NSLog(@"pause");
 }
 - (void)onStart {
 	self.eventName.text = @"start";
 	self.duration.text = [[NSNumber numberWithInt:(int)p.duration] stringValue];
-	NSLog(@"start");
 }
-- (void)onError:(enum SambaPlayerError)error {
-	NSLog(@"Error: %ld", (long)error);
+- (void)onError:(SambaPlayerError *)error {
+	NSLog(@"%@", error.localizedDescription);
+	[error setMessage:[NSString stringWithFormat:@"My custom error message with code #%d wohooo!", error.code]];
 }
 - (IBAction)seekHandler {
 	if (p == nil) return;
