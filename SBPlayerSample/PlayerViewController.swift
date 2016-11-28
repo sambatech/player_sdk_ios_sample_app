@@ -18,6 +18,7 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 	@IBOutlet var seekTo: UITextField!
 	@IBOutlet var seekBy: UITextField!
 	@IBOutlet var drmControlbar: UIView!
+	@IBOutlet var policy: UILabel!
 	
 	var mediaInfo: MediaInfo?
 	var valReq: ValidationRequest?
@@ -44,6 +45,7 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 				
 				DispatchQueue.main.async {
 					self.drmControlbar.isHidden = false
+					self.policy.text = self.policies[0]
 					self.drmControlbar.setNeedsDisplay()
 				}
 			}
@@ -197,35 +199,64 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 		}
 	}
 	
-	@IBAction func authorizeHandler() {
+	private let policies = ["Content only", "Subscription", "Rental", "p#30", "p#32"]
+	
+	@IBAction func policyHandler(_ sender: UIButton) {
+		guard let valReq = valReq else { return }
+		
+		let menu = UIAlertController(title: "Policies", message: "Choose a policy to authorize/deauthorize.", preferredStyle: .actionSheet)
+		let getCallback = { (index: Int) in
+			return { (action: UIAlertAction) in
+				valReq.policy = index
+				self.policy.text = self.policies[index]
+			}
+		}
+		
+		for (i, policy) in policies.enumerated() {
+			menu.addAction(UIAlertAction(title: policy, style: .default, handler: getCallback(i)))
+		}
+		
+		menu.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+		menu.popoverPresentationController?.sourceView = sender
+		menu.popoverPresentationController?.sourceRect = sender.bounds
+		
+		present(menu, animated: true, completion: nil)
+	}
+	
+	@IBAction func authorizeHandler(_ sender: AnyObject) {
 		guard let valReq = valReq,
-			let drm = valReq.media?.drmRequest,
+			let media = valReq.media,
+			let drm = media.drmRequest,
 			let sessionId = drm.getLicenseParam(key: "SessionId"),
 			let ticket = drm.getLicenseParam(key: "Ticket") else {
 			print("No validation request or session created to authorize DRM media.")
 			return
 		}
 		
-		status.text = "Authorizing..."
+		let deauth = (sender as? UIView)?.tag == 1
+		let params: String
 		
-		var url = "http://sambatech.stage.ott.irdeto.com/services/Authorize?CrmId=sambatech&AccountId=sambatech&SessionId=\(sessionId)&Ticket=\(ticket)"
-		
-		if !valReq.policyOnly {
-			url += "&ContentId=\(valReq.contentId)"
+		switch valReq.policy {
+		case 0: params = "&ContentId=\(media.id)"
+		case 1: params = "&PackageId=10"
+		case 2: params = "&OptionId=11&ContentId=\(media.id)"
+		case 3: params = "&PackageId=30"
+		case 4: params = "&PackageId=32"
+		default: params = ""
 		}
 		
-		if let packageId = valReq.packageId {
-			url += "&\(valReq.policyOnly ? "PackageId" : "OptionId")=\(packageId)"
-		}
+		status.text = deauth ? "Deauthorizing..." : "Authorizing..."
 		
+		let url = "http://sambatech.stage.ott.irdeto.com/services/\(deauth ? "Deauthorize" : "Authorize")?CrmId=sambatech&AccountId=sambatech&SessionId=\(sessionId)&Ticket=\(ticket)\(params)"
 		var req = URLRequest(url: URL(string: url)!)
+		
 		req.httpMethod = "POST"
 		req.addValue("app@sambatech.com", forHTTPHeaderField: "MAN-user-id")
 		req.addValue("c5kU6DCTmomi9fU", forHTTPHeaderField: "MAN-user-password")
-		print(req)
+		
 		Helpers.requestURL(req) { (response: String?) in
 			DispatchQueue.main.async {
-				self.status.text = "Authorized"
+				self.status.text = "\(deauth ? "Deauthorized" : "Authorized"): \(valReq.policy < self.policies.count ? self.policies[valReq.policy] : "unknown")"
 			}
 		}
 	}

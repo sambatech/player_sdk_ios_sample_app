@@ -474,6 +474,7 @@
 					"$(PROJECT_DIR)/Build/Products/Debug-iphonesimulator",
 				);
 				INFOPLIST_FILE = "SBPlayerSample-objc/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.sambatech.SBPlayerSample-objc";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -491,6 +492,7 @@
 					"$(PROJECT_DIR)/Build/Products/Debug-iphonesimulator",
 				);
 				INFOPLIST_FILE = "SBPlayerSample-objc/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.sambatech.SBPlayerSample-objc";
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -108,7 +108,7 @@ class MediaListViewController : UITableViewController {
 			mediaId: "4a48d2ea922217a3d91771f2acf56fdf"
 		)
 		m.mediaURL = "http://107.21.208.27/vodd/_definst_/mp4:chaves3_480p.mp4/playlist.m3u8"
-		m.validationRequest = ValidationRequest(contentId: "samba_p8_test", packageId: 10, policyOnly: true)
+		m.validationRequest = ValidationRequest(contentId: "samba_p8_test")
 		m.environment = .test
 		mediaList.append(m)
 		
@@ -119,7 +119,7 @@ class MediaListViewController : UITableViewController {
 			mediaId: "4a48d2ea922217a3d91771f2acf56fdf"
 		)
 		m.mediaURL = "http://107.21.208.27/vodd/_definst_/mp4:agdq.mp4/playlist.m3u8"
-		m.validationRequest = ValidationRequest(contentId: "samba_p9_test", packageId: 11)
+		m.validationRequest = ValidationRequest(contentId: "samba_p9_test")
 		m.environment = .test
 		mediaList.append(m)
 		
@@ -172,10 +172,9 @@ class MediaListViewController : UITableViewController {
 					
 					m.environment = isDev ? .test : .staging
 					
-					if pid == "5952" || pid == "6050" || pid == "5719",
-						let id = m.mediaId {
-						// if subscription project/policy, don't include content ID
-						m.validationRequest = ValidationRequest(contentId: id, packageId: 10, policyOnly: pid == "5952")
+					// WORKAROUND: to identify which project has DRM
+					if pid == "5952" || pid == "6050" || pid == "5719" {
+						m.validationRequest = ValidationRequest()
 					}
 					
 					self.mediaList.append(m)
@@ -417,23 +416,11 @@ class MediaInfo {
 }
 
 class ValidationRequest {
-	
-	let contentId: String
-	let packageId: Int?
-	let policyOnly: Bool
+	let contentId: String?
 	var media: SambaMediaConfig?
+	var policy: Int = 0
 	
-	convenience init(contentId: String) {
-		self.init(contentId: contentId, packageId: nil)
-	}
-	
-	convenience init(contentId: String, packageId: Int?) {
-		self.init(contentId: contentId, packageId: packageId, policyOnly: false)
-	}
-	
-	init(contentId: String, packageId: Int?, policyOnly: Bool) {
+	init(contentId: String? = nil) {
 		self.contentId = contentId
-		self.packageId = packageId
-		self.policyOnly = policyOnly
 	}
 }
