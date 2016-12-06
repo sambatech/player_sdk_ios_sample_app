@@ -202,10 +202,10 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 	}
 	
 	private let policies = [
-		"Aluguel 48 horas (p#5)",
-		"Assinatura mensal (p#6)",
-		"Aluguel 48 horas, somente Brasil (p#7)",
-		"Assinatura mensal, somente Brasil (p#8)"
+		"Aluguel 48h (p5)",
+		"Ass. mensal (p6)",
+		"Aluguel 48h/BR (p7)",
+		"Ass. mensal/BR (p8)"
 	]
 	
 	@IBAction func policyHandler(_ sender: UIButton) {
@@ -244,7 +244,7 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 		let params: String
 		
 		switch valReq.policy {
-		case 0: params = "&OptionId=6&ContentId=9681e031c13cc3ead99e35d36f7a55fc"
+		case 0: params = "&OptionId=6&ContentId=\(media.id)"
 		case 1: params = "&PackageId=2"
 		case 2: params = "&OptionId=7&ContentId=\(media.id)"
 		case 3: params = "&PackageId=3"
