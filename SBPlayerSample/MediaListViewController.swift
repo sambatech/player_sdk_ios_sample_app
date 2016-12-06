@@ -173,7 +173,7 @@ class MediaListViewController : UITableViewController {
 					m.environment = isDev ? .test : .staging
 					
 					// WORKAROUND: to identify which project has DRM
-					if pid == "5952" || pid == "6050" || pid == "5719" {
+					if pid == "5952" || pid == "6050" || pid == "5719" || isDev {
 						m.validationRequest = ValidationRequest()
 					}
 					

@@ -21,9 +21,11 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 	@IBOutlet var policy: UILabel!
 	
 	var mediaInfo: MediaInfo?
-	var valReq: ValidationRequest?
+	
+	private static let irdetoUrl = "http://sambatech.live.ott.irdeto.com/"
 	
 	private var sambaPlayer: SambaPlayer?
+	private var valReq: ValidationRequest?
 	
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
@@ -176,7 +178,7 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 		
 		status.text = "Creating session..."
 		
-		var req = URLRequest(url: URL(string: "http://sambatech.stage.ott.irdeto.com/services/CreateSession?CrmId=sambatech&UserId=smbUserTest")!)
+		var req = URLRequest(url: URL(string: "\(PlayerViewController.irdetoUrl)services/CreateSession?CrmId=sambatech&UserId=samba")!)
 		req.httpMethod = "POST"
 		req.addValue("app@sambatech.com", forHTTPHeaderField: "MAN-user-id")
 		req.addValue("c5kU6DCTmomi9fU", forHTTPHeaderField: "MAN-user-password")
@@ -199,7 +201,12 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 		}
 	}
 	
-	private let policies = ["Content only", "Subscription", "Rental", "p#30", "p#32"]
+	private let policies = [
+		"Aluguel 48 horas (p#5)",
+		"Assinatura mensal (p#6)",
+		"Aluguel 48 horas, somente Brasil (p#7)",
+		"Assinatura mensal, somente Brasil (p#8)"
+	]
 	
 	@IBAction func policyHandler(_ sender: UIButton) {
 		guard let valReq = valReq else { return }
@@ -237,17 +244,17 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 		let params: String
 		
 		switch valReq.policy {
-		case 0: params = "&ContentId=\(media.id)"
-		case 1: params = "&PackageId=10"
-		case 2: params = "&OptionId=11&ContentId=\(media.id)"
-		case 3: params = "&PackageId=30"
-		case 4: params = "&PackageId=32"
+		case 0: params = "&OptionId=6&ContentId=9681e031c13cc3ead99e35d36f7a55fc"
+		case 1: params = "&PackageId=2"
+		case 2: params = "&OptionId=7&ContentId=\(media.id)"
+		case 3: params = "&PackageId=3"
 		default: params = ""
 		}
 		
 		status.text = deauth ? "Deauthorizing..." : "Authorizing..."
 		
-		let url = "http://sambatech.stage.ott.irdeto.com/services/\(deauth ? "Deauthorize" : "Authorize")?CrmId=sambatech&AccountId=sambatech&SessionId=\(sessionId)&Ticket=\(ticket)\(params)"
+		let url = "\(PlayerViewController.irdetoUrl)services/\(deauth ? "Deauthorize" : "Authorize")?CrmId=sambatech&AccountId=sambatech" +
+			"&SessionId=\(sessionId)&Ticket=\(ticket)&UserIp=\(AppDelegate.externalIp)\(params)"
 		var req = URLRequest(url: URL(string: url)!)
 		
 		req.httpMethod = "POST"
