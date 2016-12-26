@@ -87,7 +87,7 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 		
 		SambaApi().requestMedia(req, onComplete: callback) { (error, response) in
 			print("Erro ao requisitar mídia!")
-			print(error, response)
+			print(error ?? "no error obj", response ?? "no response obj")
 		}
 	}
 	
@@ -181,7 +181,8 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 		
 		status.text = "Creating session..."
 		
-		var req = URLRequest(url: URL(string: "\(PlayerViewController.irdetoUrl)services/CreateSession?CrmId=sambatech&UserId=feijao&CreateUser=true")!)
+		//var req = URLRequest(url: URL(string: "\(PlayerViewController.irdetoUrl)services/CreateSession?CrmId=sambatech&UserId=feijao&CreateUser=true")!)
+		var req = URLRequest(url: URL(string: "\(PlayerViewController.irdetoUrl)services/CreateSession?CrmId=sambatech&UserId=samba&CreateUser=true")!)
 		req.httpMethod = "POST"
 		req.addValue("app@sambatech.com", forHTTPHeaderField: "MAN-user-id")
 		req.addValue("c5kU6DCTmomi9fU", forHTTPHeaderField: "MAN-user-password")
