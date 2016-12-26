@@ -80,6 +80,17 @@ class MediaListViewController : UITableViewController {
 		// INJECTED MEDIA
 		
 		var m = MediaInfo(
+			title: "DRM Irdeto (p#6) - 15/12",
+			thumb: "http://pcgamingwiki.com/images/thumb/b/b3/DRM-free_icon.svg/120px-DRM-free_icon.svg.png",
+			projectHash: "2893ae96e3f2fade7391695553400f80",
+			mediaId: "769c4d7d2f4a73145d1c594d37aaf3a0"
+		)
+		m.mediaURL = "http://107.21.208.27/vodd/_definst_/amlst%3Astg.test%3B100209%2C562%2Cbec5caca334057bad49ba0bb85109e9a%3Bhidden64np%3B3aiIJCS2wHwCgTqm2GO0Qb5SKBq80rGh6gepZKNw2e4RxsqWhKeXdhV5fzJZnM4LgRsSapqLfH5bB-ZcNQu_hgIvRWs53Nm6i9GNlW2z1DWaRMzHRnfTf6hlhPtisCnkAwcoAVnSj256sHpgNl3ddgNXvpRSBn2X7nTd6NBHHtEtd6AEEnnDPoB5Y3IqBUWnTeRt5av7maape8LsxsxZyk9iALFkb7icoNCvby16MDPOOHJh9KQYbUcDpgT_WKw4lJN0wugS7A%21%21/playlist.m3u8"
+		m.validationRequest = ValidationRequest(contentId: "9681e031c13cc3ead99e35d36f7a55fc")
+		m.environment = .staging
+		mediaList.append(m)
+		
+		/*var m = MediaInfo(
 			title: "DRM Irdeto (p#7)",
 			thumb: "http://pcgamingwiki.com/images/thumb/b/b3/DRM-free_icon.svg/120px-DRM-free_icon.svg.png",
 			projectHash: "b00772b75e3677dba5a59e09598b7a0d",
@@ -121,7 +132,7 @@ class MediaListViewController : UITableViewController {
 		m.mediaURL = "http://107.21.208.27/vodd/_definst_/mp4:agdq.mp4/playlist.m3u8"
 		m.validationRequest = ValidationRequest(contentId: "samba_p9_test")
 		m.environment = .test
-		mediaList.append(m)
+		mediaList.append(m)*/
 		
 		/*m = MediaInfo(
 			title: "Geoblock (dev)",
@@ -422,5 +433,10 @@ class ValidationRequest {
 	
 	init(contentId: String? = nil) {
 		self.contentId = contentId
+	}
+	
+	convenience init(contentId: String? = nil, policy: Int) {
+		self.init(contentId: contentId)
+		self.policy = policy
 	}
 }
