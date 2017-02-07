@@ -378,7 +378,7 @@ class MediaInfo {
 	let isLiveAudio: Bool?
 	var isAutoStart = true
 	var validationRequest: ValidationRequest?
-	var environment: SambaMediaRequest.Environment?
+	var environment: SambaEnvironment?
 	
 	var thumb:UIImage? {
 		didSet {

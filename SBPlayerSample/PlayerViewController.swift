@@ -78,7 +78,7 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 		else {
 			req = SambaMediaRequest(
 				projectHash: ph,
-				streamUrl: m.mediaURL!, isLiveAudio: m.isLiveAudio)
+				streamUrl: m.mediaURL!, isLiveAudio: m.isLiveAudio ?? false)
 		}
 		
 		if let env = m.environment {
