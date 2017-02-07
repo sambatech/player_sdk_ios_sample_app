@@ -88,7 +88,7 @@ class MediaListViewController : UITableViewController {
 		)
 		m.mediaURL = "http://107.21.208.27/vodd/_definst_/amlst%3Astg.test%3B100209%2C562%2Cbec5caca334057bad49ba0bb85109e9a%3Bhidden64np%3B3aiIJCS2wHwCgTqm2GO0Qb5SKBq80rGh6gepZKNw2e4RxsqWhKeXdhV5fzJZnM4LgRsSapqLfH5bB-ZcNQu_hgIvRWs53Nm6i9GNlW2z1DWaRMzHRnfTf6hlhPtisCnkAwcoAVnSj256sHpgNl3ddgNXvpRSBn2X7nTd6NBHHtEtd6AEEnnDPoB5Y3IqBUWnTeRt5av7maape8LsxsxZyk9iALFkb7icoNCvby16MDPOOHJh9KQYbUcDpgT_WKw4lJN0wugS7A%21%21/playlist.m3u8"
 		m.validationRequest = ValidationRequest(contentId: "9681e031c13cc3ead99e35d36f7a55fc")
-		m.environment = .staging
+		m.environment = .prod
 		mediaList.append(m)
 		
 		/*var m = MediaInfo(
@@ -182,7 +182,7 @@ class MediaListViewController : UITableViewController {
 						isAudio: isAudio
 					)
 					
-					m.environment = isDev ? .test : .staging
+					m.environment = isDev ? .test : .prod
 					
 					// WORKAROUND: to identify which project has DRM
 					if pid == "5952" || pid == "6050" || pid == "5719" || isDev {
