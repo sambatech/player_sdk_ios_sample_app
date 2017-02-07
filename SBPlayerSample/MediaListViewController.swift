@@ -71,8 +71,8 @@ class MediaListViewController : UITableViewController {
 	}
 	
 	private func makeInitialRequests() {
-		requestMediaSet([String(6050), String(4421), String(4460)])
-		//requestMediaSet([String(543), String(562), String(4421), String(6050), String(5952), String(5719)])
+		//requestMediaSet([String(6050), String(4421), String(4460)])
+		requestMediaSet([String(4421)])
 	}
 	
 	private func requestMediaSet(_ pids:[String]) {
@@ -80,7 +80,7 @@ class MediaListViewController : UITableViewController {
 
 		// INJECTED MEDIA
 		
-		var m = MediaInfo(
+		/*var m = MediaInfo(
 			title: "DRM Irdeto (p#6) - 15/12",
 			thumb: "http://pcgamingwiki.com/images/thumb/b/b3/DRM-free_icon.svg/120px-DRM-free_icon.svg.png",
 			projectHash: "2893ae96e3f2fade7391695553400f80",
@@ -91,7 +91,7 @@ class MediaListViewController : UITableViewController {
 		m.environment = .prod
 		mediaList.append(m)
 		
-		/*var m = MediaInfo(
+		var m = MediaInfo(
 			title: "DRM Irdeto (p#7)",
 			thumb: "http://pcgamingwiki.com/images/thumb/b/b3/DRM-free_icon.svg/120px-DRM-free_icon.svg.png",
 			projectHash: "b00772b75e3677dba5a59e09598b7a0d",
