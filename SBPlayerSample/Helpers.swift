@@ -10,56 +10,86 @@ import Foundation
 import UIKit
 
 class Helpers {
-	static let settings = NSDictionary.init(contentsOfFile: NSBundle.mainBundle().pathForResource("Configs", ofType: "plist")!)! as! [String:String]
+	static let settings = NSDictionary.init(contentsOfFile: Bundle.main.path(forResource: "Configs", ofType: "plist")!)! as! [String:String]
 	
-	static func requestURLJson(url: String, _ callback: ([AnyObject]? -> ())) {
-		guard let url = NSURL(string: url) else {
-			print("\(self.dynamicType) Error: Invalid URL format.")
+	static func requestURL<T>(_ url: String, _ callback: ((T?) -> Void)?) {
+		guard let url = URL(string: url) else {
+			print("\(type(of: self)) Error: Invalid URL format.")
 			return
 		}
 		
-		let requestTask = NSURLSession.sharedSession().dataTaskWithRequest(NSURLRequest(URL: url)) { data, response, error in
-			dispatch_async(dispatch_get_main_queue()) {
-				if let error = error {
-					print("\(self.dynamicType) Error: \(error.localizedDescription)")
-					callback(nil)
-					return
+		requestURL(URLRequest(url: url), callback)
+	}
+	
+	static func requestURL(_ url: String) {
+		requestURL(url, nil as ((Data?) -> Void)?)
+	}
+	
+	static func requestURL<T>(_ urlRequest: URLRequest, _ callback: ((T?) -> Void)?) {
+		let requestTask = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
+			let reqText = "\n\(urlRequest.url?.absoluteString ?? "")\nMethod: \(urlRequest.httpMethod ?? "")\nHeader: \(urlRequest.allHTTPHeaderFields)"
+			
+			if let error = error {
+				print("\(type(of: self)) Error: \(error.localizedDescription)\(reqText)")
+				return
+			}
+			
+			guard let response = response as? HTTPURLResponse else {
+				print("\(type(of: self)) Error: No response from server.\(reqText)")
+				return
+			}
+			
+			guard case 200..<300 = response.statusCode else {
+				print("\(type(of: self)) Error: Invalid server response (\(response)).\(reqText)")
+				return
+			}
+			
+			guard let data = data else {
+				print("\(type(of: self)) Error: Unable to get data.\(reqText)")
+				callback?(nil)
+				return
+			}
+			
+			switch T.self {
+			case is String.Type:
+				if let text = String(data: data, encoding: String.Encoding.utf8) {
+					callback?(text as? T)
 				}
-				
-				guard let response = response as? NSHTTPURLResponse else {
-					print("\(self.dynamicType) Error: No response from server.")
-					callback(nil)
-					return
+				else {
+					print("\(type(of: self)) Error: Unable to get text response.\(reqText)")
 				}
-				
-				guard case 200..<300 = response.statusCode else {
-					print("\(self.dynamicType) Error: Invalid server response (\(response.statusCode)).")
-					callback(nil)
-					return
-				}
-				
-				guard let jsonData = data else {
-					print("\(self.dynamicType) Error: \(error?.description ?? "Unable to get data.")")
-					callback(nil)
-					return
-				}
-				
-				var jsonOpt: [AnyObject]?
-				
-				do {
-					jsonOpt = try NSJSONSerialization.JSONObjectWithData(jsonData, options: .AllowFragments) as? [AnyObject]
-				}
-				catch {
-					print("\(self.dynamicType) Error parsing JSON string.")
-					callback(nil)
-					return
-				}
-				
-				callback(jsonOpt)
+			case is Data.Type:
+				callback?(data as? T)
+			default:
+				callback?(nil)
 			}
 		}
 		
 		requestTask.resume()
+	}
+	
+	static func requestURL(_ urlRequest: URLRequest) {
+		requestURL(urlRequest, nil as ((Data?) -> Void)?)
+	}
+	
+	static func requestURLJson(_ url: String, _ callback: @escaping (AnyObject?) -> Void) {
+		requestURL(url) { (data: Data?) in
+			var jsonOpt: AnyObject?
+			
+			do {
+				if let data = data {
+					jsonOpt = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as AnyObject
+				}
+				else {
+					print("\(type(of: self)) Error getting JSON data.")
+				}
+			}
+			catch {
+				print("\(type(of: self)) Error parsing JSON string.")
+			}
+			
+			callback(jsonOpt)
+		}
 	}
 }
 
@@ -67,7 +97,7 @@ extension UIColor {
 	convenience init(_ rgba: UInt) {
 		let t = rgba > 0xFFFFFF ? 3 : 2
 		
-		var array = [CGFloat](count: 4, repeatedValue: 1.0)
+		var array = [CGFloat](repeating: 1.0, count: 4)
 		var n: UInt
 		
 		for i in 0...t {
@@ -96,26 +126,26 @@ public extension UIImage {
 	
 	- returns: UIImage
 	*/
-	public func tintPhoto(tintColor: UIColor) -> UIImage {
+	public func tintPhoto(_ tintColor: UIColor) -> UIImage {
 		
 		return modifiedImage { context, rect in
 			// draw black background - workaround to preserve color of partially transparent pixels
-			CGContextSetBlendMode(context, .Normal)
-			UIColor.blackColor().setFill()
-			CGContextFillRect(context, rect)
+			context.setBlendMode(.normal)
+			UIColor.black.setFill()
+			context.fill(rect)
 			
 			// draw original image
-			CGContextSetBlendMode(context, .Normal)
-			CGContextDrawImage(context, rect, self.CGImage)
+			context.setBlendMode(.normal)
+			context.draw(self.cgImage!, in: rect)
 			
 			// tint image (loosing alpha) - the luminosity of the original image is preserved
-			CGContextSetBlendMode(context, .Color)
+			context.setBlendMode(.color)
 			tintColor.setFill()
-			CGContextFillRect(context, rect)
+			context.fill(rect)
 			
 			// mask by alpha values of original image
-			CGContextSetBlendMode(context, .DestinationIn)
-			CGContextDrawImage(context, rect, self.CGImage)
+			context.setBlendMode(.destinationIn)
+			context.draw(self.cgImage!, in: rect)
 		}
 	}
 	/**
@@ -125,27 +155,27 @@ public extension UIImage {
 	
 	- returns: UIImage
 	*/
-	public func tintPicto(fillColor: UIColor) -> UIImage {
+	public func tintPicto(_ fillColor: UIColor) -> UIImage {
 		
 		return modifiedImage { context, rect in
 			// draw tint color
-			CGContextSetBlendMode(context, .Normal)
+			context.setBlendMode(.normal)
 			fillColor.setFill()
-			CGContextFillRect(context, rect)
+			context.fill(rect)
 			
 			// mask by alpha values of original image
-			CGContextSetBlendMode(context, .DestinationIn)
-			CGContextDrawImage(context, rect, self.CGImage)
+			context.setBlendMode(.destinationIn)
+			context.draw(self.cgImage!, in: rect)
 		}
 	}
 	/**
 	Modified Image Context, apply modification on image
 	
-	- parameter draw: (CGContext, CGRect) -> ())
+	- parameter draw: (CGContext, CGRect) -> Void)
 	
 	- returns: UIImage
 	*/
-	private func modifiedImage(@noescape draw: (CGContext, CGRect) -> ()) -> UIImage {
+	fileprivate func modifiedImage(_ draw: (CGContext, CGRect) -> Void) -> UIImage {
 		
 		// using scale correctly preserves retina images
 		UIGraphicsBeginImageContextWithOptions(size, false, scale)
@@ -153,15 +183,15 @@ public extension UIImage {
 		assert(context != nil)
 		
 		// correctly rotate image
-		CGContextTranslateCTM(context, 0, size.height);
-		CGContextScaleCTM(context, 1.0, -1.0);
+		context.translateBy(x: 0, y: size.height)
+		context.scaleBy(x: 1.0, y: -1.0)
 		
-		let rect = CGRectMake(0.0, 0.0, size.width, size.height)
+		let rect = CGRect(x: 0.0, y: 0.0, width: size.width, height: size.height)
 		
 		draw(context, rect)
 		
 		let image = UIGraphicsGetImageFromCurrentImageContext()
 		UIGraphicsEndImageContext()
-		return image
+		return image!
 	}
 }

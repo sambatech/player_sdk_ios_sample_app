@@ -21,10 +21,10 @@ class MediaListTableViewCell: UITableViewCell {
         // Initialization code
 		//self.layer.masksToBounds = true
 		self.layer.borderWidth = 0.5
-		self.layer.borderColor = UIColor( red: 0, green: 0, blue:0, alpha: 1.0 ).CGColor
+		self.layer.borderColor = UIColor( red: 0, green: 0, blue:0, alpha: 1.0 ).cgColor
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
