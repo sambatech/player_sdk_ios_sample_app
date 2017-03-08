@@ -31,8 +31,8 @@ SambaPlayer *p;
 	p = [[SambaPlayer alloc] initWithParentViewController:self andParentView:_container];
 	SambaMedia *media = [[SambaMedia alloc] init:@"http://svbps-sambavideos.akamaized.net/voda/_definst_/amlst%3Astg.test%3B100243%2C530%2C24a89d4aa21fc48385d3412341df8cbd%3Bhidden32%3BWRDYQCD63MQ25BTVKRMEJXYREOJKRTB4OWNZJWDOLOZSNOKZ6QON6R6MPG2CEKS5JJBWBCNHHF4QIWNV6DC75KAABII4Y7T5UNN3W5RS56JJQX5TDS6GXSOH3EZINJFIC4HHUTOXOJFJ3LZWZE7G2WKT7T2FCWZYKVBGTRCEAHLS7XA7FKBA%3D%3D%3D%3D/playlist.m3u8"];
 	
-	SambaMediaRequest *request = [[SambaMediaRequest alloc] initWithProjectHash:@"..." mediaId:@"..."];
-	request.environment = SambaEnvironmentProd;
+	/*SambaMediaRequest *request = [[SambaMediaRequest alloc] initWithProjectHash:@"..." mediaId:@"..."];
+	request.environment = SambaEnvironmentProd;*/
 	
 	p.media = media;
 	//p.controlsVisible = NO;
@@ -66,7 +66,7 @@ SambaPlayer *p;
 }
 - (void)onError:(SambaPlayerError *)error {
 	NSLog(@"%@", error.localizedDescription);
-	[error setMessage:[NSString stringWithFormat:@"My custom error message with code #%ld!", (long)error.code]];
+	error.message = [NSString stringWithFormat:@"My custom error message with code #%ld!", (long)error.code];
 }
 - (IBAction)seekHandler {
 	if (p == nil) return;
