@@ -7,13 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9A2B49231DD3B1E8002EC4EC /* SambaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A2B49221DD3B1E8002EC4EC /* SambaPlayer.framework */; };
-		9A2B49241DD3B1E8002EC4EC /* SambaPlayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9A2B49221DD3B1E8002EC4EC /* SambaPlayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9A34EB761E13E6F40028FA52 /* SP_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A34EB751E13E6F40028FA52 /* SP_UITests.swift */; };
-		9A54E97C1E4E049100852C4E /* GoogleInteractiveMediaAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A54E97A1E4E049100852C4E /* GoogleInteractiveMediaAds.framework */; };
+		9A7B782A1E70A0E800426500 /* SambaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A7B78291E70A0E700426500 /* SambaPlayer.framework */; };
+		9A7B782B1E70A0E800426500 /* SambaPlayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9A7B78291E70A0E700426500 /* SambaPlayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9A7B782E1E70A12D00426500 /* GoogleInteractiveMediaAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A7B782D1E70A12D00426500 /* GoogleInteractiveMediaAds.framework */; };
 		9A83F68C1E6F4E3B00C4A80F /* SambaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A2B49221DD3B1E8002EC4EC /* SambaPlayer.framework */; };
 		9A83F68D1E6F4E3B00C4A80F /* SambaPlayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9A2B49221DD3B1E8002EC4EC /* SambaPlayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		9A83F68F1E6F4E5700C4A80F /* GoogleInteractiveMediaAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A54E97A1E4E049100852C4E /* GoogleInteractiveMediaAds.framework */; };
 		9AC676331D66214A00768524 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC676321D66214A00768524 /* AppDelegate.swift */; };
 		9AC676381D66214A00768524 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AC676361D66214A00768524 /* Main.storyboard */; };
 		9AC6763A1D66214A00768524 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9AC676391D66214A00768524 /* Assets.xcassets */; };
@@ -42,13 +41,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		9A2B49251DD3B1E8002EC4EC /* Embed Frameworks */ = {
+		9A7B782C1E70A0E800426500 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				9A2B49241DD3B1E8002EC4EC /* SambaPlayer.framework in Embed Frameworks */,
+				9A7B782B1E70A0E800426500 /* SambaPlayer.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -71,8 +70,9 @@
 		9A34EB731E13E6F40028FA52 /* SP-UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SP-UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A34EB751E13E6F40028FA52 /* SP_UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SP_UITests.swift; sourceTree = "<group>"; };
 		9A34EB771E13E6F40028FA52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9A54E97A1E4E049100852C4E /* GoogleInteractiveMediaAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleInteractiveMediaAds.framework; path = Carthage/Build/iOS/GoogleInteractiveMediaAds.framework; sourceTree = "<group>"; };
 		9A54E97B1E4E049100852C4E /* SambaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SambaPlayer.framework; path = Carthage/Build/iOS/SambaPlayer.framework; sourceTree = "<group>"; };
+		9A7B78291E70A0E700426500 /* SambaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SambaPlayer.framework; path = Carthage/Build/iOS/SambaPlayer.framework; sourceTree = "<group>"; };
+		9A7B782D1E70A12D00426500 /* GoogleInteractiveMediaAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleInteractiveMediaAds.framework; path = Carthage/Checkouts/player_sdk_ios/Frameworks/GoogleInteractiveMediaAds.framework; sourceTree = "<group>"; };
 		9AC6762F1D66214A00768524 /* SP-v0.4.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SP-v0.4.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AC676321D66214A00768524 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9AC676371D66214A00768524 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -109,8 +109,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9A2B49231DD3B1E8002EC4EC /* SambaPlayer.framework in Frameworks */,
-				9A83F68F1E6F4E5700C4A80F /* GoogleInteractiveMediaAds.framework in Frameworks */,
+				9A7B782A1E70A0E800426500 /* SambaPlayer.framework in Frameworks */,
+				9A7B782E1E70A12D00426500 /* GoogleInteractiveMediaAds.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -119,7 +119,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A83F68C1E6F4E3B00C4A80F /* SambaPlayer.framework in Frameworks */,
-				9A54E97C1E4E049100852C4E /* GoogleInteractiveMediaAds.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -129,7 +128,7 @@
 		9A2B49261DD3B281002EC4EC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				9A54E97A1E4E049100852C4E /* GoogleInteractiveMediaAds.framework */,
+				9A7B782D1E70A12D00426500 /* GoogleInteractiveMediaAds.framework */,
 				9A54E97B1E4E049100852C4E /* SambaPlayer.framework */,
 			);
 			name = Frameworks;
@@ -147,6 +146,7 @@
 		9AC676261D66214A00768524 = {
 			isa = PBXGroup;
 			children = (
+				9A7B78291E70A0E700426500 /* SambaPlayer.framework */,
 				9A2B49221DD3B1E8002EC4EC /* SambaPlayer.framework */,
 				9AC676311D66214A00768524 /* SBPlayerSample */,
 				9AD5AAEB1D66489E0052E278 /* SBPlayerSample-objc */,
@@ -236,7 +236,7 @@
 				9AC6762B1D66214A00768524 /* Sources */,
 				9AC6762C1D66214A00768524 /* Frameworks */,
 				9AC6762D1D66214A00768524 /* Resources */,
-				9A2B49251DD3B1E8002EC4EC /* Embed Frameworks */,
+				9A7B782C1E70A0E800426500 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -553,6 +553,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Checkouts/player_sdk_ios/Frameworks",
 				);
 				INFOPLIST_FILE = SBPlayerSample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -572,6 +573,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Checkouts/player_sdk_ios/Frameworks",
 				);
 				INFOPLIST_FILE = SBPlayerSample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
