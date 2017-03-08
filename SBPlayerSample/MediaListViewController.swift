@@ -323,7 +323,8 @@ class MediaListViewController : UITableViewController {
 			projectHash: ph,
 			mediaId: nil,
 			isAudio: false,
-			mediaURL: "http://slrp.sambavideos.sambatech.com/liveevent/tvdiario_7a683b067e5eee5c8d45e1e1883f69b9/livestream/playlist.m3u8"
+			mediaURL: "http://slrp.sambavideos.sambatech.com/liveevent/tvdiario_7a683b067e5eee5c8d45e1asdfas9b9/livestream/wrong_url.m3u8",
+			"http://slrp.sambavideos.sambatech.com/liveevent/tvdiario_7a683b067e5eee5c8d45e1e1883f69b9/livestream/playlist.m3u8"
 		)
 		
 		self.mediaList.append(m4)
@@ -332,8 +333,8 @@ class MediaListViewController : UITableViewController {
 		                   thumb: "https://cdn4.iconfinder.com/data/icons/defaulticon/icons/png/256x256/media-volume-2.png",
 		                   projectHash: ph,
 		                   mediaId: nil,
-		                  mediaURL: "http://slrp.sambavideos.sambatech.com/radio/pajucara4_7fbed8aac5d5d915877e6ec61e3cf0db/livestream/playlist.m3u8",
-		                  isLiveAudio: true)
+		                   isLiveAudio: true,
+		                   mediaURL: "http://slrp.sambavideos.sambatech.com/radio/pajucara4_7fbed8aac5d5d915877e6ec61e3cf0db/livestream/playlist.m3u8")
 		
 		self.mediaList.append(m5)
 		
@@ -375,6 +376,7 @@ class MediaInfo {
 	var mediaAd:String?
 	var description:String?
 	var mediaURL:String?
+	var backupUrls = [String]()
 	let isLiveAudio: Bool?
 	var isAutoStart = true
 	var validationRequest: ValidationRequest?
@@ -402,15 +404,16 @@ class MediaInfo {
 	
 	init(title:String, thumb:String? = nil, projectHash:String? = nil, mediaId:String? = nil,
 	     isAudio:Bool = false, description:String? = nil, mediaAd:String? = nil,
-	     mediaURL:String? = nil, isLiveAudio: Bool? = false) {
+	     isLiveAudio: Bool? = false, mediaURL:String? = nil, _ backupUrls:String...) {
 		self.title = title
 		self.projectHash = projectHash
 		self.mediaId = mediaId
 		self.isAudio = isAudio
 		self.description = description
 		self.mediaAd = mediaAd
-		self.mediaURL = mediaURL
 		self.isLiveAudio = isLiveAudio
+		self.mediaURL = mediaURL
+		self.backupUrls = backupUrls
 		
 		load_image(thumb)
 	}

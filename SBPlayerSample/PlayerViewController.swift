@@ -60,6 +60,7 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 			if let url = m.mediaURL {
 				let media = SambaMediaConfig()
 				media.url = url
+				media.backupUrls = m.backupUrls
 				media.title = m.title
 				media.thumb = m.thumb
 				callback(media)
@@ -70,15 +71,19 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 		
 		let req: SambaMediaRequest
 
+		// VoD
 		if let mId = m.mediaId {
 			req = SambaMediaRequest(
 				projectHash: ph,
 				mediaId: mId)
 		}
+		// Live
 		else {
 			req = SambaMediaRequest(
 				projectHash: ph,
-				streamUrl: m.mediaURL!, isLiveAudio: m.isLiveAudio ?? false)
+				isLiveAudio: m.isLiveAudio ?? false,
+				streamUrl: m.mediaURL!,
+				m.backupUrls)
 		}
 		
 		if let env = m.environment {
@@ -155,7 +160,8 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 	func onDestroy() {}
 	
 	func onError(_ error: SambaPlayerError) {
-		status.text = error.localizedDescription
+		status.text = "\(error.code) \(error.localizedDescription)"
+		print(status.text!)
 	}
 	
 	//MARK: actions
