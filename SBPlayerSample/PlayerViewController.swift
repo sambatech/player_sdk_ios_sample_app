@@ -83,7 +83,7 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 				projectHash: ph,
 				isLiveAudio: m.isLiveAudio ?? false,
 				streamUrl: m.mediaURL!,
-				m.backupUrls)
+				backupUrls: m.backupUrls)
 		}
 		
 		if let env = m.environment {

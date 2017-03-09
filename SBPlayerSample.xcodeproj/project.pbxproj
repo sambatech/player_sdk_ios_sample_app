@@ -11,8 +11,6 @@
 		9A7B782A1E70A0E800426500 /* SambaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A7B78291E70A0E700426500 /* SambaPlayer.framework */; };
 		9A7B782B1E70A0E800426500 /* SambaPlayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9A7B78291E70A0E700426500 /* SambaPlayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9A7B782E1E70A12D00426500 /* GoogleInteractiveMediaAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A7B782D1E70A12D00426500 /* GoogleInteractiveMediaAds.framework */; };
-		9A83F68C1E6F4E3B00C4A80F /* SambaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A2B49221DD3B1E8002EC4EC /* SambaPlayer.framework */; };
-		9A83F68D1E6F4E3B00C4A80F /* SambaPlayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9A2B49221DD3B1E8002EC4EC /* SambaPlayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9AC676331D66214A00768524 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC676321D66214A00768524 /* AppDelegate.swift */; };
 		9AC676381D66214A00768524 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AC676361D66214A00768524 /* Main.storyboard */; };
 		9AC6763A1D66214A00768524 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9AC676391D66214A00768524 /* Assets.xcassets */; };
@@ -22,6 +20,8 @@
 		9AC6764C1D66227700768524 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC676461D66227700768524 /* PlayerViewController.swift */; };
 		9AC6764D1D66227700768524 /* MediaListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC676471D66227700768524 /* MediaListTableViewCell.swift */; };
 		9AC6764E1D66227700768524 /* Configs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9AC676481D66227700768524 /* Configs.plist */; };
+		9ACF224A1E71A0870091555D /* SambaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A7B78291E70A0E700426500 /* SambaPlayer.framework */; };
+		9ACF224B1E71A0870091555D /* SambaPlayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9A7B78291E70A0E700426500 /* SambaPlayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9AD5AAEE1D66489E0052E278 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD5AAED1D66489E0052E278 /* main.m */; };
 		9AD5AAF11D66489E0052E278 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD5AAF01D66489E0052E278 /* AppDelegate.m */; };
 		9AD5AAF41D66489E0052E278 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD5AAF31D66489E0052E278 /* ViewController.m */; };
@@ -58,7 +58,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				9A83F68D1E6F4E3B00C4A80F /* SambaPlayer.framework in Embed Frameworks */,
+				9ACF224B1E71A0870091555D /* SambaPlayer.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -66,7 +66,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		9A2B49221DD3B1E8002EC4EC /* SambaPlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SambaPlayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A34EB731E13E6F40028FA52 /* SP-UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SP-UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A34EB751E13E6F40028FA52 /* SP_UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SP_UITests.swift; sourceTree = "<group>"; };
 		9A34EB771E13E6F40028FA52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -118,7 +117,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9A83F68C1E6F4E3B00C4A80F /* SambaPlayer.framework in Frameworks */,
+				9ACF224A1E71A0870091555D /* SambaPlayer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,7 +146,6 @@
 			isa = PBXGroup;
 			children = (
 				9A7B78291E70A0E700426500 /* SambaPlayer.framework */,
-				9A2B49221DD3B1E8002EC4EC /* SambaPlayer.framework */,
 				9AC676311D66214A00768524 /* SBPlayerSample */,
 				9AD5AAEB1D66489E0052E278 /* SBPlayerSample-objc */,
 				9A34EB741E13E6F40028FA52 /* SP-UITests */,

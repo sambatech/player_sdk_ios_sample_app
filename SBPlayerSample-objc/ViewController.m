@@ -29,18 +29,28 @@ SambaPlayer *p;
 	if (p != nil) return;
 	
 	p = [[SambaPlayer alloc] initWithParentViewController:self andParentView:_container];
-	SambaMedia *media = [[SambaMedia alloc] init:@"http://svbps-sambavideos.akamaized.net/voda/_definst_/amlst%3Astg.test%3B100243%2C530%2C24a89d4aa21fc48385d3412341df8cbd%3Bhidden32%3BWRDYQCD63MQ25BTVKRMEJXYREOJKRTB4OWNZJWDOLOZSNOKZ6QON6R6MPG2CEKS5JJBWBCNHHF4QIWNV6DC75KAABII4Y7T5UNN3W5RS56JJQX5TDS6GXSOH3EZINJFIC4HHUTOXOJFJ3LZWZE7G2WKT7T2FCWZYKVBGTRCEAHLS7XA7FKBA%3D%3D%3D%3D/playlist.m3u8"];
-	
-	/*SambaMediaRequest *request = [[SambaMediaRequest alloc] initWithProjectHash:@"..." mediaId:@"..."];
-	request.environment = SambaEnvironmentProd;*/
-	
-	p.media = media;
 	//p.controlsVisible = NO;
 	p.delegate = self;
-
+	
+	//[self loadVod];
+	[self loadLive];
+}
+- (void)loadVod {
+	SambaMedia *media = [[SambaMedia alloc] init:@"http://svbps-sambavideos.akamaized.net/voda/_definst_/amlst%3Astg.test%3B100243%2C530%2C24a89d4aa21fc48385d3412341df8cbd%3Bhidden32%3BWRDYQCD63MQ25BTVKRMEJXYREOJKRTB4OWNZJWDOLOZSNOKZ6QON6R6MPG2CEKS5JJBWBCNHHF4QIWNV6DC75KAABII4Y7T5UNN3W5RS56JJQX5TDS6GXSOH3EZINJFIC4HHUTOXOJFJ3LZWZE7G2WKT7T2FCWZYKVBGTRCEAHLS7XA7FKBA%3D%3D%3D%3D/playlist.m3u8"];
+	p.media = media;
 	[p play];
 }
-
+- (void)loadLive {
+	SambaMediaRequest *request = [[SambaMediaRequest alloc] initWithProjectHash:@"bc6a17435f3f389f37a514c171039b75"
+																	  streamUrl:@"http://slrp.sambavideos.sambatech.com/liveevent/tvdiario_7a683b067e5eee5c8d45e1asdfas9b9/livestream/wrong_url.m3u8"
+																	 backupUrls:@[@"http://slrp.sambavideos.sambatech.com/liveevent/tvdiario_7a683b067e5eee5c8d45e1asdfas9b9/livestream/wrong_url2.m3u8",
+																				  @"http://slrp.sambavideos.sambatech.com/liveevent/tvdiario_7a683b067e5eee5c8d45e1e1883f69b9/livestream/playlist.m3u8"]];
+	
+	[[[SambaApi alloc] init] requestMedia:request onComplete:^(SambaMedia *media) {
+		p.media = media;
+		[p play];
+	}];
+}
 - (void)onLoad {
 	self.eventName.text = @"load";
 }
