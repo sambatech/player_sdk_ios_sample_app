@@ -71,8 +71,7 @@ class MediaListViewController : UITableViewController {
 	}
 	
 	private func makeInitialRequests() {
-		//requestMediaSet([String(6050), String(4421), String(4460)])
-		requestMediaSet([String(4421)])
+		requestMediaSet(["4421", "6050", "5952", "5719", "543", "562"])//"4460"
 	}
 	
 	private func requestMediaSet(_ pids:[String]) {
@@ -273,70 +272,67 @@ class MediaListViewController : UITableViewController {
 		let thumbURL = "http://www.impactmobile.com/files/2012/09/icon64-broadcasts.png"
 		let ph = "bc6a17435f3f389f37a514c171039b75"
 		
-		let m = MediaInfo(
-			title: "Live SBT (HLS)",
+		// HLS 1
+		self.mediaList.append(MediaInfo(
+			title: "HLS 1",
 			thumb:  thumbURL,
 			projectHash: ph,
-			mediaId: nil,
-			isAudio: false,
 			mediaURL: "http://liveabr2.sambatech.com.br/abr/sbtabr_8fcdc5f0f8df8d4de56b22a2c6660470/livestreamabrsbt.m3u8"
-		)
+		))
 		
-		self.mediaList.append(m)
-		
-		let m1 = MediaInfo(
-			title: "Live VEVO (HLS)",
+		// HLS 2
+		self.mediaList.append(MediaInfo(
+			title: "HLS 2",
 			thumb: thumbURL,
 			projectHash: ph,
-			mediaId: nil,
-			isAudio: false,
-			mediaURL: "http://vevoplaylist-live.hls.adaptive.level3.net/vevo/ch1/appleman.m3u8"
-		)
+			mediaURL: "http://slrp.sambavideos.sambatech.com/liveevent/tvdiario_7a683b067e5eee5c8d45e1e1883f69b9/livestream/playlist.m3u8"
+		))
 		
-		self.mediaList.append(m1)
-		
-		let m2 = MediaInfo(
-			title: "Live Denmark channel (HLS)",
+		// fallback URL
+		self.mediaList.append(MediaInfo(
+			title: "Fallback URL",
 			thumb: thumbURL,
 			projectHash: ph,
-			mediaId: nil,
-			isAudio: false,
-			mediaURL: "http://itv08.digizuite.dk/tv2b/ngrp:ch1_all/playlist.m3u8"
-		)
+			mediaURL: "http://liveabr2.sambatech.com.br/abr/sbtabr_8fcdc5f0f8df8d4de56b26660470/wrong_url.m3u8",
+			"http://liveabr2.sambatech.com.br/abr/sbtabr_8fcdc5f0f8df8d4de56b26660470/wrong_url2.m3u8",
+			"http://liveabr2.sambatech.com.br/abr/sbtabr_8fcdc5f0f8df8d4de56b22a2c6660470/livestreamabrsbtbkp.m3u8"
+		))
 		
-		self.mediaList.append(m2)
+		// fallback HDS
+		self.mediaList.append(MediaInfo(
+			title: "Fallback HDS",
+			thumb: thumbURL,
+			projectHash: "90fe205bd667e40036dd56619d69359f",
+			env: SambaEnvironment.test,
+			mediaURL: "http://slrp.sambavideos.sambatech.com/liveevent/pajucara3_7fbed8aac5d5d915877e6ec61e3cf0db/livestream/manifest.f4m"
+		))
 		
-		let m3 = MediaInfo(
-			title: "Live Denmark channel (HDS: erro!)",
+		// fallback error
+		self.mediaList.append(MediaInfo(
+			title: "Fallback com erro",
 			thumb: thumbURL,
 			projectHash: ph,
-			mediaId: nil,
-			isAudio: false,
-			mediaURL: "http://itv08.digizuite.dk/tv2b/ngrp:ch1_all/manifest.f4m"
-		)
+			mediaURL: "http://liveabr2.sambatech.com.br/abr/sbtabr_8fcdc5f0f8df8d4de56b26660470/wrong_url.m3u8",
+			"http://liveabr2.sambatech.com.br/abr/sbtabr_8fcdc5f0f8df8d4de56b26660470/wrong_url2.m3u8"
+		))
 		
-		self.mediaList.append(m3)
-		
-		let m4 = MediaInfo(
-			title: "Tv Diário",
+		// geo-blocking
+		self.mediaList.append(MediaInfo(
+			title: "Geo-blocking",
 			thumb: thumbURL,
+			projectHash: "90fe205bd667e40036dd56619d69359f",
+			env: SambaEnvironment.test,
+			mediaURL: "http://slrp.sambavideos.sambatech.com/liveevent/tvdiario_7a683b067e5eee5c8d45e1e1883f69b9/livestream/playlist.m3u8"
+		))
+		
+		// audio
+		self.mediaList.append(MediaInfo(
+			title: "Áudio live",
+			thumb: "https://cdn4.iconfinder.com/data/icons/defaulticon/icons/png/256x256/media-volume-2.png",
 			projectHash: ph,
-			mediaId: nil,
-			isAudio: false,
-			mediaURL: "http://slrp.sambavideos.sambatech.com/liveevent/tvdiario_7a683b067e5eee5c8d45e1asdfas9b9/livestream/wrong_url.m3u8",
-			"http://slrp.sambavideos.sambatech.com/liveevent/tvdiario_7a683b067e5eee5c8d45e1e1883f69b9/livestream/playlist.m3u8"
-		)
-		
-		self.mediaList.append(m4)
-		
-		let m5 = MediaInfo(title: "Live áudio",
-		                   thumb: "https://cdn4.iconfinder.com/data/icons/defaulticon/icons/png/256x256/media-volume-2.png",
-		                   projectHash: ph,
-		                   mediaId: nil,
-		                   isLiveAudio: true,
-		                   mediaURL: "http://slrp.sambavideos.sambatech.com/radio/pajucara4_7fbed8aac5d5d915877e6ec61e3cf0db/livestream/playlist.m3u8")
-		
-		self.mediaList.append(m5)
+			isLiveAudio: true,
+			mediaURL: "http://slrp.sambavideos.sambatech.com/radio/pajucara4_7fbed8aac5d5d915877e6ec61e3cf0db/livestream/playlist.m3u8"
+		))
 		
 		self.tableView.reloadData()
 	}
@@ -404,7 +400,7 @@ class MediaInfo {
 	
 	init(title:String, thumb:String? = nil, projectHash:String? = nil, mediaId:String? = nil,
 	     isAudio:Bool = false, description:String? = nil, mediaAd:String? = nil,
-	     isLiveAudio: Bool? = false, mediaURL:String? = nil, _ backupUrls:String...) {
+	     isLiveAudio: Bool? = false, env: SambaEnvironment? = nil, mediaURL:String? = nil, _ backupUrls:String...) {
 		self.title = title
 		self.projectHash = projectHash
 		self.mediaId = mediaId
@@ -412,6 +408,7 @@ class MediaInfo {
 		self.description = description
 		self.mediaAd = mediaAd
 		self.isLiveAudio = isLiveAudio
+		self.environment = env
 		self.mediaURL = mediaURL
 		self.backupUrls = backupUrls
 		
