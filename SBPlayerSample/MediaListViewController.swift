@@ -184,7 +184,7 @@ class MediaListViewController : UITableViewController {
 					m.environment = isDev ? .test : .prod
 					
 					// WORKAROUND: to identify which project has DRM
-					if pid == "5952" || pid == "6050" || pid == "5719" || isDev {
+					if pid == "5952" || pid == "6050" || pid == "5719" || pid == "562" {
 						m.validationRequest = ValidationRequest()
 					}
 					
@@ -277,7 +277,7 @@ class MediaListViewController : UITableViewController {
 			title: "HLS 1",
 			thumb:  thumbURL,
 			projectHash: ph,
-			mediaURL: "http://liveabr2.sambatech.com.br/abr/sbtabr_8fcdc5f0f8df8d4de56b22a2c6660470/livestreamabrsbt.m3u8"
+			mediaURL: "http://liveabr2.sambatech.com.br/abr/sbtabr_8fcdc5f0f8df8d4de56b22a2c6660470/livestreamabrsbtbkp.m3u8"
 		))
 		
 		// HLS 2
