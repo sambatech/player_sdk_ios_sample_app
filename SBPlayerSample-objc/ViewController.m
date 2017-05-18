@@ -46,6 +46,7 @@ SambaPlayer *p;
 																	 backupUrls:@[@"http://slrp.sambavideos.sambatech.com/liveevent/tvdiario_7a683b067e5eee5c8d45e1asdfas9b9/livestream/wrong_url2.m3u8",
 																				  @"http://slrp.sambavideos.sambatech.com/liveevent/tvdiario_7a683b067e5eee5c8d45e1e1883f69b9/livestream/playlist.m3u8"]];
 	
+	
 	[[[SambaApi alloc] init] requestMedia:request onComplete:^(SambaMedia *media) {
 		p.media = media;
 		[p play];

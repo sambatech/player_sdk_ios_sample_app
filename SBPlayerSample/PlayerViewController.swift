@@ -90,6 +90,8 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 			req.environment = env
 		}
 		
+		req.apiProtocol = SambaProtocol.https
+		
 		SambaApi().requestMedia(req, onComplete: callback) { (error, response) in
 			print("Erro ao requisitar mídia!")
 			print(error ?? "no error obj", response ?? "no response obj")

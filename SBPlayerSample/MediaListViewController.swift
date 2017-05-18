@@ -79,6 +79,18 @@ class MediaListViewController : UITableViewController {
 
 		// INJECTED MEDIA
 		
+		var m = MediaInfo(
+			title: "SBT (com publicidade)",
+			thumb: "https://vignette4.wikia.nocookie.net/telepedia/images/4/4e/Logotipo_do_SBT.png/revision/latest?cb=20150603172637&path-prefix=pt-br",
+			projectHash: "25ce5b8513c18a9eae99a8af601d0943",
+			mediaId: "5db4352a8618fbf794753d2f1170dbf8",
+			isAudio: false,
+			description: nil,
+			mediaAd: "https://pubads.g.doubleclick.net/gampad/ads?sz=640x480|640x480&iu=/1011235/640x480_WebDigital_TheNoite_PreRoll&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&url=[referrer_url]&description_url=[description_url]&correlator=[timestamp]&a=0"
+		)
+		m.environment = .prod
+		mediaList.append(m)
+		
 		/*var m = MediaInfo(
 			title: "DRM Irdeto (p#6) - 15/12",
 			thumb: "http://pcgamingwiki.com/images/thumb/b/b3/DRM-free_icon.svg/120px-DRM-free_icon.svg.png",

@@ -11,8 +11,8 @@
 		9A4A98D71E7339DC0010AE78 /* SambaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A4A98D61E7339DC0010AE78 /* SambaPlayer.framework */; };
 		9A4A98D81E7339DC0010AE78 /* SambaPlayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9A4A98D61E7339DC0010AE78 /* SambaPlayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9A7B782E1E70A12D00426500 /* GoogleInteractiveMediaAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A7B782D1E70A12D00426500 /* GoogleInteractiveMediaAds.framework */; };
-		9AC040B01E71C300001F447A /* SambaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A54E97B1E4E049100852C4E /* SambaPlayer.framework */; };
-		9AC040B11E71C300001F447A /* SambaPlayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9A54E97B1E4E049100852C4E /* SambaPlayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9AA657ED1EB0E6EB00F455C4 /* SambaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A4A98D61E7339DC0010AE78 /* SambaPlayer.framework */; };
+		9AA657EE1EB0E6EB00F455C4 /* SambaPlayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9A4A98D61E7339DC0010AE78 /* SambaPlayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9AC676331D66214A00768524 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC676321D66214A00768524 /* AppDelegate.swift */; };
 		9AC676381D66214A00768524 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AC676361D66214A00768524 /* Main.storyboard */; };
 		9AC6763A1D66214A00768524 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9AC676391D66214A00768524 /* Assets.xcassets */; };
@@ -52,13 +52,13 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9A83F68E1E6F4E3B00C4A80F /* Embed Frameworks */ = {
+		9AA657EF1EB0E6EB00F455C4 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				9AC040B11E71C300001F447A /* SambaPlayer.framework in Embed Frameworks */,
+				9AA657EE1EB0E6EB00F455C4 /* SambaPlayer.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -72,7 +72,7 @@
 		9A4A98D61E7339DC0010AE78 /* SambaPlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SambaPlayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A54E97B1E4E049100852C4E /* SambaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SambaPlayer.framework; path = Carthage/Build/iOS/SambaPlayer.framework; sourceTree = "<group>"; };
 		9A7B782D1E70A12D00426500 /* GoogleInteractiveMediaAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleInteractiveMediaAds.framework; path = Carthage/Checkouts/player_sdk_ios/Frameworks/GoogleInteractiveMediaAds.framework; sourceTree = "<group>"; };
-		9AC6762F1D66214A00768524 /* SP-v0.4.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SP-v0.4.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9AC6762F1D66214A00768524 /* SP-v0.5.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SP-v0.5.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AC676321D66214A00768524 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9AC676371D66214A00768524 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9AC676391D66214A00768524 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -84,7 +84,7 @@
 		9AC676471D66227700768524 /* MediaListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaListTableViewCell.swift; sourceTree = "<group>"; };
 		9AC676481D66227700768524 /* Configs.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Configs.plist; sourceTree = "<group>"; };
 		9AC676491D66227700768524 /* Test-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Test-Bridging-Header.h"; sourceTree = "<group>"; };
-		9AD5AAEA1D66489D0052E278 /* SPO-v0.4.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SPO-v0.4.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9AD5AAEA1D66489D0052E278 /* SPO-v0.5.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SPO-v0.5.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AD5AAED1D66489E0052E278 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		9AD5AAEF1D66489E0052E278 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		9AD5AAF01D66489E0052E278 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -117,7 +117,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9AC040B01E71C300001F447A /* SambaPlayer.framework in Frameworks */,
+				9AA657ED1EB0E6EB00F455C4 /* SambaPlayer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -157,8 +157,8 @@
 		9AC676301D66214A00768524 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9AC6762F1D66214A00768524 /* SP-v0.4.app */,
-				9AD5AAEA1D66489D0052E278 /* SPO-v0.4.app */,
+				9AC6762F1D66214A00768524 /* SP-v0.5.app */,
+				9AD5AAEA1D66489D0052E278 /* SPO-v0.5.app */,
 				9A34EB731E13E6F40028FA52 /* SP-UITests.xctest */,
 			);
 			name = Products;
@@ -227,9 +227,9 @@
 			productReference = 9A34EB731E13E6F40028FA52 /* SP-UITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
-		9AC6762E1D66214A00768524 /* SP-v0.4 */ = {
+		9AC6762E1D66214A00768524 /* SP-v0.5 */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9AC676411D66214A00768524 /* Build configuration list for PBXNativeTarget "SP-v0.4" */;
+			buildConfigurationList = 9AC676411D66214A00768524 /* Build configuration list for PBXNativeTarget "SP-v0.5" */;
 			buildPhases = (
 				9AC6762B1D66214A00768524 /* Sources */,
 				9AC6762C1D66214A00768524 /* Frameworks */,
@@ -240,27 +240,27 @@
 			);
 			dependencies = (
 			);
-			name = "SP-v0.4";
+			name = "SP-v0.5";
 			productName = SBPlayerSample;
-			productReference = 9AC6762F1D66214A00768524 /* SP-v0.4.app */;
+			productReference = 9AC6762F1D66214A00768524 /* SP-v0.5.app */;
 			productType = "com.apple.product-type.application";
 		};
-		9AD5AAE91D66489D0052E278 /* SPO-v0.4 */ = {
+		9AD5AAE91D66489D0052E278 /* SPO-v0.5 */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9AD5AB001D66489E0052E278 /* Build configuration list for PBXNativeTarget "SPO-v0.4" */;
+			buildConfigurationList = 9AD5AB001D66489E0052E278 /* Build configuration list for PBXNativeTarget "SPO-v0.5" */;
 			buildPhases = (
 				9AD5AAE61D66489D0052E278 /* Sources */,
 				9AD5AAE71D66489D0052E278 /* Frameworks */,
 				9AD5AAE81D66489D0052E278 /* Resources */,
-				9A83F68E1E6F4E3B00C4A80F /* Embed Frameworks */,
+				9AA657EF1EB0E6EB00F455C4 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "SPO-v0.4";
+			name = "SPO-v0.5";
 			productName = "SBPlayerSample-objc";
-			productReference = 9AD5AAEA1D66489D0052E278 /* SPO-v0.4.app */;
+			productReference = 9AD5AAEA1D66489D0052E278 /* SPO-v0.5.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -302,8 +302,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				9AC6762E1D66214A00768524 /* SP-v0.4 */,
-				9AD5AAE91D66489D0052E278 /* SPO-v0.4 */,
+				9AC6762E1D66214A00768524 /* SP-v0.5 */,
+				9AD5AAE91D66489D0052E278 /* SPO-v0.5 */,
 				9A34EB721E13E6F40028FA52 /* SP-UITests */,
 			);
 		};
@@ -376,7 +376,7 @@
 /* Begin PBXTargetDependency section */
 		9A34EB791E13E6F40028FA52 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 9AC6762E1D66214A00768524 /* SP-v0.4 */;
+			target = 9AC6762E1D66214A00768524 /* SP-v0.5 */;
 			targetProxy = 9A34EB781E13E6F40028FA52 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -555,7 +555,7 @@
 				);
 				INFOPLIST_FILE = SBPlayerSample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.sambatech.SP-v0.4";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sambatech.SP-v0.5";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_VERSION = 3.0;
@@ -575,7 +575,7 @@
 				);
 				INFOPLIST_FILE = SBPlayerSample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.sambatech.SP-v0.4";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sambatech.SP-v0.5";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_VERSION = 3.0;
@@ -595,7 +595,7 @@
 				INFOPLIST_FILE = "SBPlayerSample-objc/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.sambatech.SPO-v0.4";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sambatech.SPO-v0.5";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -613,7 +613,7 @@
 				INFOPLIST_FILE = "SBPlayerSample-objc/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.sambatech.SPO-v0.4";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sambatech.SPO-v0.5";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -639,7 +639,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9AC676411D66214A00768524 /* Build configuration list for PBXNativeTarget "SP-v0.4" */ = {
+		9AC676411D66214A00768524 /* Build configuration list for PBXNativeTarget "SP-v0.5" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9AC676421D66214A00768524 /* Debug */,
@@ -648,7 +648,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9AD5AB001D66489E0052E278 /* Build configuration list for PBXNativeTarget "SPO-v0.4" */ = {
+		9AD5AB001D66489E0052E278 /* Build configuration list for PBXNativeTarget "SPO-v0.5" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9AD5AAFE1D66489E0052E278 /* Debug */,
