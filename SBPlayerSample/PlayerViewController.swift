@@ -180,6 +180,15 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 		sambaPlayer?.stop()
 	}
 	
+	@IBAction func fullscreenHandler() {
+		sambaPlayer?.fullscreen = true
+	}
+	
+	@IBAction func controlbarHandler() {
+		guard let player = sambaPlayer else { return }
+		player.controlsVisible = !player.controlsVisible
+	}
+	
 	@IBAction func createSessionHandler() {
 		guard let valReq = valReq,
 			let drm = valReq.media?.drmRequest else {
