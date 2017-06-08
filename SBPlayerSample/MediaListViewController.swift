@@ -32,6 +32,12 @@ class MediaListViewController : UITableViewController {
 		//Button live
 		let liveIcon = liveToggleButton.currentBackgroundImage?.tintPhoto(UIColor.lightGray)
 		liveToggleButton.setImage(liveIcon, for: UIControlState())
+		
+		// refresh control
+		let refreshControl = UIRefreshControl()
+		refreshControl.addTarget(self, action: #selector(refreshRequestedHandler), for: .valueChanged)
+		refreshControl.tintColor = .red
+		self.refreshControl = refreshControl
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -161,7 +167,10 @@ class MediaListViewController : UITableViewController {
 			let url = "\(Helpers.settings[isDev ? "svapi_dev" : "svapi_stage"]!)medias?access_token=\(Helpers.settings[isDev ? "svapi_token_dev" : "svapi_token_prod"]!)&pid=\(pid)&published=true"
 			
 			Helpers.requestURLJson(url) { json in
-				guard let json = json as? [AnyObject] else { return }
+				guard let json = json as? [AnyObject] else {
+					self.refreshControl?.endRefreshing()
+					return
+				}
 				
 				for jsonNode in json {
 					var isAudio = false
@@ -208,6 +217,7 @@ class MediaListViewController : UITableViewController {
 				if i == pids.count {
 					DispatchQueue.main.async {
 						self.tableView.reloadData()
+						self.refreshControl?.endRefreshing()
 					}
 					return
 				}
@@ -372,6 +382,18 @@ class MediaListViewController : UITableViewController {
 	@IBAction func autoStartHandler(_ sender: UIButton) {
 		sender.tintColor = isAutoStart ? UIColor.lightGray : UIColor(colorLiteralRed: 0, green: 0.4, blue: 1, alpha: 1)
 		isAutoStart = !isAutoStart
+	}
+	
+	@objc private func refreshRequestedHandler() {
+		let shouldRefresh = !liveActive
+		
+		self.enableLiveButton(false)
+		self.enableDfpButton(false)
+		
+		if shouldRefresh {
+			self.mediaList = [MediaInfo]()
+			self.makeInitialRequests()
+		}
 	}
 }
 

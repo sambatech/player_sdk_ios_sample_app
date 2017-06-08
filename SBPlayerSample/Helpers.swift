@@ -31,16 +31,19 @@ class Helpers {
 			
 			if let error = error {
 				print("\(type(of: self)) Error: \(error.localizedDescription)\(reqText)")
+				callback?(nil)
 				return
 			}
 			
 			guard let response = response as? HTTPURLResponse else {
 				print("\(type(of: self)) Error: No response from server.\(reqText)")
+				callback?(nil)
 				return
 			}
 			
 			guard case 200..<300 = response.statusCode else {
 				print("\(type(of: self)) Error: Invalid server response (\(response)).\(reqText)")
+				callback?(nil)
 				return
 			}
 			
@@ -57,6 +60,7 @@ class Helpers {
 				}
 				else {
 					print("\(type(of: self)) Error: Unable to get text response.\(reqText)")
+					callback?(nil)
 				}
 			case is Data.Type:
 				callback?(data as? T)

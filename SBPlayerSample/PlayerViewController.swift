@@ -162,7 +162,7 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 	func onDestroy() {}
 	
 	func onError(_ error: SambaPlayerError) {
-		status.text = "\(error.code) \(error.localizedDescription)"
+		status.text = "\(error.code) (\(error.cause?.code): \(error.cause?.localizedDescription ?? error.localizedDescription)"
 		print(status.text!)
 	}
 	
