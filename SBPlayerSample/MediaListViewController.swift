@@ -36,7 +36,7 @@ class MediaListViewController : UITableViewController {
 		// refresh control
 		let refreshControl = UIRefreshControl()
 		refreshControl.addTarget(self, action: #selector(refreshRequestedHandler), for: .valueChanged)
-		refreshControl.tintColor = .red
+		refreshControl.tintColor = UIColor(0xCCCCCC)
 		self.refreshControl = refreshControl
 	}
 	
