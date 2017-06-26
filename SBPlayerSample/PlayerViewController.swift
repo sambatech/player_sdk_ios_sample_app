@@ -251,6 +251,31 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 		present(menu, animated: true, completion: nil)
 	}
 	
+	@IBAction func outputHandler(_ sender: UIButton) {
+		guard let player = sambaPlayer else { return }
+		
+		let outputs = player.outputs
+		
+		guard outputs.count > 0 else { return }
+		
+		let menu = UIAlertController(title: "Quality", message: "Choose an outputs to switch quality.", preferredStyle: .actionSheet)
+		let getCallback = { (index: Int) in
+			return { (action: UIAlertAction) in
+				player.switchOutput(index - 1)
+			}
+		}
+		
+		for (i, output) in outputs.enumerated() {
+			menu.addAction(UIAlertAction(title: output.label, style: .default, handler: getCallback(i)))
+		}
+		
+		menu.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+		menu.popoverPresentationController?.sourceView = sender
+		menu.popoverPresentationController?.sourceRect = sender.bounds
+		
+		present(menu, animated: true, completion: nil)
+	}
+	
 	@IBAction func authorizeHandler(_ sender: AnyObject) {
 		guard let valReq = valReq,
 			let media = valReq.media,

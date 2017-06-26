@@ -151,7 +151,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="gwW-F7-1BG" userLabel="API">
-                                        <rect key="frame" x="0.0" y="87" width="280" height="30"/>
+                                        <rect key="frame" x="0.0" y="87" width="336" height="30"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m3i-1p-gBS">
                                                 <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
@@ -191,6 +191,14 @@
                                                 <state key="normal" title="Controlbar"/>
                                                 <connections>
                                                     <action selector="controlbarHandler" destination="9Et-Yp-bwl" eventType="touchUpInside" id="pNO-n4-HBe"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CR1-lo-gnD">
+                                                <rect key="frame" x="288" y="0.0" width="48" height="30"/>
+                                                <color key="backgroundColor" red="0.59999999999999998" green="0.80000000000000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <state key="normal" title="Output"/>
+                                                <connections>
+                                                    <action selector="outputHandler:" destination="9Et-Yp-bwl" eventType="touchUpInside" id="mC6-iI-FwU"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -266,7 +274,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="90"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EMB-Za-OGB" id="kww-Pq-5BW">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="90"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="89"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bee" translatesAutoresizingMaskIntoConstraints="NO" id="uJJ-iu-RAS">
