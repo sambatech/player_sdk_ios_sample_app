@@ -17,6 +17,7 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 	@IBOutlet var duration: UILabel!
 	@IBOutlet var seekTo: UITextField!
 	@IBOutlet var seekBy: UITextField!
+	@IBOutlet var rate: UITextField!
 	@IBOutlet var drmControlbar: UIView!
 	@IBOutlet var policy: UILabel!
 	
@@ -256,14 +257,16 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 		
 		let outputs = player.outputs
 		
-		guard outputs.count > 0 else { return }
+		guard outputs.count > 1 else { return }
 		
 		let menu = UIAlertController(title: "Quality", message: "Choose an outputs to switch quality.", preferredStyle: .actionSheet)
 		let getCallback = { (index: Int) in
 			return { (action: UIAlertAction) in
-				player.switchOutput(index - 1)
+				player.switchOutput(index)
 			}
 		}
+		
+		menu.addAction(UIAlertAction(title: "Auto", style: .default, handler: getCallback(-1)))
 		
 		for (i, output) in outputs.enumerated() {
 			menu.addAction(UIAlertAction(title: output.label, style: .default, handler: getCallback(i)))
@@ -343,6 +346,12 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 			let time = sambaPlayer?.currentTime,
 			let by = Float(byStr) else { return }
 		sambaPlayer?.seek(time + by)
+	}
+	
+	@IBAction func rateHandler() {
+		guard let rateStr = self.rate.text,
+			let rate = Float(rateStr) else { return }
+		sambaPlayer?.rate = rate
 	}
 	
 	//MARK: utils
