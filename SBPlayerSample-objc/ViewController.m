@@ -77,7 +77,7 @@ SambaPlayer *p;
 }
 - (void)onError:(SambaPlayerError *)error {
 	NSLog(@"%@", error.localizedDescription);
-	error.message = [NSString stringWithFormat:@"My custom error message with code #%ld!", (long)error.code];
+	//error.message = [NSString stringWithFormat:@"My custom error message with code #%ld!", (long)error.code];
 }
 - (IBAction)seekHandler {
 	if (p == nil) return;
