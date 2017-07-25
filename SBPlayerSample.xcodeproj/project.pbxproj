@@ -10,7 +10,6 @@
 		9A34EB761E13E6F40028FA52 /* SP_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A34EB751E13E6F40028FA52 /* SP_UITests.swift */; };
 		9A4A98D71E7339DC0010AE78 /* SambaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A4A98D61E7339DC0010AE78 /* SambaPlayer.framework */; };
 		9A4A98D81E7339DC0010AE78 /* SambaPlayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9A4A98D61E7339DC0010AE78 /* SambaPlayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		9A7B782E1E70A12D00426500 /* GoogleInteractiveMediaAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A7B782D1E70A12D00426500 /* GoogleInteractiveMediaAds.framework */; };
 		9AA657ED1EB0E6EB00F455C4 /* SambaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A4A98D61E7339DC0010AE78 /* SambaPlayer.framework */; };
 		9AA657EE1EB0E6EB00F455C4 /* SambaPlayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9A4A98D61E7339DC0010AE78 /* SambaPlayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9AC676331D66214A00768524 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC676321D66214A00768524 /* AppDelegate.swift */; };
@@ -109,7 +108,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A4A98D71E7339DC0010AE78 /* SambaPlayer.framework in Frameworks */,
-				9A7B782E1E70A12D00426500 /* GoogleInteractiveMediaAds.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
