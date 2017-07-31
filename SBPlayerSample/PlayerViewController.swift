@@ -94,8 +94,7 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 		req.apiProtocol = SambaProtocol.https
 		
 		SambaApi().requestMedia(req, onComplete: callback) { (error, response) in
-			print("Erro ao requisitar mídia!")
-			print(error ?? "no error obj", response ?? "no response obj")
+			print("Erro ao requisitar mídia:", error ?? "no error obj", response ?? "no response obj")
 		}
 	}
 	
@@ -109,6 +108,8 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 		// ad injection
 		if let url = mediaInfo?.mediaAd {
 			media.adUrl = url
+			//media.adsSettings.maxRedirects = 0
+			//media.adsSettings.playAdsAfterTime = 5
 		}
 
 		if media.isAudio {
