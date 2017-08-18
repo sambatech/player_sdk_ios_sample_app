@@ -308,6 +308,25 @@ class MediaListViewController : UITableViewController {
 			thumb: thumbURL,
 			projectHash: ph,
 			mediaURL: "http://slrp.sambavideos.sambatech.com/liveevent/tvdiario_7a683b067e5eee5c8d45e1e1883f69b9/livestream/playlist.m3u8"
+			//mediaURL: "http://liveabr2.sambatech.com.br/abr/sbtabr_8fcdc5f0f8df8d4de56b26660470/wrong_url.m3u8"
+		))
+		
+		// HLS + DVR
+		self.mediaList.append(MediaInfo(
+			title: "HLS + DVR",
+			thumb: thumbURL,
+			projectHash: ph,
+			isDvr: true,
+			mediaURL: "http://origin3.live.sambatech.com.br/liveevent_dvr/client_playerHash/livestream/playlist.m3u8?DVR"
+		))
+		
+		// HLS + DVR (API)
+		self.mediaList.append(MediaInfo(
+			title: "HLS + DVR (API)",
+			thumb: thumbURL,
+			projectHash: "84fb558d1eb2c5c78b836c7a942de67b",
+			liveChannelId: "c2f4fa0c808eafbe3f45d1ac117059ea",
+			env: .test
 		))
 		
 		// fallback URL
@@ -399,20 +418,22 @@ class MediaListViewController : UITableViewController {
 
 class MediaInfo {
 	
-	let title:String
-	let projectHash:String?
-	let mediaId:String?
-	let isAudio:Bool
-	var mediaAd:String?
-	var description:String?
-	var mediaURL:String?
+	let title: String
+	let projectHash: String?
+	let mediaId: String?
+	let liveChannelId: String?
+	let isAudio: Bool
+	var mediaAd: String?
+	var description: String?
+	var mediaURL: String?
 	var backupUrls = [String]()
 	let isLiveAudio: Bool?
+	let isDvr: Bool
 	var isAutoStart = true
 	var validationRequest: ValidationRequest?
 	var environment: SambaEnvironment?
 	
-	var thumb:UIImage? {
+	var thumb: UIImage? {
 		didSet {
 			if let imageView = imageView {
 				self.imageView = imageView
@@ -432,16 +453,18 @@ class MediaInfo {
 		}
 	}
 	
-	init(title:String, thumb:String? = nil, projectHash:String? = nil, mediaId:String? = nil,
-	     isAudio:Bool = false, description:String? = nil, mediaAd:String? = nil,
-	     isLiveAudio: Bool? = false, env: SambaEnvironment? = nil, mediaURL:String? = nil, _ backupUrls:String...) {
+	init(title: String, thumb: String? = nil, projectHash: String? = nil, mediaId: String? = nil, liveChannelId: String? = nil,
+	     isAudio: Bool = false, description: String? = nil, mediaAd: String? = nil, isLiveAudio: Bool? = false,
+	     isDvr: Bool = false, env: SambaEnvironment? = nil, mediaURL: String? = nil, _ backupUrls: String...) {
 		self.title = title
 		self.projectHash = projectHash
 		self.mediaId = mediaId
+		self.liveChannelId = liveChannelId
 		self.isAudio = isAudio
 		self.description = description
 		self.mediaAd = mediaAd
 		self.isLiveAudio = isLiveAudio
+		self.isDvr = isDvr
 		self.environment = env
 		self.mediaURL = mediaURL
 		self.backupUrls = backupUrls

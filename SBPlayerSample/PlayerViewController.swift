@@ -74,9 +74,12 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 
 		// VoD
 		if let mId = m.mediaId {
-			req = SambaMediaRequest(
-				projectHash: ph,
-				mediaId: mId)
+			req = SambaMediaRequest(projectHash: ph, mediaId: mId)
+		}
+		// DVR
+		else if let mId = m.liveChannelId {
+			req = SambaMediaRequest(projectHash: ph, liveChannelId: mId)
+			req.apiProtocol = SambaProtocol.http
 		}
 		// Live
 		else {
@@ -91,22 +94,25 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 			req.environment = env
 		}
 		
-		req.apiProtocol = SambaProtocol.https
-		
 		SambaApi().requestMedia(req, onComplete: callback) { (error, response) in
 			print("Erro ao requisitar mídia:", error ?? "no error obj", response ?? "no response obj")
 		}
 	}
 	
 	private func initPlayer(_ media: SambaMedia) {
+		guard let mediaInfo = mediaInfo else {
+			print("No MediaInfo instance found!")
+			return
+		}
+		
 		// media URL injection
-		if let url = mediaInfo?.mediaURL {
+		if let url = mediaInfo.mediaURL {
 			media.url = url
 			media.outputs?.removeAll()
 		}
 		
 		// ad injection
-		if let url = mediaInfo?.mediaAd {
+		if let url = mediaInfo.mediaAd {
 			media.adUrl = url
 			//media.adsSettings.maxRedirects = 0
 			//media.adsSettings.playAdsAfterTime = 5
@@ -118,11 +124,15 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 			playerContainer.frame = frame
 		}
 		
+		if mediaInfo.isDvr {
+			media.isDvr = true
+		}
+		
 		let player = SambaPlayer(parentViewController: self, andParentView: playerContainer)
 		player.delegate = self
 		player.media = media
 		
-		if let mediaInfo = mediaInfo, mediaInfo.isAutoStart {
+		if mediaInfo.isAutoStart {
 			player.play()
 		}
 		
@@ -190,6 +200,14 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 		guard let player = sambaPlayer else { return }
 		player.controlsVisible = !player.controlsVisible
 	}
+	
+	// TODO: switch media on-the-fly (e.g. playlist)
+	/*let m = SambaMediaConfig()
+	m.projectHash = "bc6a17435f3f389f37a514c171039b75"
+	m.id = ""
+	m.url = "http://liveabr2.sambatech.com.br/abr/sbtabr_8fcdc5f0f8df8d4de56b22a2c6660470/livestreamabrsbtbkp.m3u8"
+	m.isLive = true
+	sambaPlayer?.media = m*/
 	
 	@IBAction func createSessionHandler() {
 		guard let valReq = valReq,
