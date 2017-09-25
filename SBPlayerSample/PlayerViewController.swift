@@ -58,7 +58,7 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 		}
 		
 		guard let ph = m.projectHash else {
-			if let url = m.mediaURL {
+			if let url = m.mediaUrl {
 				let media = SambaMediaConfig()
 				media.url = url
 				media.backupUrls = m.backupUrls
@@ -72,21 +72,23 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 		
 		let req: SambaMediaRequest
 
-		// VoD
 		if let mId = m.mediaId {
-			req = SambaMediaRequest(projectHash: ph, mediaId: mId)
-		}
-		// DVR
-		else if let mId = m.liveChannelId {
-			req = SambaMediaRequest(projectHash: ph, liveChannelId: mId)
-			req.apiProtocol = SambaProtocol.http
+			// DVR
+			if m.isDvr {
+				req = SambaMediaRequest(projectHash: ph, liveChannelId: mId)
+				req.apiProtocol = SambaProtocol.http
+			}
+			// VoD
+			else {
+				req = SambaMediaRequest(projectHash: ph, mediaId: mId)
+			}
 		}
 		// Live
 		else {
 			req = SambaMediaRequest(
 				projectHash: ph,
 				isLiveAudio: m.isLiveAudio ?? false,
-				streamUrl: m.mediaURL!,
+				streamUrl: m.mediaUrl!,
 				backupUrls: m.backupUrls)
 		}
 		
@@ -106,7 +108,7 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 		}
 		
 		// media URL injection
-		if let url = mediaInfo.mediaURL {
+		if let url = mediaInfo.mediaUrl {
 			media.url = url
 			media.outputs?.removeAll()
 		}
@@ -118,11 +120,7 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 			//media.adsSettings.playAdsAfterTime = 5
 		}
 
-		if media.isAudio {
-			var frame = playerContainer.frame
-			frame.size.height = media.isLive ? 100 : 50
-			playerContainer.frame = frame
-		}
+		configUI(media)
 		
 		if mediaInfo.isDvr {
 			media.isDvr = true
@@ -137,6 +135,14 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 		}
 		
 		sambaPlayer = player
+	}
+	
+	private func configUI(_ media: SambaMedia) {
+		if media.isAudio {
+			var frame = playerContainer.frame
+			frame.size.height = media.isLive ? 100 : 50
+			playerContainer.frame = frame
+		}
 	}
 	
 	func onLoad() {
@@ -174,7 +180,7 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 	func onDestroy() {}
 	
 	func onError(_ error: SambaPlayerError) {
-		status.text = "\(error.code) (\(error.cause?.code)): \(error.cause?.localizedDescription ?? error.localizedDescription)"
+		status.text = "\(error.code) (\(error.cause?.code ?? -1)): \(error.cause?.localizedDescription ?? error.localizedDescription)"
 		print(status.text!)
 	}
 	
@@ -201,13 +207,27 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 		player.controlsVisible = !player.controlsVisible
 	}
 	
-	// TODO: switch media on-the-fly (e.g. playlist)
-	/*let m = SambaMediaConfig()
-	m.projectHash = "bc6a17435f3f389f37a514c171039b75"
-	m.id = ""
-	m.url = "http://liveabr2.sambatech.com.br/abr/sbtabr_8fcdc5f0f8df8d4de56b22a2c6660470/livestreamabrsbtbkp.m3u8"
-	m.isLive = true
-	sambaPlayer?.media = m*/
+	@IBAction func swapHandler(_ sender: UIButton) {
+		sender.isHidden = true
+		sender.setNeedsDisplay()
+		
+		// live: "http://liveabr2.sambatech.com.br/abr/sbtabr_8fcdc5f0f8df8d4de56b22a2c6660470/livestreamabrsbtbkp.m3u8"
+		let req = SambaMediaRequest(projectHash: "25ce5b8513c18a9eae99a8af601d0943", mediaId: "5db4352a8618fbf794753d2f1170dbf8")
+		
+		SambaApi().requestMedia(req, onComplete: { (media: SambaMedia?) in
+			guard let m = media else { return }
+			
+			self.configUI(m)
+			self.sambaPlayer?.media = m
+			self.sambaPlayer?.play()
+			
+			sender.isHidden = false
+			sender.setNeedsDisplay()
+		}, onError: { (error, response) in
+			sender.isHidden = false
+			sender.setNeedsDisplay()
+		})
+	}
 	
 	@IBAction func createSessionHandler() {
 		guard let valReq = valReq,

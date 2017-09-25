@@ -1,21 +1,20 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1421" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ugg-Pl-SIy">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ugg-Pl-SIy">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Player Container-->
         <scene sceneID="XPw-ra-cJ3">
             <objects>
-                <viewController id="9Et-Yp-bwl" userLabel="Player Container" customClass="PlayerViewController" customModule="SP_v0_5" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="9Et-Yp-bwl" userLabel="Player Container" customClass="PlayerViewController" customModule="Player_swift" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qqF-BV-VhR"/>
                         <viewControllerLayoutGuide type="bottom" id="9CF-Aj-o1T"/>
@@ -288,18 +287,18 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oAn-RT-wNg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-359.19999999999999" y="928.78560719640188"/>
+            <point key="canvasLocation" x="425" y="929"/>
         </scene>
-        <!--Media List View Controller-->
+        <!--Media List-->
         <scene sceneID="g2i-Wp-xec">
             <objects>
-                <tableViewController id="diY-80-TBT" customClass="MediaListViewController" customModule="SP_v0_5" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="diY-80-TBT" customClass="MediaListViewController" customModule="Player_swift" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="90" sectionHeaderHeight="28" sectionFooterHeight="28" id="7T8-oY-L18">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MediaListTableViewCell" rowHeight="90" id="EMB-Za-OGB" customClass="MediaListTableViewCell" customModule="SP_v0_5" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MediaCell" rowHeight="90" id="EMB-Za-OGB" userLabel="Media Cell" customClass="MediaCell" customModule="Player_swift" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="90"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EMB-Za-OGB" id="kww-Pq-5BW">
@@ -310,17 +309,17 @@
                                             <rect key="frame" x="8" y="7" width="48" height="48"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cAs-GV-oaQ">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cAs-GV-oaQ">
                                             <rect key="frame" x="64" y="8" width="321" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="Descrição da mídia" translatesAutoresizingMaskIntoConstraints="NO" id="9jw-XJ-HuY">
                                             <rect key="frame" x="64" y="31" width="258" height="45"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         </textView>
@@ -331,7 +330,7 @@
                                     <outlet property="mediaDesc" destination="9jw-XJ-HuY" id="jtY-EH-K7W"/>
                                     <outlet property="mediaThumb" destination="uJJ-iu-RAS" id="KD4-xl-8Nb"/>
                                     <outlet property="mediaTitle" destination="cAs-GV-oaQ" id="HSX-is-7Yd"/>
-                                    <segue destination="9Et-Yp-bwl" kind="show" identifier="ListItemToDetail" id="EPT-sL-qvc"/>
+                                    <segue destination="9Et-Yp-bwl" kind="show" identifier="MediaToPlayer" id="EPT-sL-qvc"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -340,87 +339,84 @@
                             <outlet property="delegate" destination="diY-80-TBT" id="h9U-vv-GaK"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="iEc-Jm-0w5">
-                        <nil key="title"/>
-                        <barButtonItem key="leftBarButtonItem" id="omR-hO-C20">
-                            <textField key="customView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" id="DqM-UF-ihH">
-                                <rect key="frame" x="16" y="7" width="133" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <action selector="dfpEditingChanged" destination="diY-80-TBT" eventType="editingChanged" id="PcJ-Jk-zfX"/>
-                                </connections>
-                            </textField>
-                        </barButtonItem>
-                        <rightBarButtonItems>
-                            <barButtonItem title="Item" id="EsF-gu-xSg">
-                                <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Ytk-rm-P3j">
-                                    <rect key="frame" x="321" y="5" width="38" height="34"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="tintColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <state key="normal" backgroundImage="dfpIcon"/>
-                                    <connections>
-                                        <action selector="dfpTapped" destination="diY-80-TBT" eventType="touchUpInside" id="9aY-wC-KSy"/>
-                                    </connections>
-                                </button>
-                            </barButtonItem>
-                            <barButtonItem id="b1J-Rw-dqZ">
-                                <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="n2x-gg-J0h">
-                                    <rect key="frame" x="275" y="5" width="38" height="34"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <state key="normal" backgroundImage="liveIcon"/>
-                                    <connections>
-                                        <action selector="liveTapped:" destination="diY-80-TBT" eventType="touchUpInside" id="vPD-nX-vkt"/>
-                                    </connections>
-                                </button>
-                            </barButtonItem>
-                            <barButtonItem title="Auto Start" id="TYs-O4-wxc">
-                                <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="r3v-TN-ihq">
-                                    <rect key="frame" x="251" y="11" width="16" height="22"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <state key="normal" image="autoStart"/>
-                                    <connections>
-                                        <action selector="autoStartHandler:" destination="diY-80-TBT" eventType="touchUpInside" id="wql-A0-e8Z"/>
-                                    </connections>
-                                </button>
-                            </barButtonItem>
-                        </rightBarButtonItems>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="dfpTextField" destination="DqM-UF-ihH" id="kbj-ij-Np2"/>
-                        <outlet property="dfpToggleButton" destination="Ytk-rm-P3j" id="C49-6d-qrK"/>
-                        <outlet property="liveToggleButton" destination="n2x-gg-J0h" id="yh9-Ew-JXr"/>
-                    </connections>
+                    <navigationItem key="navigationItem" title="Media List" id="iEc-Jm-0w5"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XTO-Im-uWM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1095" y="929"/>
+            <point key="canvasLocation" x="-348" y="929"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="wYR-1K-SYs">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ugg-Pl-SIy" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="8O5-xa-7Cd">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="8O5-xa-7Cd">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="diY-80-TBT" kind="relationship" relationship="rootViewController" id="Kop-ES-xyS"/>
+                        <segue destination="diY-80-TBT" kind="relationship" relationship="rootViewController" id="yiF-o7-pDz"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7eb-ZZ-ise" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1870" y="929"/>
+            <point key="canvasLocation" x="-1134" y="929"/>
+        </scene>
+        <!--Category List View Controller-->
+        <scene sceneID="u60-Jr-WVg">
+            <objects>
+                <tableViewController id="0kn-am-csn" userLabel="Category List View Controller" customClass="CategoryListViewController" customModule="Player_swift" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="90" sectionHeaderHeight="28" sectionFooterHeight="28" id="E9m-dX-PnW">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CategoryCell" id="zWT-uu-Vvw" customClass="CategoryCell" customModule="Player_swift" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="90"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zWT-uu-Vvw" id="v5L-Nd-LUH">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="90"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D7g-wQ-5QP">
+                                            <rect key="frame" x="8" y="35" width="33.5" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="leadingMargin" secondItem="D7g-wQ-5QP" secondAttribute="leading" id="4tD-FI-OeP"/>
+                                        <constraint firstItem="D7g-wQ-5QP" firstAttribute="centerY" secondItem="v5L-Nd-LUH" secondAttribute="centerY" id="6da-UH-dq3"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="titleLabel" destination="D7g-wQ-5QP" id="2LU-ag-4Zk"/>
+                                    <segue destination="diY-80-TBT" kind="show" identifier="CategoryToMediaList" id="guw-ee-djp"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="0kn-am-csn" id="lJf-9e-hv3"/>
+                            <outlet property="delegate" destination="0kn-am-csn" id="pmf-mv-8Pr"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Categories" id="1tV-k0-3rC"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="z9N-Ns-LhL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-349" y="68"/>
         </scene>
     </scenes>
     <resources>
-        <image name="autoStart" width="16" height="20"/>
         <image name="bee" width="49" height="50"/>
-        <image name="dfpIcon" width="150" height="150"/>
-        <image name="liveIcon" width="150" height="142"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="yiF-o7-pDz"/>
+    </inferredMetricsTieBreakers>
 </document>

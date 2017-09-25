@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9A131E191F794770002A36AC /* CategoryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A131E181F794770002A36AC /* CategoryListViewController.swift */; };
+		9A131E1B1F794A32002A36AC /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A131E1A1F794A32002A36AC /* CategoryCell.swift */; };
 		9A34EB761E13E6F40028FA52 /* SP_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A34EB751E13E6F40028FA52 /* SP_UITests.swift */; };
 		9A44E4541F2FB3CD0003FE7A /* SambaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AFC6B531F29276E00D9FA05 /* SambaPlayer.framework */; };
 		9A44E4551F2FB3CD0003FE7A /* SambaPlayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9AFC6B531F29276E00D9FA05 /* SambaPlayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -20,7 +22,7 @@
 		9AC6764A1D66227700768524 /* MediaListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC676441D66227700768524 /* MediaListViewController.swift */; };
 		9AC6764B1D66227700768524 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC676451D66227700768524 /* Helpers.swift */; };
 		9AC6764C1D66227700768524 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC676461D66227700768524 /* PlayerViewController.swift */; };
-		9AC6764D1D66227700768524 /* MediaListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC676471D66227700768524 /* MediaListTableViewCell.swift */; };
+		9AC6764D1D66227700768524 /* MediaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC676471D66227700768524 /* MediaCell.swift */; };
 		9AC6764E1D66227700768524 /* Configs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9AC676481D66227700768524 /* Configs.plist */; };
 		9AD5AAEE1D66489E0052E278 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD5AAED1D66489E0052E278 /* main.m */; };
 		9AD5AAF11D66489E0052E278 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD5AAF01D66489E0052E278 /* AppDelegate.m */; };
@@ -73,6 +75,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		9A131E181F794770002A36AC /* CategoryListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryListViewController.swift; sourceTree = "<group>"; };
+		9A131E1A1F794A32002A36AC /* CategoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		9A34EB731E13E6F40028FA52 /* SP-UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SP-UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A34EB751E13E6F40028FA52 /* SP_UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SP_UITests.swift; sourceTree = "<group>"; };
 		9A34EB771E13E6F40028FA52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -85,7 +89,7 @@
 		9AC676441D66227700768524 /* MediaListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaListViewController.swift; sourceTree = "<group>"; };
 		9AC676451D66227700768524 /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		9AC676461D66227700768524 /* PlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
-		9AC676471D66227700768524 /* MediaListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaListTableViewCell.swift; sourceTree = "<group>"; };
+		9AC676471D66227700768524 /* MediaCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaCell.swift; sourceTree = "<group>"; };
 		9AC676481D66227700768524 /* Configs.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Configs.plist; sourceTree = "<group>"; };
 		9AC676491D66227700768524 /* Test-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Test-Bridging-Header.h"; sourceTree = "<group>"; };
 		9AD5AAEA1D66489D0052E278 /* Player-objc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Player-objc.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -143,16 +147,28 @@
 			path = "SP-UITests";
 			sourceTree = "<group>";
 		};
+		9A87A94D1F75B6FB00F10D66 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				9AC676471D66227700768524 /* MediaCell.swift */,
+				9A131E1A1F794A32002A36AC /* CategoryCell.swift */,
+				9AC676441D66227700768524 /* MediaListViewController.swift */,
+				9A131E181F794770002A36AC /* CategoryListViewController.swift */,
+				9AC676461D66227700768524 /* PlayerViewController.swift */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
 		9AC676261D66214A00768524 = {
 			isa = PBXGroup;
 			children = (
 				9AE43F1D1F2A8C05001DD6D2 /* GoogleInteractiveMediaAds.framework */,
 				9AFC6B531F29276E00D9FA05 /* SambaPlayer.framework */,
+				9AE43F201F2A8C1A001DD6D2 /* Frameworks */,
+				9AC676301D66214A00768524 /* Products */,
 				9AC676311D66214A00768524 /* SBPlayerSample */,
 				9AD5AAEB1D66489E0052E278 /* SBPlayerSample-objc */,
 				9A34EB741E13E6F40028FA52 /* SP-UITests */,
-				9AC676301D66214A00768524 /* Products */,
-				9AE43F201F2A8C1A001DD6D2 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -169,11 +185,9 @@
 		9AC676311D66214A00768524 /* SBPlayerSample */ = {
 			isa = PBXGroup;
 			children = (
+				9A87A94D1F75B6FB00F10D66 /* ViewControllers */,
 				9AC676321D66214A00768524 /* AppDelegate.swift */,
-				9AC676441D66227700768524 /* MediaListViewController.swift */,
 				9AC676451D66227700768524 /* Helpers.swift */,
-				9AC676461D66227700768524 /* PlayerViewController.swift */,
-				9AC676471D66227700768524 /* MediaListTableViewCell.swift */,
 				9AC676481D66227700768524 /* Configs.plist */,
 				9AC676491D66227700768524 /* Test-Bridging-Header.h */,
 				9AC676361D66214A00768524 /* Main.storyboard */,
@@ -363,8 +377,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9AC6764D1D66227700768524 /* MediaListTableViewCell.swift in Sources */,
+				9AC6764D1D66227700768524 /* MediaCell.swift in Sources */,
 				9AC6764A1D66227700768524 /* MediaListViewController.swift in Sources */,
+				9A131E191F794770002A36AC /* CategoryListViewController.swift in Sources */,
+				9A131E1B1F794A32002A36AC /* CategoryCell.swift in Sources */,
 				9AC676331D66214A00768524 /* AppDelegate.swift in Sources */,
 				9AC6764B1D66227700768524 /* Helpers.swift in Sources */,
 				9AC6764C1D66227700768524 /* PlayerViewController.swift in Sources */,
