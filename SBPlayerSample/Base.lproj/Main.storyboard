@@ -339,7 +339,13 @@
                             <outlet property="delegate" destination="diY-80-TBT" id="h9U-vv-GaK"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Media List" id="iEc-Jm-0w5"/>
+                    <navigationItem key="navigationItem" title="Media List" id="iEc-Jm-0w5">
+                        <barButtonItem key="rightBarButtonItem" title="All" id="xjf-Tn-vAR">
+                            <connections>
+                                <action selector="envButtonHandler:" destination="diY-80-TBT" id="Vrf-Bz-ugX"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XTO-Im-uWM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -350,7 +356,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ugg-Pl-SIy" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="8O5-xa-7Cd">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="8O5-xa-7Cd">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

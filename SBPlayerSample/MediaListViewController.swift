@@ -14,18 +14,50 @@ class MediaListViewController : UITableViewController {
 	var categoryInfo: CategoryInfo?
 	
 	private var mediaList = [MediaInfo]()
+	private var mediaListFiltered = [MediaInfo]()
+	private let envs: [SambaEnvironment] = [.prod, .staging, .test]
+	private let envNames = ["All", "Prod", "Staging", "Test"]
+	private var currentFilterIndex = -1
+	
+	@IBAction func envButtonHandler(_ sender: UIBarButtonItem) {
+		let menu = UIAlertController(title: "Environment", message: "Choose a filter", preferredStyle: .actionSheet)
+		
+		let getCallback = { (index: Int) in
+			return { (action: UIAlertAction) in
+				DispatchQueue.main.async {
+					self.filterData(index, withBarButton: sender)
+					self.tableView.reloadData()
+				}
+			}
+		}
+		
+		menu.addAction(UIAlertAction(title: envNames[0], style: .default, handler: getCallback(-1)))
+		
+		for (i, _) in envs.enumerated() {
+			menu.addAction(UIAlertAction(title: envNames[i + 1], style: .default, handler: getCallback(i)))
+		}
+		
+		menu.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+		
+		if let view = sender.value(forKey: "view") as? UIView {
+			menu.popoverPresentationController?.sourceView = view
+			menu.popoverPresentationController?.sourceRect = view.bounds
+		}
+		
+		present(menu, animated: true, completion: nil)
+	}
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		self.tableView.backgroundColor = UIColor.clear
-		
-		makeInitialRequests()
 		
 		// refresh control
 		let refreshControl = UIRefreshControl()
 		refreshControl.addTarget(self, action: #selector(refreshRequestedHandler), for: .valueChanged)
 		refreshControl.tintColor = UIColor(0xCCCCCC)
 		self.refreshControl = refreshControl
+		
+		makeInitialRequests()
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -35,29 +67,34 @@ class MediaListViewController : UITableViewController {
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		guard segue.identifier == "MediaToPlayer",
 			let index = (tableView.indexPathForSelectedRow as NSIndexPath?)?.row,
-			index < mediaList.count
+			index < mediaListFiltered.count
 		else { return }
 		
-		(segue.destination as! PlayerViewController).mediaInfo = mediaList[index]
+		(segue.destination as! PlayerViewController).mediaInfo = mediaListFiltered[index]
 	}
 	
 	override func tableView(_ tableView: UITableView?, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellIdentifier = "MediaCell"
 		let cell = tableView!.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! MediaCell
-		
-		let media = mediaList[(indexPath as NSIndexPath).row]
+		let media = mediaListFiltered[(indexPath as NSIndexPath).row]
+		let odd = (indexPath as NSIndexPath).row & 1 == 0
 		
 		cell.mediaTitle.text = media.title
         cell.mediaDesc.text = media.description ?? ""
 		media.imageView = cell.mediaThumb
 		
-		cell.contentView.backgroundColor = UIColor((indexPath as NSIndexPath).row & 1 == 0 ? 0xEEEEEE : 0xFFFFFF)
+		switch media.environment ?? .prod {
+		case .prod: cell.contentView.backgroundColor = UIColor(odd ? 0xeeffee : 0xddffdd)
+		case .staging: cell.contentView.backgroundColor = UIColor(odd ? 0xddeeff : 0xccddff)
+		case .test: cell.contentView.backgroundColor = UIColor(odd ? 0xffeeee : 0xffdddd)
+		default: cell.contentView.backgroundColor = UIColor(odd ? 0xeeeeee : 0xffffff)
+		}
 		
 		return cell
 	}
 	
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return mediaList.count
+		return mediaListFiltered.count
 	}
 	
 	override func numberOfSections(in tableView: UITableView) -> Int {
@@ -69,7 +106,7 @@ class MediaListViewController : UITableViewController {
 	}
 	
 	private func makeInitialRequests() {
-		Helpers.requestURLJson("https://api.myjson.com/bins/15yyvl") { json in
+		Helpers.requestURLJson("http://playerground.sambatech.com/v1/liquid/medias?cat_id=16") { json in
 			guard let json = json as? [AnyObject] else {
 				// hides fetching data info
 				self.refreshControl?.endRefreshing()
@@ -119,12 +156,29 @@ class MediaListViewController : UITableViewController {
 				self.mediaList.append(m)
 			}
 			
+			self.filterData(self.currentFilterIndex)
+			
 			DispatchQueue.main.async {
 				self.tableView.reloadData()
 				// hides fetching data info
 				self.refreshControl?.endRefreshing()
 			}
 		}
+	}
+	
+	private func filterData(_ index: Int, withBarButton barButton: UIBarButtonItem? = nil) {
+		currentFilterIndex = index
+		
+		// filtered
+		if index > -1 {
+			self.mediaListFiltered = self.mediaList.filter({$0.environment == self.envs[index]})
+		}
+		// all
+		else {
+			self.mediaListFiltered = self.mediaList
+		}
+		
+		barButton?.title = self.envNames[index + 1]
 	}
 	
 	@objc private func refreshRequestedHandler() {
