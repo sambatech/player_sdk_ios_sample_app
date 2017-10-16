@@ -74,7 +74,7 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 
 		if let mId = m.mediaId {
 			// DVR
-			if m.isDvr {
+			if m.isLive {
 				req = SambaMediaRequest(projectHash: ph, liveChannelId: mId)
 				req.apiProtocol = SambaProtocol.http
 			}
@@ -121,10 +121,6 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 		}
 
 		configUI(media)
-		
-		if mediaInfo.isDvr {
-			media.isDvr = true
-		}
 		
 		let player = SambaPlayer(parentViewController: self, andParentView: playerContainer)
 		player.delegate = self

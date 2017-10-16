@@ -197,7 +197,6 @@ class MediaInfo {
 	let isLive: Bool
 	let isAudio: Bool
 	let isLiveAudio: Bool?
-	let isDvr: Bool
 	var isAutoStart = true
 	var validationRequest: ValidationRequest?
 	var environment: SambaEnvironment?
@@ -225,8 +224,8 @@ class MediaInfo {
 	}
 	
 	init(title: String, description: String? = nil, thumb: String? = nil, projectHash: String? = nil, mediaId: String? = nil,
-	     mediaAd: String? = nil, validationRequest: ValidationRequest?, isLive: Bool = false, isAudio: Bool = false, isLiveAudio: Bool? = false,
-	     isDvr: Bool = false, env: SambaEnvironment? = nil, mediaUrl: String? = nil, _ backupUrls: [String]? = nil) {
+	     mediaAd: String? = nil, validationRequest: ValidationRequest?, isLive: Bool = false, isAudio: Bool = false,
+	     isLiveAudio: Bool? = false, env: SambaEnvironment? = nil, mediaUrl: String? = nil, _ backupUrls: [String]? = nil) {
 		self.title = title
 		self.description = description
 		self.projectHash = projectHash
@@ -236,7 +235,6 @@ class MediaInfo {
 		self.isLive = isLive
 		self.isAudio = isAudio
 		self.isLiveAudio = isLiveAudio
-		self.isDvr = isDvr
 		self.environment = env
 		self.mediaUrl = mediaUrl
 		self.backupUrls = backupUrls ?? [String]()
