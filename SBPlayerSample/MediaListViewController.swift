@@ -147,7 +147,7 @@ class MediaListViewController : UITableViewController {
 					mediaAd: params["ad_program"] as? String,
 					// WORKAROUND: to identify which project has DRM
 					validationRequest: (jsonNode["drm"] as? Bool ?? false) ? ValidationRequest() : nil,
-					isLive: jsonNode["liveChannelId"] != nil,
+					isLive: jsonNode["liveChannelId"]! != nil,
 					isAudio: isAudio,
 					env: env,
 					mediaUrl: params["primaryLive"] as? String,
