@@ -1,0 +1,43 @@
+# Customise this file, documentation can be found here:
+# https://github.com/fastlane/fastlane/tree/master/fastlane/docs
+# All available actions: https://docs.fastlane.tools/actions
+# can also be listed using the `fastlane actions` command
+
+# Change the syntax highlighting to Ruby
+# All lines starting with a # are ignored when running `fastlane`
+
+# If you want to automatically update fastlane if a new version is available:
+# update_fastlane
+
+# This is the minimum version number required.
+# Update this, if you use features of a newer version
+fastlane_version "2.62.0"
+
+default_platform :ios
+
+platform :ios do
+  before_all do
+    ENV['KEYCHAIN_NAME'] = "TempKeychain.keychain"
+    carthage
+  end
+
+  desc "Submit a new Beta Build to Apple TestFlight"
+  desc "This will also make sure the profile is up to date"
+  lane :beta do
+    changelog = File.read("../fastlane/Changelog")
+    gym(scheme: "SBPlayerSample",
+        export_method: "ad-hoc",
+        export_options: {
+            compileBitcode: false,
+            provisioningProfiles: {
+                "com.sambatech.sambaplayersample" => "PlayerSample_adhoc"
+            }
+        })
+    crashlytics(api_token: "d65ded11441e5aab976dfcd41ea4d11b8dbe67fd",
+                build_secret: "c336324cf222be626f09cdc36377993e1be8a05f921f6289e7f885c56af5688f",
+                emails: "player@sambatech.com.br",
+                notifications: true,
+                notes: changelog)
+  end
+
+end

@@ -15,6 +15,10 @@
 		9A44E4561F2FB3D00003FE7A /* GoogleInteractiveMediaAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AE43F1D1F2A8C05001DD6D2 /* GoogleInteractiveMediaAds.framework */; };
 		9A44E4571F2FB3D00003FE7A /* GoogleInteractiveMediaAds.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9AE43F1D1F2A8C05001DD6D2 /* GoogleInteractiveMediaAds.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9A44E4581F2FB3D40003FE7A /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AE43F211F2A8C1A001DD6D2 /* WebKit.framework */; };
+		9AB5ACD71F9E87440062A290 /* SambaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AB5ACD61F9E87430062A290 /* SambaPlayer.framework */; };
+		9AB5ACD81F9E87440062A290 /* SambaPlayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9AB5ACD61F9E87430062A290 /* SambaPlayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9AB5ACDA1F9E87DF0062A290 /* GoogleInteractiveMediaAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AB5ACD91F9E87DF0062A290 /* GoogleInteractiveMediaAds.framework */; };
+		9AB5ACDB1F9E87DF0062A290 /* GoogleInteractiveMediaAds.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9AB5ACD91F9E87DF0062A290 /* GoogleInteractiveMediaAds.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9AC676331D66214A00768524 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC676321D66214A00768524 /* AppDelegate.swift */; };
 		9AC676381D66214A00768524 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AC676361D66214A00768524 /* Main.storyboard */; };
 		9AC6763A1D66214A00768524 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9AC676391D66214A00768524 /* Assets.xcassets */; };
@@ -30,11 +34,7 @@
 		9AD5AAF71D66489E0052E278 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AD5AAF51D66489E0052E278 /* Main.storyboard */; };
 		9AD5AAF91D66489E0052E278 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9AD5AAF81D66489E0052E278 /* Assets.xcassets */; };
 		9AD5AAFC1D66489E0052E278 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AD5AAFA1D66489E0052E278 /* LaunchScreen.storyboard */; };
-		9AE43F1E1F2A8C05001DD6D2 /* GoogleInteractiveMediaAds.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9AE43F1D1F2A8C05001DD6D2 /* GoogleInteractiveMediaAds.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		9AE43F1F1F2A8C14001DD6D2 /* GoogleInteractiveMediaAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AE43F1D1F2A8C05001DD6D2 /* GoogleInteractiveMediaAds.framework */; };
 		9AE43F221F2A8C1A001DD6D2 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AE43F211F2A8C1A001DD6D2 /* WebKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		9AFC6B541F29276E00D9FA05 /* SambaPlayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9AFC6B531F29276E00D9FA05 /* SambaPlayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		9AFC6B551F29279900D9FA05 /* SambaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AFC6B531F29276E00D9FA05 /* SambaPlayer.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,8 +66,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				9AFC6B541F29276E00D9FA05 /* SambaPlayer.framework in Embed Frameworks */,
-				9AE43F1E1F2A8C05001DD6D2 /* GoogleInteractiveMediaAds.framework in Embed Frameworks */,
+				9AB5ACDB1F9E87DF0062A290 /* GoogleInteractiveMediaAds.framework in Embed Frameworks */,
+				9AB5ACD81F9E87440062A290 /* SambaPlayer.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -80,6 +80,8 @@
 		9A34EB731E13E6F40028FA52 /* SP-UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SP-UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A34EB751E13E6F40028FA52 /* SP_UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SP_UITests.swift; sourceTree = "<group>"; };
 		9A34EB771E13E6F40028FA52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9AB5ACD61F9E87430062A290 /* SambaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SambaPlayer.framework; path = Carthage/Build/iOS/SambaPlayer.framework; sourceTree = "<group>"; };
+		9AB5ACD91F9E87DF0062A290 /* GoogleInteractiveMediaAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleInteractiveMediaAds.framework; path = Carthage/Checkouts/player_sdk_ios/Frameworks/GoogleInteractiveMediaAds.framework; sourceTree = "<group>"; };
 		9AC6762F1D66214A00768524 /* Player-swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Player-swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AC676321D66214A00768524 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9AC676371D66214A00768524 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -119,9 +121,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9AFC6B551F29279900D9FA05 /* SambaPlayer.framework in Frameworks */,
-				9AE43F1F1F2A8C14001DD6D2 /* GoogleInteractiveMediaAds.framework in Frameworks */,
+				9AB5ACDA1F9E87DF0062A290 /* GoogleInteractiveMediaAds.framework in Frameworks */,
 				9AE43F221F2A8C1A001DD6D2 /* WebKit.framework in Frameworks */,
+				9AB5ACD71F9E87440062A290 /* SambaPlayer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -162,6 +164,8 @@
 		9AC676261D66214A00768524 = {
 			isa = PBXGroup;
 			children = (
+				9AB5ACD91F9E87DF0062A290 /* GoogleInteractiveMediaAds.framework */,
+				9AB5ACD61F9E87430062A290 /* SambaPlayer.framework */,
 				9AE43F1D1F2A8C05001DD6D2 /* GoogleInteractiveMediaAds.framework */,
 				9AFC6B531F29276E00D9FA05 /* SambaPlayer.framework */,
 				9AE43F201F2A8C1A001DD6D2 /* Frameworks */,
@@ -259,6 +263,7 @@
 				9AC6762C1D66214A00768524 /* Frameworks */,
 				9AC6762D1D66214A00768524 /* Resources */,
 				9AFC6B521F291D4300D9FA05 /* Embed Frameworks */,
+				9AB5ACDE1F9E8B170062A290 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -306,6 +311,7 @@
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = K7KHBXSBN5;
 						LastSwiftMigration = 0810;
+						ProvisioningStyle = Manual;
 					};
 					9AD5AAE91D66489D0052E278 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -363,6 +369,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		9AB5ACDE1F9E8B170062A290 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# remove me";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9A34EB6F1E13E6F40028FA52 /* Sources */ = {
@@ -573,17 +595,22 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = K7KHBXSBN5;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Checkouts/player_sdk_ios/Frameworks",
 				);
 				INFOPLIST_FILE = SBPlayerSample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.sambatech.Player-swift";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sambatech.sambaplayersample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "0c7eedc8-ff82-4091-b3f7-d888609849fc";
+				PROVISIONING_PROFILE_SPECIFIER = PlayerSample_dev;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -593,17 +620,22 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = K7KHBXSBN5;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Checkouts/player_sdk_ios/Frameworks",
 				);
 				INFOPLIST_FILE = SBPlayerSample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.sambatech.Player-swift";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sambatech.sambaplayersample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "927177b3-b4c1-4c86-9954-40f0346cfabb";
+				PROVISIONING_PROFILE_SPECIFIER = PlayerSample_adhoc;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
@@ -620,7 +652,7 @@
 				INFOPLIST_FILE = "SBPlayerSample-objc/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.sambatech.Player-objc";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sambatech.sambaplayersample-objc";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -637,7 +669,7 @@
 				INFOPLIST_FILE = "SBPlayerSample-objc/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.sambatech.Player-objc";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sambatech.sambaplayersample-objc";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

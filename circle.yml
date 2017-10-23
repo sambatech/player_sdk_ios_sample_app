@@ -1,0 +1,28 @@
+machine:
+	pre:
+		- brew install wget
+	post:
+		- cd $CIRCLE_PROJECT_REPONAME && curl --header "Authorization:token $GITHUB_USER_TOKEN" --header "Accept:application/vnd.github.v3.raw" --remote-name --location https://api.github.com/repos/sambatech/devops/contents/circle-ci/run-sonar.sh
+		- cd $CIRCLE_PROJECT_REPONAME && chmod a+x run-sonar.sh
+		- cd $CIRCLE_PROJECT_REPONAME && ./run-sonar.sh install
+		- cd $CIRCLE_PROJECT_REPONAME && ./run-sonar.sh run
+	xcode:
+		version: 9.0
+	environment:
+		GYM_CODE_SIGNING_IDENTITY: "iPhone Distribution: Samba Mobile Multimidia SA (K7KHBXSBN5)"
+
+dependencies:
+	override:
+		- bundle install
+		- pod install
+		- carthage update
+
+test:
+	override:
+		- set -o pipefail && xcodebuild -workspace SambaVideos.xcworkspace -scheme 'SambaVideos' clean build test -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 6,OS=latest' CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY= PROVISIONING_PROFILE='SambaVideos_DEV'
+
+deployment:
+  beta_distribution:
+	branch: dev
+	commands:
+	  - bundle exec fastlane beta
