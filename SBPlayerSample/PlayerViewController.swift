@@ -275,7 +275,6 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
         let enumOptions:[(type: SambaPlayerControls, description: String)] = [(.play, "Play Button"),
                                                                               (.playLarge, "Play Button Large"),
                                                                               (.fullscreen, "Fullscreen Button"),
-                                                                              (.caption, "Caption Button"),
                                                                               (.seekbar, "Seekbar"),
                                                                               (.topBar, "Top Bar"),
                                                                               (.bottomBar, "Bottom Bar"),
