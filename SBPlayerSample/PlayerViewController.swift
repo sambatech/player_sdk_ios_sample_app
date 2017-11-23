@@ -264,6 +264,51 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 		"Aluguel 48h/BR (p7)",
 		"Ass. mensal/BR (p8)"
 	]
+    
+    @IBAction func changeControlls(_ sender: UIButton) {
+        let alert = UIAlertController.init(title: "Remover Controles", message: nil, preferredStyle: .actionSheet)
+        var actions:[UIAlertAction] = []
+        let closure = { (control: SambaPlayerControls) in { (action: UIAlertAction!) -> Void in
+                self.sambaPlayer?.hide(control)
+            }
+        }
+        let enumOptions:[(type: SambaPlayerControls, description: String)] = [(.play, "Play Button"),
+                                                                              (.playLarge, "Play Button Large"),
+                                                                              (.fullscreen, "Fullscreen Button"),
+                                                                              (.seekbar, "Seekbar"),
+                                                                              (.topBar, "Top Bar"),
+                                                                              (.bottomBar, "Bottom Bar"),
+                                                                              (.time, "Time"),
+                                                                              (.menu, "Menu Button"),
+                                                                              (.liveIcon, "Live Icon")]
+        for (_, item) in enumOptions.enumerated() {
+            let action = UIAlertAction.init(title: item.description, style: .default, handler: closure(item.type))
+            actions.append(action)
+        }
+        let action1 = UIAlertAction.init(title: "PlayLarge, FullScreen, Menu", style: .default, handler: { _ in
+            self.sambaPlayer?.hide([.playLarge, .fullscreen, .menu])
+        })
+        actions.append(action1)
+        let action2 = UIAlertAction.init(title: "TopBar, BottomBar", style: .default, handler: { _ in
+            self.sambaPlayer?.hide([.topBar, .bottomBar])
+        })
+        actions.append(action2)
+        let cancel = UIAlertAction.init(title: "Cancelar", style: .cancel, handler: { (alertAction: UIAlertAction!) in
+            alert.dismiss(animated: true, completion: nil)
+        })
+        cancel.setValue(UIColor.red, forKey: "titleTextColor")
+        for action in actions {
+            alert.addAction(action)
+        }
+        alert.addAction(cancel)
+        alert.dismiss(animated: false, completion: nil)
+        if let popoverController = alert.popoverPresentationController {
+            popoverController.sourceView = self.view
+            popoverController.permittedArrowDirections = []
+            popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+        }
+        self.present(alert, animated: true, completion: nil)
+    }
 	
 	@IBAction func policyHandler(_ sender: UIButton) {
 		guard let valReq = valReq else { return }
