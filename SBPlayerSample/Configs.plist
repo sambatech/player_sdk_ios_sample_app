@@ -7,7 +7,7 @@
 	<key>svapi_stage</key>
 	<string>http://staging.sambavideos.sambatech.com/v1/</string>
 	<key>svapi_dev</key>
-	<string>http://52.2.166.124:8091/v1/</string>
+	<string>http://web1.qa.sambatech.com:10000/v1/</string>
 	<key>svapi_token_prod</key>
 	<string>ec8f5393-8e54-4ef2-842e-3f6cf0ea6287</string>
 	<key>svapi_token_dev</key>

@@ -13,12 +13,12 @@ class Helpers {
 	static let settings = NSDictionary.init(contentsOfFile: Bundle.main.path(forResource: "Configs", ofType: "plist")!)! as! [String:String]
 	
 	static func requestURL<T>(_ url: String, _ callback: ((T?) -> Void)?) {
-		guard let url = URL(string: url) else {
-			print("\(type(of: self)) Error: Invalid URL format.")
+		guard let urlObj = URL(string: url) else {
+			print("\(type(of: self)) Error: Invalid URL format: \(url)")
 			return
 		}
 		
-		requestURL(URLRequest(url: url), callback)
+		requestURL(URLRequest(url: urlObj), callback)
 	}
 	
 	static func requestURL(_ url: String) {
@@ -27,7 +27,7 @@ class Helpers {
 	
 	static func requestURL<T>(_ urlRequest: URLRequest, _ callback: ((T?) -> Void)?) {
 		let requestTask = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
-			let reqText = "\n\(urlRequest.url?.absoluteString ?? "")\nMethod: \(urlRequest.httpMethod ?? "")\nHeader: \(urlRequest.allHTTPHeaderFields)"
+			let reqText = "\n\(urlRequest.url?.absoluteString ?? "")\nMethod: \(urlRequest.httpMethod ?? "")\nHeader: \(String(describing: urlRequest.allHTTPHeaderFields))"
 			
 			if let error = error {
 				print("\(type(of: self)) Error: \(error.localizedDescription)\(reqText)")

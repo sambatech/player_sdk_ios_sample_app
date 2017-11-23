@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MediaListTableViewCell: UITableViewCell {
+class MediaCell: UITableViewCell {
     
     // MARK: Properties
     

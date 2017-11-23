@@ -7,11 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9A131E191F794770002A36AC /* CategoryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A131E181F794770002A36AC /* CategoryListViewController.swift */; };
+		9A131E1B1F794A32002A36AC /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A131E1A1F794A32002A36AC /* CategoryCell.swift */; };
 		9A34EB761E13E6F40028FA52 /* SP_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A34EB751E13E6F40028FA52 /* SP_UITests.swift */; };
-		9A4A98D71E7339DC0010AE78 /* SambaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A4A98D61E7339DC0010AE78 /* SambaPlayer.framework */; };
-		9A4A98D81E7339DC0010AE78 /* SambaPlayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9A4A98D61E7339DC0010AE78 /* SambaPlayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		9AA657ED1EB0E6EB00F455C4 /* SambaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A4A98D61E7339DC0010AE78 /* SambaPlayer.framework */; };
-		9AA657EE1EB0E6EB00F455C4 /* SambaPlayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9A4A98D61E7339DC0010AE78 /* SambaPlayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9A44E4581F2FB3D40003FE7A /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AE43F211F2A8C1A001DD6D2 /* WebKit.framework */; };
 		9AC676331D66214A00768524 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC676321D66214A00768524 /* AppDelegate.swift */; };
 		9AC676381D66214A00768524 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AC676361D66214A00768524 /* Main.storyboard */; };
 		9AC6763A1D66214A00768524 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9AC676391D66214A00768524 /* Assets.xcassets */; };
@@ -19,7 +18,7 @@
 		9AC6764A1D66227700768524 /* MediaListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC676441D66227700768524 /* MediaListViewController.swift */; };
 		9AC6764B1D66227700768524 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC676451D66227700768524 /* Helpers.swift */; };
 		9AC6764C1D66227700768524 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC676461D66227700768524 /* PlayerViewController.swift */; };
-		9AC6764D1D66227700768524 /* MediaListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC676471D66227700768524 /* MediaListTableViewCell.swift */; };
+		9AC6764D1D66227700768524 /* MediaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC676471D66227700768524 /* MediaCell.swift */; };
 		9AC6764E1D66227700768524 /* Configs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9AC676481D66227700768524 /* Configs.plist */; };
 		9AD5AAEE1D66489E0052E278 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD5AAED1D66489E0052E278 /* main.m */; };
 		9AD5AAF11D66489E0052E278 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD5AAF01D66489E0052E278 /* AppDelegate.m */; };
@@ -27,6 +26,11 @@
 		9AD5AAF71D66489E0052E278 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AD5AAF51D66489E0052E278 /* Main.storyboard */; };
 		9AD5AAF91D66489E0052E278 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9AD5AAF81D66489E0052E278 /* Assets.xcassets */; };
 		9AD5AAFC1D66489E0052E278 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AD5AAFA1D66489E0052E278 /* LaunchScreen.storyboard */; };
+		9AE43F221F2A8C1A001DD6D2 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AE43F211F2A8C1A001DD6D2 /* WebKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		C7A712A81FC6DC0200C49630 /* SambaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7A712A71FC6DC0100C49630 /* SambaPlayer.framework */; };
+		C7A712A91FC6DC0200C49630 /* SambaPlayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C7A712A71FC6DC0100C49630 /* SambaPlayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C7A712AC1FC6DC1400C49630 /* GoogleInteractiveMediaAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7A712AB1FC6DC1400C49630 /* GoogleInteractiveMediaAds.framework */; };
+		C7A712AD1FC6DC1400C49630 /* GoogleInteractiveMediaAds.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C7A712AB1FC6DC1400C49630 /* GoogleInteractiveMediaAds.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,24 +44,24 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		9A4A98D91E7339DD0010AE78 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				9A4A98D81E7339DC0010AE78 /* SambaPlayer.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		9AA657EF1EB0E6EB00F455C4 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				9AA657EE1EB0E6EB00F455C4 /* SambaPlayer.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C7A712AA1FC6DC0200C49630 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				C7A712AD1FC6DC1400C49630 /* GoogleInteractiveMediaAds.framework in Embed Frameworks */,
+				C7A712A91FC6DC0200C49630 /* SambaPlayer.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -65,13 +69,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		9A131E181F794770002A36AC /* CategoryListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryListViewController.swift; sourceTree = "<group>"; };
+		9A131E1A1F794A32002A36AC /* CategoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		9A34EB731E13E6F40028FA52 /* SP-UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SP-UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A34EB751E13E6F40028FA52 /* SP_UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SP_UITests.swift; sourceTree = "<group>"; };
 		9A34EB771E13E6F40028FA52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9A4A98D61E7339DC0010AE78 /* SambaPlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SambaPlayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9A54E97B1E4E049100852C4E /* SambaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SambaPlayer.framework; path = Carthage/Build/iOS/SambaPlayer.framework; sourceTree = "<group>"; };
-		9A7B782D1E70A12D00426500 /* GoogleInteractiveMediaAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleInteractiveMediaAds.framework; path = Carthage/Checkouts/player_sdk_ios/Frameworks/GoogleInteractiveMediaAds.framework; sourceTree = "<group>"; };
-		9AC6762F1D66214A00768524 /* SP-v0.6.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SP-v0.6.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9AC6762F1D66214A00768524 /* Player-swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Player-swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AC676321D66214A00768524 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9AC676371D66214A00768524 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9AC676391D66214A00768524 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -80,10 +83,10 @@
 		9AC676441D66227700768524 /* MediaListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaListViewController.swift; sourceTree = "<group>"; };
 		9AC676451D66227700768524 /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		9AC676461D66227700768524 /* PlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
-		9AC676471D66227700768524 /* MediaListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaListTableViewCell.swift; sourceTree = "<group>"; };
+		9AC676471D66227700768524 /* MediaCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaCell.swift; sourceTree = "<group>"; };
 		9AC676481D66227700768524 /* Configs.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Configs.plist; sourceTree = "<group>"; };
 		9AC676491D66227700768524 /* Test-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Test-Bridging-Header.h"; sourceTree = "<group>"; };
-		9AD5AAEA1D66489D0052E278 /* SPO-v0.6.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SPO-v0.6.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9AD5AAEA1D66489D0052E278 /* Player-objc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Player-objc.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AD5AAED1D66489E0052E278 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		9AD5AAEF1D66489E0052E278 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		9AD5AAF01D66489E0052E278 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -93,6 +96,9 @@
 		9AD5AAF81D66489E0052E278 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9AD5AAFB1D66489E0052E278 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9AD5AAFD1D66489E0052E278 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9AE43F211F2A8C1A001DD6D2 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		C7A712A71FC6DC0100C49630 /* SambaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SambaPlayer.framework; path = Carthage/Build/iOS/SambaPlayer.framework; sourceTree = "<group>"; };
+		C7A712AB1FC6DC1400C49630 /* GoogleInteractiveMediaAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleInteractiveMediaAds.framework; path = Carthage/Checkouts/player_sdk_ios/Frameworks/GoogleInteractiveMediaAds.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,7 +113,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9A4A98D71E7339DC0010AE78 /* SambaPlayer.framework in Frameworks */,
+				C7A712AC1FC6DC1400C49630 /* GoogleInteractiveMediaAds.framework in Frameworks */,
+				C7A712A81FC6DC0200C49630 /* SambaPlayer.framework in Frameworks */,
+				9AE43F221F2A8C1A001DD6D2 /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,22 +123,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9AA657ED1EB0E6EB00F455C4 /* SambaPlayer.framework in Frameworks */,
+				9A44E4581F2FB3D40003FE7A /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		9A2B49261DD3B281002EC4EC /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				9A7B782D1E70A12D00426500 /* GoogleInteractiveMediaAds.framework */,
-				9A54E97B1E4E049100852C4E /* SambaPlayer.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		9A34EB741E13E6F40028FA52 /* SP-UITests */ = {
 			isa = PBXGroup;
 			children = (
@@ -140,23 +139,36 @@
 			path = "SP-UITests";
 			sourceTree = "<group>";
 		};
+		9A87A94D1F75B6FB00F10D66 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				9AC676471D66227700768524 /* MediaCell.swift */,
+				9A131E1A1F794A32002A36AC /* CategoryCell.swift */,
+				9AC676441D66227700768524 /* MediaListViewController.swift */,
+				9A131E181F794770002A36AC /* CategoryListViewController.swift */,
+				9AC676461D66227700768524 /* PlayerViewController.swift */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
 		9AC676261D66214A00768524 = {
 			isa = PBXGroup;
 			children = (
-				9A4A98D61E7339DC0010AE78 /* SambaPlayer.framework */,
+				C7A712AB1FC6DC1400C49630 /* GoogleInteractiveMediaAds.framework */,
+				C7A712A71FC6DC0100C49630 /* SambaPlayer.framework */,
+				9AE43F201F2A8C1A001DD6D2 /* Frameworks */,
+				9AC676301D66214A00768524 /* Products */,
 				9AC676311D66214A00768524 /* SBPlayerSample */,
 				9AD5AAEB1D66489E0052E278 /* SBPlayerSample-objc */,
 				9A34EB741E13E6F40028FA52 /* SP-UITests */,
-				9AC676301D66214A00768524 /* Products */,
-				9A2B49261DD3B281002EC4EC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
 		9AC676301D66214A00768524 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9AC6762F1D66214A00768524 /* SP-v0.6.app */,
-				9AD5AAEA1D66489D0052E278 /* SPO-v0.6.app */,
+				9AC6762F1D66214A00768524 /* Player-swift.app */,
+				9AD5AAEA1D66489D0052E278 /* Player-objc.app */,
 				9A34EB731E13E6F40028FA52 /* SP-UITests.xctest */,
 			);
 			name = Products;
@@ -165,11 +177,9 @@
 		9AC676311D66214A00768524 /* SBPlayerSample */ = {
 			isa = PBXGroup;
 			children = (
+				9A87A94D1F75B6FB00F10D66 /* ViewControllers */,
 				9AC676321D66214A00768524 /* AppDelegate.swift */,
-				9AC676441D66227700768524 /* MediaListViewController.swift */,
 				9AC676451D66227700768524 /* Helpers.swift */,
-				9AC676461D66227700768524 /* PlayerViewController.swift */,
-				9AC676471D66227700768524 /* MediaListTableViewCell.swift */,
 				9AC676481D66227700768524 /* Configs.plist */,
 				9AC676491D66227700768524 /* Test-Bridging-Header.h */,
 				9AC676361D66214A00768524 /* Main.storyboard */,
@@ -204,6 +214,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		9AE43F201F2A8C1A001DD6D2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9AE43F211F2A8C1A001DD6D2 /* WebKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -225,27 +243,27 @@
 			productReference = 9A34EB731E13E6F40028FA52 /* SP-UITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
-		9AC6762E1D66214A00768524 /* SP-v0.6 */ = {
+		9AC6762E1D66214A00768524 /* Player-swift */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9AC676411D66214A00768524 /* Build configuration list for PBXNativeTarget "SP-v0.6" */;
+			buildConfigurationList = 9AC676411D66214A00768524 /* Build configuration list for PBXNativeTarget "Player-swift" */;
 			buildPhases = (
 				9AC6762B1D66214A00768524 /* Sources */,
 				9AC6762C1D66214A00768524 /* Frameworks */,
 				9AC6762D1D66214A00768524 /* Resources */,
-				9A4A98D91E7339DD0010AE78 /* Embed Frameworks */,
+				C7A712AA1FC6DC0200C49630 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "SP-v0.6";
+			name = "Player-swift";
 			productName = SBPlayerSample;
-			productReference = 9AC6762F1D66214A00768524 /* SP-v0.6.app */;
+			productReference = 9AC6762F1D66214A00768524 /* Player-swift.app */;
 			productType = "com.apple.product-type.application";
 		};
-		9AD5AAE91D66489D0052E278 /* SPO-v0.6 */ = {
+		9AD5AAE91D66489D0052E278 /* Player-objc */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9AD5AB001D66489E0052E278 /* Build configuration list for PBXNativeTarget "SPO-v0.6" */;
+			buildConfigurationList = 9AD5AB001D66489E0052E278 /* Build configuration list for PBXNativeTarget "Player-objc" */;
 			buildPhases = (
 				9AD5AAE61D66489D0052E278 /* Sources */,
 				9AD5AAE71D66489D0052E278 /* Frameworks */,
@@ -256,9 +274,9 @@
 			);
 			dependencies = (
 			);
-			name = "SPO-v0.6";
+			name = "Player-objc";
 			productName = "SBPlayerSample-objc";
-			productReference = 9AD5AAEA1D66489D0052E278 /* SPO-v0.6.app */;
+			productReference = 9AD5AAEA1D66489D0052E278 /* Player-objc.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -300,8 +318,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				9AC6762E1D66214A00768524 /* SP-v0.6 */,
-				9AD5AAE91D66489D0052E278 /* SPO-v0.6 */,
+				9AC6762E1D66214A00768524 /* Player-swift */,
+				9AD5AAE91D66489D0052E278 /* Player-objc */,
 				9A34EB721E13E6F40028FA52 /* SP-UITests */,
 			);
 		};
@@ -351,8 +369,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9AC6764D1D66227700768524 /* MediaListTableViewCell.swift in Sources */,
+				9AC6764D1D66227700768524 /* MediaCell.swift in Sources */,
 				9AC6764A1D66227700768524 /* MediaListViewController.swift in Sources */,
+				9A131E191F794770002A36AC /* CategoryListViewController.swift in Sources */,
+				9A131E1B1F794A32002A36AC /* CategoryCell.swift in Sources */,
 				9AC676331D66214A00768524 /* AppDelegate.swift in Sources */,
 				9AC6764B1D66227700768524 /* Helpers.swift in Sources */,
 				9AC6764C1D66227700768524 /* PlayerViewController.swift in Sources */,
@@ -374,7 +394,7 @@
 /* Begin PBXTargetDependency section */
 		9A34EB791E13E6F40028FA52 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 9AC6762E1D66214A00768524 /* SP-v0.6 */;
+			target = 9AC6762E1D66214A00768524 /* Player-swift */;
 			targetProxy = 9A34EB781E13E6F40028FA52 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -548,12 +568,14 @@
 				DEVELOPMENT_TEAM = K7KHBXSBN5;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Carthage/Checkouts/player_sdk_ios/Frameworks",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = SBPlayerSample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.sambatech.SP-v0.6";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sambatech.Player-swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_VERSION = 3.0;
@@ -568,12 +590,14 @@
 				DEVELOPMENT_TEAM = K7KHBXSBN5;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Carthage/Checkouts/player_sdk_ios/Frameworks",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = SBPlayerSample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.sambatech.SP-v0.6";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sambatech.Player-swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_VERSION = 3.0;
@@ -587,13 +611,12 @@
 				DEVELOPMENT_TEAM = K7KHBXSBN5;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-					"$(PROJECT_DIR)/Build/Products/Debug-iphonesimulator",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "SBPlayerSample-objc/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.sambatech.SPO-v0.6";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sambatech.Player-objc";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -605,13 +628,12 @@
 				DEVELOPMENT_TEAM = K7KHBXSBN5;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-					"$(PROJECT_DIR)/Build/Products/Debug-iphonesimulator",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "SBPlayerSample-objc/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.sambatech.SPO-v0.6";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sambatech.Player-objc";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -637,7 +659,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9AC676411D66214A00768524 /* Build configuration list for PBXNativeTarget "SP-v0.6" */ = {
+		9AC676411D66214A00768524 /* Build configuration list for PBXNativeTarget "Player-swift" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9AC676421D66214A00768524 /* Debug */,
@@ -646,7 +668,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9AD5AB001D66489E0052E278 /* Build configuration list for PBXNativeTarget "SPO-v0.6" */ = {
+		9AD5AB001D66489E0052E278 /* Build configuration list for PBXNativeTarget "Player-objc" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9AD5AAFE1D66489E0052E278 /* Debug */,

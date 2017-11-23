@@ -58,7 +58,7 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 		}
 		
 		guard let ph = m.projectHash else {
-			if let url = m.mediaURL {
+			if let url = m.mediaUrl {
 				let media = SambaMediaConfig()
 				media.url = url
 				media.backupUrls = m.backupUrls
@@ -72,18 +72,23 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 		
 		let req: SambaMediaRequest
 
-		// VoD
 		if let mId = m.mediaId {
-			req = SambaMediaRequest(
-				projectHash: ph,
-				mediaId: mId)
+			// Live/DVR (API)
+			if m.isLive {
+				req = SambaMediaRequest(projectHash: ph, liveChannelId: mId)
+				req.apiProtocol = SambaProtocol.http
+			}
+			// VoD
+			else {
+				req = SambaMediaRequest(projectHash: ph, mediaId: mId)
+			}
 		}
 		// Live
 		else {
 			req = SambaMediaRequest(
 				projectHash: ph,
 				isLiveAudio: m.isLiveAudio ?? false,
-				streamUrl: m.mediaURL!,
+				streamUrl: m.mediaUrl!,
 				backupUrls: m.backupUrls)
 		}
 		
@@ -91,41 +96,49 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 			req.environment = env
 		}
 		
-		req.apiProtocol = SambaProtocol.https
-		
 		SambaApi().requestMedia(req, onComplete: callback) { (error, response) in
-			print("Erro ao requisitar mídia!")
-			print(error ?? "no error obj", response ?? "no response obj")
+			print("Erro ao requisitar mídia:", error ?? "no error obj", response ?? "no response obj")
 		}
 	}
 	
 	private func initPlayer(_ media: SambaMedia) {
+		guard let mediaInfo = mediaInfo else {
+			print("No MediaInfo instance found!")
+			return
+		}
+		
 		// media URL injection
-		if let url = mediaInfo?.mediaURL {
+		if let url = mediaInfo.mediaUrl {
 			media.url = url
 			media.outputs?.removeAll()
 		}
 		
 		// ad injection
-		if let url = mediaInfo?.mediaAd {
+		if let url = mediaInfo.mediaAd {
 			media.adUrl = url
+			//media.adsSettings.maxRedirects = 0
+			//media.adsSettings.playAdsAfterTime = 5
 		}
 
-		if media.isAudio {
-			var frame = playerContainer.frame
-			frame.size.height = media.isLive ? 100 : 50
-			playerContainer.frame = frame
-		}
+		configUI(media)
 		
 		let player = SambaPlayer(parentViewController: self, andParentView: playerContainer)
 		player.delegate = self
 		player.media = media
 		
-		if let mediaInfo = mediaInfo, mediaInfo.isAutoStart {
+		if mediaInfo.isAutoStart {
 			player.play()
 		}
 		
 		sambaPlayer = player
+	}
+	
+	private func configUI(_ media: SambaMedia) {
+		if media.isAudio {
+			var frame = playerContainer.frame
+			frame.size.height = media.isLive ? 100 : 50
+			playerContainer.frame = frame
+		}
 	}
 	
 	func onLoad() {
@@ -163,7 +176,7 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 	func onDestroy() {}
 	
 	func onError(_ error: SambaPlayerError) {
-		status.text = "\(error.code) (\(error.cause?.code)): \(error.cause?.localizedDescription ?? error.localizedDescription)"
+		status.text = "\(error.code) (\(error.cause?.code ?? -1)): \(error.cause?.localizedDescription ?? error.localizedDescription)"
 		print(status.text!)
 	}
 	
@@ -188,6 +201,28 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 	@IBAction func controlbarHandler() {
 		guard let player = sambaPlayer else { return }
 		player.controlsVisible = !player.controlsVisible
+	}
+	
+	@IBAction func swapHandler(_ sender: UIButton) {
+		sender.isHidden = true
+		sender.setNeedsDisplay()
+		
+		// live: "http://liveabr2.sambatech.com.br/abr/sbtabr_8fcdc5f0f8df8d4de56b22a2c6660470/livestreamabrsbtbkp.m3u8"
+		let req = SambaMediaRequest(projectHash: "25ce5b8513c18a9eae99a8af601d0943", mediaId: "5db4352a8618fbf794753d2f1170dbf8")
+		
+		SambaApi().requestMedia(req, onComplete: { (media: SambaMedia?) in
+			guard let m = media else { return }
+			
+			self.configUI(m)
+			self.sambaPlayer?.media = m
+			self.sambaPlayer?.play()
+			
+			sender.isHidden = false
+			sender.setNeedsDisplay()
+		}, onError: { (error, response) in
+			sender.isHidden = false
+			sender.setNeedsDisplay()
+		})
 	}
 	
 	@IBAction func createSessionHandler() {
@@ -229,6 +264,51 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 		"Aluguel 48h/BR (p7)",
 		"Ass. mensal/BR (p8)"
 	]
+    
+    @IBAction func changeControlls(_ sender: UIButton) {
+        let alert = UIAlertController.init(title: "Remover Controles", message: nil, preferredStyle: .actionSheet)
+        var actions:[UIAlertAction] = []
+        let closure = { (control: SambaPlayerControls) in { (action: UIAlertAction!) -> Void in
+                self.sambaPlayer?.hide(control)
+            }
+        }
+        let enumOptions:[(type: SambaPlayerControls, description: String)] = [(.play, "Play Button"),
+                                                                              (.playLarge, "Play Button Large"),
+                                                                              (.fullscreen, "Fullscreen Button"),
+                                                                              (.seekbar, "Seekbar"),
+                                                                              (.topBar, "Top Bar"),
+                                                                              (.bottomBar, "Bottom Bar"),
+                                                                              (.time, "Time"),
+                                                                              (.menu, "Menu Button"),
+                                                                              (.liveIcon, "Live Icon")]
+        for (_, item) in enumOptions.enumerated() {
+            let action = UIAlertAction.init(title: item.description, style: .default, handler: closure(item.type))
+            actions.append(action)
+        }
+        let action1 = UIAlertAction.init(title: "PlayLarge, FullScreen, Menu", style: .default, handler: { _ in
+            self.sambaPlayer?.hide([.playLarge, .fullscreen, .menu])
+        })
+        actions.append(action1)
+        let action2 = UIAlertAction.init(title: "TopBar, BottomBar", style: .default, handler: { _ in
+            self.sambaPlayer?.hide([.topBar, .bottomBar])
+        })
+        actions.append(action2)
+        let cancel = UIAlertAction.init(title: "Cancelar", style: .cancel, handler: { (alertAction: UIAlertAction!) in
+            alert.dismiss(animated: true, completion: nil)
+        })
+        cancel.setValue(UIColor.red, forKey: "titleTextColor")
+        for action in actions {
+            alert.addAction(action)
+        }
+        alert.addAction(cancel)
+        alert.dismiss(animated: false, completion: nil)
+        if let popoverController = alert.popoverPresentationController {
+            popoverController.sourceView = self.view
+            popoverController.permittedArrowDirections = []
+            popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+        }
+        self.present(alert, animated: true, completion: nil)
+    }
 	
 	@IBAction func policyHandler(_ sender: UIButton) {
 		guard let valReq = valReq else { return }
