@@ -10,10 +10,6 @@
 		9A131E191F794770002A36AC /* CategoryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A131E181F794770002A36AC /* CategoryListViewController.swift */; };
 		9A131E1B1F794A32002A36AC /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A131E1A1F794A32002A36AC /* CategoryCell.swift */; };
 		9A34EB761E13E6F40028FA52 /* SP_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A34EB751E13E6F40028FA52 /* SP_UITests.swift */; };
-		9A44E4541F2FB3CD0003FE7A /* SambaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AFC6B531F29276E00D9FA05 /* SambaPlayer.framework */; };
-		9A44E4551F2FB3CD0003FE7A /* SambaPlayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9AFC6B531F29276E00D9FA05 /* SambaPlayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		9A44E4561F2FB3D00003FE7A /* GoogleInteractiveMediaAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AE43F1D1F2A8C05001DD6D2 /* GoogleInteractiveMediaAds.framework */; };
-		9A44E4571F2FB3D00003FE7A /* GoogleInteractiveMediaAds.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9AE43F1D1F2A8C05001DD6D2 /* GoogleInteractiveMediaAds.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9A44E4581F2FB3D40003FE7A /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AE43F211F2A8C1A001DD6D2 /* WebKit.framework */; };
 		9AC676331D66214A00768524 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC676321D66214A00768524 /* AppDelegate.swift */; };
 		9AC676381D66214A00768524 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AC676361D66214A00768524 /* Main.storyboard */; };
@@ -31,10 +27,10 @@
 		9AD5AAF91D66489E0052E278 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9AD5AAF81D66489E0052E278 /* Assets.xcassets */; };
 		9AD5AAFC1D66489E0052E278 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AD5AAFA1D66489E0052E278 /* LaunchScreen.storyboard */; };
 		9AE43F221F2A8C1A001DD6D2 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AE43F211F2A8C1A001DD6D2 /* WebKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		C7681E371FB466DE0084D817 /* GoogleInteractiveMediaAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7681E361FB466DE0084D817 /* GoogleInteractiveMediaAds.framework */; };
-		C7681E381FB466DE0084D817 /* GoogleInteractiveMediaAds.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C7681E361FB466DE0084D817 /* GoogleInteractiveMediaAds.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		C7681E3A1FB466E30084D817 /* SambaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AFC6B531F29276E00D9FA05 /* SambaPlayer.framework */; };
-		C7681E3B1FB466E30084D817 /* SambaPlayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9AFC6B531F29276E00D9FA05 /* SambaPlayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C7A712A81FC6DC0200C49630 /* SambaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7A712A71FC6DC0100C49630 /* SambaPlayer.framework */; };
+		C7A712A91FC6DC0200C49630 /* SambaPlayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C7A712A71FC6DC0100C49630 /* SambaPlayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C7A712AC1FC6DC1400C49630 /* GoogleInteractiveMediaAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7A712AB1FC6DC1400C49630 /* GoogleInteractiveMediaAds.framework */; };
+		C7A712AD1FC6DC1400C49630 /* GoogleInteractiveMediaAds.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C7A712AB1FC6DC1400C49630 /* GoogleInteractiveMediaAds.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,20 +50,18 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				9A44E4571F2FB3D00003FE7A /* GoogleInteractiveMediaAds.framework in Embed Frameworks */,
-				9A44E4551F2FB3CD0003FE7A /* SambaPlayer.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C7681E391FB466DE0084D817 /* Embed Frameworks */ = {
+		C7A712AA1FC6DC0200C49630 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				C7681E3B1FB466E30084D817 /* SambaPlayer.framework in Embed Frameworks */,
-				C7681E381FB466DE0084D817 /* GoogleInteractiveMediaAds.framework in Embed Frameworks */,
+				C7A712AD1FC6DC1400C49630 /* GoogleInteractiveMediaAds.framework in Embed Frameworks */,
+				C7A712A91FC6DC0200C49630 /* SambaPlayer.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -102,12 +96,9 @@
 		9AD5AAF81D66489E0052E278 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9AD5AAFB1D66489E0052E278 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9AD5AAFD1D66489E0052E278 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9AE43F1D1F2A8C05001DD6D2 /* GoogleInteractiveMediaAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleInteractiveMediaAds.framework; sourceTree = "<group>"; };
 		9AE43F211F2A8C1A001DD6D2 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
-		9AFC6B531F29276E00D9FA05 /* SambaPlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SambaPlayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C7681E361FB466DE0084D817 /* GoogleInteractiveMediaAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleInteractiveMediaAds.framework; sourceTree = "<group>"; };
-		C7A373B71FAC849E0027E20D /* GoogleInteractiveMediaAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleInteractiveMediaAds.framework; path = Carthage/Checkouts/player_sdk_ios/Frameworks/GoogleInteractiveMediaAds.framework; sourceTree = "<group>"; };
-		C7A373BB1FAC84A90027E20D /* SambaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SambaPlayer.framework; path = Carthage/Build/iOS/SambaPlayer.framework; sourceTree = "<group>"; };
+		C7A712A71FC6DC0100C49630 /* SambaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SambaPlayer.framework; path = Carthage/Build/iOS/SambaPlayer.framework; sourceTree = "<group>"; };
+		C7A712AB1FC6DC1400C49630 /* GoogleInteractiveMediaAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleInteractiveMediaAds.framework; path = Carthage/Checkouts/player_sdk_ios/Frameworks/GoogleInteractiveMediaAds.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,9 +113,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C7681E371FB466DE0084D817 /* GoogleInteractiveMediaAds.framework in Frameworks */,
+				C7A712AC1FC6DC1400C49630 /* GoogleInteractiveMediaAds.framework in Frameworks */,
+				C7A712A81FC6DC0200C49630 /* SambaPlayer.framework in Frameworks */,
 				9AE43F221F2A8C1A001DD6D2 /* WebKit.framework in Frameworks */,
-				C7681E3A1FB466E30084D817 /* SambaPlayer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -133,8 +124,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A44E4581F2FB3D40003FE7A /* WebKit.framework in Frameworks */,
-				9A44E4561F2FB3D00003FE7A /* GoogleInteractiveMediaAds.framework in Frameworks */,
-				9A44E4541F2FB3CD0003FE7A /* SambaPlayer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -165,11 +154,8 @@
 		9AC676261D66214A00768524 = {
 			isa = PBXGroup;
 			children = (
-				C7681E361FB466DE0084D817 /* GoogleInteractiveMediaAds.framework */,
-				C7A373BB1FAC84A90027E20D /* SambaPlayer.framework */,
-				9AE43F1D1F2A8C05001DD6D2 /* GoogleInteractiveMediaAds.framework */,
-				C7A373B71FAC849E0027E20D /* GoogleInteractiveMediaAds.framework */,
-				9AFC6B531F29276E00D9FA05 /* SambaPlayer.framework */,
+				C7A712AB1FC6DC1400C49630 /* GoogleInteractiveMediaAds.framework */,
+				C7A712A71FC6DC0100C49630 /* SambaPlayer.framework */,
 				9AE43F201F2A8C1A001DD6D2 /* Frameworks */,
 				9AC676301D66214A00768524 /* Products */,
 				9AC676311D66214A00768524 /* SBPlayerSample */,
@@ -264,7 +250,7 @@
 				9AC6762B1D66214A00768524 /* Sources */,
 				9AC6762C1D66214A00768524 /* Frameworks */,
 				9AC6762D1D66214A00768524 /* Resources */,
-				C7681E391FB466DE0084D817 /* Embed Frameworks */,
+				C7A712AA1FC6DC0200C49630 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
