@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6BD42D3920FE1B9D00D6A537 /* SambaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BD42D3820FE1B9D00D6A537 /* SambaPlayer.framework */; };
+		6BD42D3A20FE1B9D00D6A537 /* SambaPlayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6BD42D3820FE1B9D00D6A537 /* SambaPlayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9A131E191F794770002A36AC /* CategoryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A131E181F794770002A36AC /* CategoryListViewController.swift */; };
 		9A131E1B1F794A32002A36AC /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A131E1A1F794A32002A36AC /* CategoryCell.swift */; };
 		9A34EB761E13E6F40028FA52 /* SP_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A34EB751E13E6F40028FA52 /* SP_UITests.swift */; };
@@ -27,8 +29,6 @@
 		9AD5AAF91D66489E0052E278 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9AD5AAF81D66489E0052E278 /* Assets.xcassets */; };
 		9AD5AAFC1D66489E0052E278 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AD5AAFA1D66489E0052E278 /* LaunchScreen.storyboard */; };
 		9AE43F221F2A8C1A001DD6D2 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AE43F211F2A8C1A001DD6D2 /* WebKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		C7A712A81FC6DC0200C49630 /* SambaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7A712A71FC6DC0100C49630 /* SambaPlayer.framework */; };
-		C7A712A91FC6DC0200C49630 /* SambaPlayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C7A712A71FC6DC0100C49630 /* SambaPlayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C7A712AC1FC6DC1400C49630 /* GoogleInteractiveMediaAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7A712AB1FC6DC1400C49630 /* GoogleInteractiveMediaAds.framework */; };
 		C7A712AD1FC6DC1400C49630 /* GoogleInteractiveMediaAds.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C7A712AB1FC6DC1400C49630 /* GoogleInteractiveMediaAds.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -60,8 +60,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				6BD42D3A20FE1B9D00D6A537 /* SambaPlayer.framework in Embed Frameworks */,
 				C7A712AD1FC6DC1400C49630 /* GoogleInteractiveMediaAds.framework in Embed Frameworks */,
-				C7A712A91FC6DC0200C49630 /* SambaPlayer.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -69,6 +69,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6BD42D3820FE1B9D00D6A537 /* SambaPlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SambaPlayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6BFDB92720FD1F0C00838B24 /* SambaPlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SambaPlayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A131E181F794770002A36AC /* CategoryListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryListViewController.swift; sourceTree = "<group>"; };
 		9A131E1A1F794A32002A36AC /* CategoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		9A34EB731E13E6F40028FA52 /* SP-UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SP-UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -114,8 +116,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				C7A712AC1FC6DC1400C49630 /* GoogleInteractiveMediaAds.framework in Frameworks */,
-				C7A712A81FC6DC0200C49630 /* SambaPlayer.framework in Frameworks */,
 				9AE43F221F2A8C1A001DD6D2 /* WebKit.framework in Frameworks */,
+				6BD42D3920FE1B9D00D6A537 /* SambaPlayer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -154,6 +156,8 @@
 		9AC676261D66214A00768524 = {
 			isa = PBXGroup;
 			children = (
+				6BD42D3820FE1B9D00D6A537 /* SambaPlayer.framework */,
+				6BFDB92720FD1F0C00838B24 /* SambaPlayer.framework */,
 				C7A712AB1FC6DC1400C49630 /* GoogleInteractiveMediaAds.framework */,
 				C7A712A71FC6DC0100C49630 /* SambaPlayer.framework */,
 				9AE43F201F2A8C1A001DD6D2 /* Frameworks */,

@@ -158,6 +158,25 @@ class MediaListViewController : UITableViewController {
 			
 			self.filterData(self.currentFilterIndex)
 			
+            self.mediaList.append(MediaInfo(
+                title: "Teste Audio lento",
+                projectHash: "4f25046e52b1b4643efd8a328b78fbf3",
+                mediaId: "bc6e1ec855f8f1142232f4282bfe5ed9"))
+            
+            self.mediaList.append(MediaInfo(
+                title: "O Grinch - Trailer 2",
+                projectHash: "d56c159b54ede968ec7d0e34e46de1c0",
+                mediaId: "f91136ce802624b62dce063d1e923187"))
+            
+            self.mediaList.append(MediaInfo(
+                title: "Live record",
+                projectHash: "fad2b4a201ef2305d06cb817da1bd262",
+                mediaId: "c63dc860710b549f2a9f80342cd54418",
+                mediaAd: nil,
+                validationRequest: nil,
+                isLive: true))
+            
+            
 			DispatchQueue.main.async {
 				self.tableView.reloadData()
 				// hides fetching data info
@@ -224,7 +243,7 @@ class MediaInfo {
 	}
 	
 	init(title: String, description: String? = nil, thumb: String? = nil, projectHash: String? = nil, mediaId: String? = nil,
-	     mediaAd: String? = nil, validationRequest: ValidationRequest?, isLive: Bool = false, isAudio: Bool = false,
+	     mediaAd: String? = nil, validationRequest: ValidationRequest? = nil, isLive: Bool = false, isAudio: Bool = false,
 	     isLiveAudio: Bool? = false, env: SambaEnvironment? = nil, mediaUrl: String? = nil, _ backupUrls: [String]? = nil) {
 		self.title = title
 		self.description = description
