@@ -14,7 +14,7 @@
         <!--Player Container-->
         <scene sceneID="XPw-ra-cJ3">
             <objects>
-                <viewController id="9Et-Yp-bwl" userLabel="Player Container" customClass="PlayerViewController" customModule="Player_swift" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="playerController" id="9Et-Yp-bwl" userLabel="Player Container" customClass="PlayerViewController" customModule="Player_swift" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qqF-BV-VhR"/>
                         <viewControllerLayoutGuide type="bottom" id="9CF-Aj-o1T"/>
@@ -24,7 +24,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A2W-qA-orU">
-                                <rect key="frame" x="0.0" y="64" width="375" height="211"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="211"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="A2W-qA-orU" secondAttribute="height" multiplier="16:9" id="WlI-n4-EUp"/>
                                 </constraints>
@@ -340,7 +340,6 @@
                                     <outlet property="mediaDesc" destination="9jw-XJ-HuY" id="jtY-EH-K7W"/>
                                     <outlet property="mediaThumb" destination="uJJ-iu-RAS" id="KD4-xl-8Nb"/>
                                     <outlet property="mediaTitle" destination="cAs-GV-oaQ" id="HSX-is-7Yd"/>
-                                    <segue destination="9Et-Yp-bwl" kind="show" identifier="MediaToPlayer" id="EPT-sL-qvc"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

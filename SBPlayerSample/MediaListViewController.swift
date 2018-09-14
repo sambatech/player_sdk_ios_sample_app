@@ -103,86 +103,106 @@ class MediaListViewController : UITableViewController {
 	
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		self.tableView.deselectRow(at: indexPath, animated: false)
+//        playerController
+        
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let playlistDetailViewController = storyBoard.instantiateViewController(withIdentifier: "playerController") as! PlayerViewController
+        playlistDetailViewController.mediaInfo =  mediaListFiltered[indexPath.row]
+        self.navigationController?.pushViewController(playlistDetailViewController, animated: true)
+
 	}
 	
 	private func makeInitialRequests() {
-		Helpers.requestURLJson("http://playerground.sambatech.com/v1/liquid/medias?cat_id=16") { json in
-			guard let json = json as? [AnyObject] else {
-				// hides fetching data info
-				self.refreshControl?.endRefreshing()
-				return
-			}
-			
-			for jsonNode in json {
-				var isAudio = false
-				var env = SambaEnvironment.prod
-				let params = jsonNode["params"] as AnyObject
-				var backupUrls = [String]()
-				
-				// skip non video or audio media
-				switch (jsonNode["qualifier"] as? String ?? "").lowercased() {
-				case "audio": isAudio = true
-				default: break
-				}
-				
-				switch (jsonNode["env"] as? String ?? "").lowercased() {
-				case "prod": env = .prod
-				case "staging": env = .staging
-				case "dev": fallthrough
-				case "web1-13000": env = .test
-				default: break
-				}
-				
-				if let backupUrl = params["backupLive"] as? String {
-					backupUrls.append(backupUrl)
-				}
-
-				let m = MediaInfo(
-					title: jsonNode["title"] as? String ?? "Unknown",
-					description: jsonNode["description"] as? String,
-					thumb: isAudio ? "https://cdn4.iconfinder.com/data/icons/defaulticon/icons/png/256x256/media-volume-2.png" : jsonNode["thumbnail"] as? String,
-					projectHash: jsonNode["ph"] as? String,
-					// tries to get VOD or Live ID
-					mediaId: jsonNode["id"] as? String ?? jsonNode["liveChannelId"] as? String,
-					mediaAd: params["ad_program"] as? String,
-					// WORKAROUND: to identify which project has DRM
-					validationRequest: (jsonNode["drm"] as? Bool ?? false) ? ValidationRequest() : nil,
-					isLive: jsonNode["liveChannelId"]! != nil,
-					isAudio: isAudio,
-					env: env,
-					mediaUrl: params["primaryLive"] as? String,
-					backupUrls)
-				
-				self.mediaList.append(m)
-			}
-			
-			self.filterData(self.currentFilterIndex)
-			
-            self.mediaList.append(MediaInfo(
-                title: "Teste Audio lento",
-                projectHash: "4f25046e52b1b4643efd8a328b78fbf3",
-                mediaId: "bc6e1ec855f8f1142232f4282bfe5ed9"))
-            
-            self.mediaList.append(MediaInfo(
-                title: "O Grinch - Trailer 2",
-                projectHash: "d56c159b54ede968ec7d0e34e46de1c0",
-                mediaId: "f91136ce802624b62dce063d1e923187"))
-            
-            self.mediaList.append(MediaInfo(
-                title: "Live record",
-                projectHash: "fad2b4a201ef2305d06cb817da1bd262",
-                mediaId: "c63dc860710b549f2a9f80342cd54418",
-                mediaAd: nil,
-                validationRequest: nil,
-                isLive: true))
-            
-            
-			DispatchQueue.main.async {
-				self.tableView.reloadData()
-				// hides fetching data info
-				self.refreshControl?.endRefreshing()
-			}
-		}
+//        Helpers.requestURLJson("http://playerground.sambatech.com/v1/liquid/medias?cat_id=16") { json in
+//            guard let json = json as? [AnyObject] else {
+//                // hides fetching data info
+//                self.refreshControl?.endRefreshing()
+//                return
+//            }
+//
+//            for jsonNode in json {
+//                var isAudio = false
+//                var env = SambaEnvironment.prod
+//                let params = jsonNode["params"] as AnyObject
+//                var backupUrls = [String]()
+//
+//                // skip non video or audio media
+//                switch (jsonNode["qualifier"] as? String ?? "").lowercased() {
+//                case "audio": isAudio = true
+//                default: break
+//                }
+//
+//                switch (jsonNode["env"] as? String ?? "").lowercased() {
+//                case "prod": env = .prod
+//                case "staging": env = .staging
+//                case "dev": fallthrough
+//                case "web1-13000": env = .test
+//                default: break
+//                }
+//
+//                if let backupUrl = params["backupLive"] as? String {
+//                    backupUrls.append(backupUrl)
+//                }
+//
+//                let m = MediaInfo(
+//                    title: jsonNode["title"] as? String ?? "Unknown",
+//                    description: jsonNode["description"] as? String,
+//                    thumb: isAudio ? "https://cdn4.iconfinder.com/data/icons/defaulticon/icons/png/256x256/media-volume-2.png" : jsonNode["thumbnail"] as? String,
+//                    projectHash: jsonNode["ph"] as? String,
+//                    // tries to get VOD or Live ID
+//                    mediaId: jsonNode["id"] as? String ?? jsonNode["liveChannelId"] as? String,
+//                    mediaAd: params["ad_program"] as? String,
+//                    // WORKAROUND: to identify which project has DRM
+//                    validationRequest: (jsonNode["drm"] as? Bool ?? false) ? ValidationRequest() : nil,
+//                    isLive: jsonNode["liveChannelId"]! != nil,
+//                    isAudio: isAudio,
+//                    env: env,
+//                    mediaUrl: params["primaryLive"] as? String,
+//                    backupUrls)
+//
+//                self.mediaList.append(m)
+//            }
+//
+//            self.filterData(self.currentFilterIndex)
+//
+//            DispatchQueue.main.async {
+//                self.tableView.reloadData()
+//                // hides fetching data info
+//                self.refreshControl?.endRefreshing()
+//            }
+//        }
+        
+        self.mediaList.append(MediaInfo(
+            title: "Teste Audio lento",
+            projectHash: "4f25046e52b1b4643efd8a328b78fbf3",
+            mediaId: "bc6e1ec855f8f1142232f4282bfe5ed9"))
+        
+        self.mediaList.append(MediaInfo(
+            title: "Media Playplus",
+            projectHash: "fad2b4a201ef2305d06cb817da1bd262",
+            mediaId: "ca60065f62e83445a4c5ae91abd3eacf"))
+        
+        self.mediaList.append(MediaInfo(
+            title: "Teste Live Playplus ESPN",
+            projectHash: "548fd94beda15ebe2fa22adf1839b60c",
+            mediaId: "3958f83a366a90dbbd093f8907129171",
+            mediaAd: nil,
+            validationRequest: nil,
+            isLive: true))
+        
+        self.mediaList.append(MediaInfo(
+            title: "Live Teste Analytics",
+            projectHash: "964b56b4b184c2a29e3c2065a7a15038",
+            mediaId: "46fe05239a330e011ea2d0f36b1f0702",
+            mediaAd: nil,
+            validationRequest: nil,
+            isLive: true))
+        
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+            // hides fetching data info
+            self.refreshControl?.endRefreshing()
+        }
 	}
 	
 	private func filterData(_ index: Int, withBarButton barButton: UIBarButtonItem? = nil) {
