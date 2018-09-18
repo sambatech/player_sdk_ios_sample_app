@@ -57,6 +57,13 @@ class MediaListViewController : UITableViewController {
 		refreshControl.tintColor = UIColor(0xCCCCCC)
 		self.refreshControl = refreshControl
 		
+        let castButton = SambaCastButton(frame: CGRect(x: CGFloat(0), y: CGFloat(0),
+                                                        width: CGFloat(24), height: CGFloat(24)))
+        castButton.tintColor = UIColor.black
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: castButton)
+        
+        SambaCast.sharedInstance.presentCastInstruction(with: castButton)
+        
 		makeInitialRequests()
 	}
 	
