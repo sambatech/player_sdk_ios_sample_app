@@ -27,6 +27,17 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 	
 	private var sambaPlayer: SambaPlayer?
 	private var valReq: ValidationRequest?
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let castButton = SambaCastButton(frame: CGRect(x: CGFloat(0), y: CGFloat(0),
+                                                       width: CGFloat(24), height: CGFloat(24)))
+        castButton.tintColor = UIColor.black
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: castButton)
+        
+    }
 	
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
@@ -123,6 +134,7 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 		configUI(media)
 		
 		let player = SambaPlayer(parentViewController: self, andParentView: playerContainer)
+        player.isChromecastEnable = true
 		player.delegate = self
         
         if media.isAudio {
@@ -131,6 +143,11 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
         
         
 		player.media = media
+        
+        SambaCast.sharedInstance.loadMedia(with: media, currentTime: 0, captionTheme: nil, completion: { (completionType, error) in
+            
+            print("complete")
+        })
 		
 		if mediaInfo.isAutoStart {
 			player.play()

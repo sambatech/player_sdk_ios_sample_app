@@ -206,6 +206,7 @@ class MediaListViewController : UITableViewController {
             isLive: true))
         
         DispatchQueue.main.async {
+            self.filterData(-1)
             self.tableView.reloadData()
             // hides fetching data info
             self.refreshControl?.endRefreshing()

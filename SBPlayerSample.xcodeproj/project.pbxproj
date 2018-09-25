@@ -85,6 +85,7 @@
 		6B15BE79214FF13C002C41CF /* GoogleCast.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleCast.framework; path = ../player_sdk_ios/Frameworks/GoogleCast.framework; sourceTree = "<group>"; };
 		6B15BE7C214FF416002C41CF /* GoogleCast.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleCast.framework; sourceTree = "<group>"; };
 		6B3CC8C2214FDE0400FAC5A4 /* GoogleCast.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleCast.framework; path = ../player_sdk_ios/Frameworks/GoogleCast.framework; sourceTree = "<group>"; };
+		6BB42B32215AB46A007034A5 /* Player-swift.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Player-swift.entitlements"; sourceTree = "<group>"; };
 		6BD42D3820FE1B9D00D6A537 /* SambaPlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SambaPlayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6BFDB92720FD1F0C00838B24 /* SambaPlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SambaPlayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A131E181F794770002A36AC /* CategoryListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryListViewController.swift; sourceTree = "<group>"; };
@@ -174,6 +175,7 @@
 		9AC676261D66214A00768524 = {
 			isa = PBXGroup;
 			children = (
+				6BB42B32215AB46A007034A5 /* Player-swift.entitlements */,
 				6B3CC8C2214FDE0400FAC5A4 /* GoogleCast.framework */,
 				6B15BE79214FF13C002C41CF /* GoogleCast.framework */,
 				6B15BE7C214FF416002C41CF /* GoogleCast.framework */,
@@ -324,6 +326,11 @@
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = K7KHBXSBN5;
 						LastSwiftMigration = 0810;
+						SystemCapabilities = {
+							com.apple.AccessWiFi = {
+								enabled = 1;
+							};
+						};
 					};
 					9AD5AAE91D66489D0052E278 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -594,6 +601,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Player-swift.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = K7KHBXSBN5;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -608,7 +616,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.sambatech.Player-swift";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sambatech.playerswift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_VERSION = 3.0;
@@ -619,6 +627,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Player-swift.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = K7KHBXSBN5;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -633,7 +642,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.sambatech.Player-swift";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sambatech.playerswift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_VERSION = 3.0;
