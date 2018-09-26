@@ -138,7 +138,7 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 		player.delegate = self
         
         if media.isAudio {
-            media.thumbAudioURL = "http://img-sambatech.akamaized.net/unsafe/x480/gbbrpvbps-sambavideos.akamaized.net/account/3170/18/2018-08-09/thumbnail/3a249ef02e0b21e41daf98645f1e2aa8/3a249ef02e0b21e41daf98645f1e2aa8_853x480.jpg"
+            media.externalThumbURL = "http://img-sambatech.akamaized.net/unsafe/x480/gbbrpvbps-sambavideos.akamaized.net/account/3170/18/2018-08-09/thumbnail/3a249ef02e0b21e41daf98645f1e2aa8/3a249ef02e0b21e41daf98645f1e2aa8_853x480.jpg"
         }
         
         
