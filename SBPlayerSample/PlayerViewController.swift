@@ -81,6 +81,7 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 			// VoD
 			else {
 				req = SambaMediaRequest(projectHash: ph, mediaId: mId)
+                req.apiProtocol = SambaProtocol.http
 			}
 		}
 		// Live

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6B5AFE1D21664608006874D1 /* GoogleInteractiveMediaAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B5AFE1C21664608006874D1 /* GoogleInteractiveMediaAds.framework */; };
+		6B5AFE1E21664608006874D1 /* GoogleInteractiveMediaAds.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6B5AFE1C21664608006874D1 /* GoogleInteractiveMediaAds.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6B5AFE212166462D006874D1 /* SambaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B5AFE202166462D006874D1 /* SambaPlayer.framework */; };
+		6B5AFE222166462D006874D1 /* SambaPlayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6B5AFE202166462D006874D1 /* SambaPlayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9A131E191F794770002A36AC /* CategoryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A131E181F794770002A36AC /* CategoryListViewController.swift */; };
 		9A131E1B1F794A32002A36AC /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A131E1A1F794A32002A36AC /* CategoryCell.swift */; };
 		9A34EB761E13E6F40028FA52 /* SP_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A34EB751E13E6F40028FA52 /* SP_UITests.swift */; };
@@ -27,10 +31,6 @@
 		9AD5AAF91D66489E0052E278 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9AD5AAF81D66489E0052E278 /* Assets.xcassets */; };
 		9AD5AAFC1D66489E0052E278 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AD5AAFA1D66489E0052E278 /* LaunchScreen.storyboard */; };
 		9AE43F221F2A8C1A001DD6D2 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AE43F211F2A8C1A001DD6D2 /* WebKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		C7A712A81FC6DC0200C49630 /* SambaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7A712A71FC6DC0100C49630 /* SambaPlayer.framework */; };
-		C7A712A91FC6DC0200C49630 /* SambaPlayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C7A712A71FC6DC0100C49630 /* SambaPlayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		C7A712AC1FC6DC1400C49630 /* GoogleInteractiveMediaAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7A712AB1FC6DC1400C49630 /* GoogleInteractiveMediaAds.framework */; };
-		C7A712AD1FC6DC1400C49630 /* GoogleInteractiveMediaAds.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C7A712AB1FC6DC1400C49630 /* GoogleInteractiveMediaAds.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +44,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		6B5AFE1F21664608006874D1 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				6B5AFE222166462D006874D1 /* SambaPlayer.framework in Embed Frameworks */,
+				6B5AFE1E21664608006874D1 /* GoogleInteractiveMediaAds.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9AA657EF1EB0E6EB00F455C4 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -54,21 +66,11 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C7A712AA1FC6DC0200C49630 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				C7A712AD1FC6DC1400C49630 /* GoogleInteractiveMediaAds.framework in Embed Frameworks */,
-				C7A712A91FC6DC0200C49630 /* SambaPlayer.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6B5AFE1C21664608006874D1 /* GoogleInteractiveMediaAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleInteractiveMediaAds.framework; path = ../player_sdk_ios/Frameworks/GoogleInteractiveMediaAds.framework; sourceTree = "<group>"; };
+		6B5AFE202166462D006874D1 /* SambaPlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SambaPlayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A131E181F794770002A36AC /* CategoryListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryListViewController.swift; sourceTree = "<group>"; };
 		9A131E1A1F794A32002A36AC /* CategoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		9A34EB731E13E6F40028FA52 /* SP-UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SP-UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -113,9 +115,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C7A712AC1FC6DC1400C49630 /* GoogleInteractiveMediaAds.framework in Frameworks */,
-				C7A712A81FC6DC0200C49630 /* SambaPlayer.framework in Frameworks */,
+				6B5AFE1D21664608006874D1 /* GoogleInteractiveMediaAds.framework in Frameworks */,
 				9AE43F221F2A8C1A001DD6D2 /* WebKit.framework in Frameworks */,
+				6B5AFE212166462D006874D1 /* SambaPlayer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -154,7 +156,9 @@
 		9AC676261D66214A00768524 = {
 			isa = PBXGroup;
 			children = (
+				6B5AFE202166462D006874D1 /* SambaPlayer.framework */,
 				C7A712AB1FC6DC1400C49630 /* GoogleInteractiveMediaAds.framework */,
+				6B5AFE1C21664608006874D1 /* GoogleInteractiveMediaAds.framework */,
 				C7A712A71FC6DC0100C49630 /* SambaPlayer.framework */,
 				9AE43F201F2A8C1A001DD6D2 /* Frameworks */,
 				9AC676301D66214A00768524 /* Products */,
@@ -250,7 +254,7 @@
 				9AC6762B1D66214A00768524 /* Sources */,
 				9AC6762C1D66214A00768524 /* Frameworks */,
 				9AC6762D1D66214A00768524 /* Resources */,
-				C7A712AA1FC6DC0200C49630 /* Embed Frameworks */,
+				6B5AFE1F21664608006874D1 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
