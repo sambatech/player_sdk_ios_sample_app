@@ -170,6 +170,11 @@ class MediaListViewController : UITableViewController {
 //                self.mediaList.append(m)
 //            }
 //
+<<<<<<< HEAD
+=======
+//
+//
+>>>>>>> origin/dev
 //            self.filterData(self.currentFilterIndex)
 //
 //            DispatchQueue.main.async {
@@ -182,12 +187,26 @@ class MediaListViewController : UITableViewController {
         self.mediaList.append(MediaInfo(
             title: "Teste Audio lento",
             projectHash: "4f25046e52b1b4643efd8a328b78fbf3",
+<<<<<<< HEAD
             mediaId: "bc6e1ec855f8f1142232f4282bfe5ed9"))
+=======
+            mediaId: "bc6e1ec855f8f1142232f4282bfe5ed9",
+            mediaAd: nil,
+            validationRequest: nil,
+            isLive: false))
+>>>>>>> origin/dev
         
         self.mediaList.append(MediaInfo(
             title: "Media Playplus",
             projectHash: "fad2b4a201ef2305d06cb817da1bd262",
+<<<<<<< HEAD
             mediaId: "ca60065f62e83445a4c5ae91abd3eacf"))
+=======
+            mediaId: "ca60065f62e83445a4c5ae91abd3eacf",
+            mediaAd: nil,
+            validationRequest: nil,
+            isLive: false))
+>>>>>>> origin/dev
         
         self.mediaList.append(MediaInfo(
             title: "Teste Live Playplus ESPN",
@@ -198,6 +217,7 @@ class MediaListViewController : UITableViewController {
             isLive: true))
         
         self.mediaList.append(MediaInfo(
+<<<<<<< HEAD
             title: "Teste Media Legenda",
             projectHash: "964b56b4b184c2a29e3c2065a7a15038",
             mediaId: "935283d109b33a4f92e8762d64d47661"))
@@ -209,6 +229,22 @@ class MediaListViewController : UITableViewController {
 //            mediaAd: nil,
 //            validationRequest: nil,
 //            isLive: true))
+=======
+            title: "Live Teste Analytics",
+            projectHash: "964b56b4b184c2a29e3c2065a7a15038",
+            mediaId: "46fe05239a330e011ea2d0f36b1f0702",
+            mediaAd: nil,
+            validationRequest: nil,
+            isLive: true))
+        
+        self.mediaList.append(MediaInfo(
+            title: "Media DRM",
+            projectHash: "61a1c1faa23eb27de9110368e551de73",
+            mediaId: "2e323f019ccc61f5bfac0a3be28b8f70",
+            mediaAd: nil,
+            validationRequest: nil,
+            isLive: false, env: SambaEnvironment.staging))
+>>>>>>> origin/dev
         
         DispatchQueue.main.async {
             self.filterData(-1)
