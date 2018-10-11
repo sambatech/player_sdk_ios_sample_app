@@ -208,7 +208,24 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 	//MARK: actions
 	
 	@IBAction func playHandler() {
-        sambaPlayer?.play()
+//        sambaPlayer?.play()
+        
+        let req = SambaMediaRequest(projectHash: "964b56b4b184c2a29e3c2065a7a15038", mediaId: "935283d109b33a4f92e8762d64d47661")
+        
+        SambaApi().requestMedia(req, onComplete: { (media: SambaMedia?) in
+            guard let m = media else { return }
+            
+            self.configUI(m)
+            self.sambaPlayer?.destroy()
+            
+            
+            self.sambaPlayer?.media = m
+            self.sambaPlayer?.play()
+            
+           
+        }, onError: { (error, response) in
+         
+        })
 	}
 	
 	@IBAction func pauseHandler() {

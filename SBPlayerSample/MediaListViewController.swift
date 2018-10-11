@@ -198,12 +198,17 @@ class MediaListViewController : UITableViewController {
             isLive: true))
         
         self.mediaList.append(MediaInfo(
-            title: "Live Teste Analytics",
+            title: "Teste Media Legenda",
             projectHash: "964b56b4b184c2a29e3c2065a7a15038",
-            mediaId: "46fe05239a330e011ea2d0f36b1f0702",
-            mediaAd: nil,
-            validationRequest: nil,
-            isLive: true))
+            mediaId: "935283d109b33a4f92e8762d64d47661"))
+        
+//        self.mediaList.append(MediaInfo(
+//            title: "Live Teste Analytics",
+//            projectHash: "964b56b4b184c2a29e3c2065a7a15038",
+//            mediaId: "46fe05239a330e011ea2d0f36b1f0702",
+//            mediaAd: nil,
+//            validationRequest: nil,
+//            isLive: true))
         
         DispatchQueue.main.async {
             self.filterData(-1)
