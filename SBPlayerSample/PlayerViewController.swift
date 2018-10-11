@@ -27,6 +27,17 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 	
 	private var sambaPlayer: SambaPlayer?
 	private var valReq: ValidationRequest?
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let castButton = SambaCastButton(frame: CGRect(x: CGFloat(0), y: CGFloat(0),
+                                                       width: CGFloat(24), height: CGFloat(24)))
+        castButton.tintColor = UIColor.black
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: castButton)
+        
+    }
 	
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
@@ -81,6 +92,7 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 			// VoD
 			else {
 				req = SambaMediaRequest(projectHash: ph, mediaId: mId)
+                req.apiProtocol = SambaProtocol.http
 			}
 		}
 		// Live
@@ -119,12 +131,30 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 			//media.adsSettings.maxRedirects = 0
 			//media.adsSettings.playAdsAfterTime = 5
 		}
+        
+        let mediaConfig = media as! SambaMediaConfig
+        
+        if  mediaConfig.drmRequest != nil {
+            mediaConfig.drmRequest?.token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjA1MjMzZDZjLWUxZTEtNDMyYi04M2E3LTg5YTg5ODcwMjg3YSJ9.eyJzdWIiOiJnb211c2ljLXVzZXIiLCJpc3MiOiJkaWVnby5kdWFydGVAc2FtYmF0ZWNoLmNvbS5iciIsImp0aSI6IklIRzlKZk1aUFpIS29MeHNvMFhveS1BZG83bThzWkNmNW5OVWdWeFhWSTg9IiwiZXhwIjoxNTM5MzA2MTk5LCJpYXQiOjE1MzkyNjI5OTksImFpZCI6ImdvbXVzaWMifQ.AlE6J9HPsyoB2Bzg1I8W60mexkBY5IZ2Slz4WXVHS30"
+        }
 
 		configUI(media)
 		
 		let player = SambaPlayer(parentViewController: self, andParentView: playerContainer)
+        player.isChromecastEnable = true
 		player.delegate = self
+        
+        if media.isAudio {
+            media.externalThumbURL = "http://img-sambatech.akamaized.net/unsafe/x480/gbbrpvbps-sambavideos.akamaized.net/account/3170/18/2018-08-09/thumbnail/3a249ef02e0b21e41daf98645f1e2aa8/3a249ef02e0b21e41daf98645f1e2aa8_853x480.jpg"
+        }
+        
+        
 		player.media = media
+        
+        SambaCast.sharedInstance.loadMedia(with: media, currentTime: 0, captionTheme: nil, completion: { (completionType, error) in
+            
+            print("complete")
+        })
 		
 		if mediaInfo.isAutoStart {
 			player.play()
@@ -134,11 +164,11 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 	}
 	
 	private func configUI(_ media: SambaMedia) {
-		if media.isAudio {
-			var frame = playerContainer.frame
-			frame.size.height = media.isLive ? 100 : 50
-			playerContainer.frame = frame
-		}
+//        if media.isAudio {
+//            var frame = playerContainer.frame
+//            frame.size.height = media.isLive ? 100 : 50
+//            playerContainer.frame = frame
+//        }
 	}
 	
 	func onLoad() {
@@ -173,7 +203,9 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 		status.text = "finish"
 	}
 	
-	func onDestroy() {}
+	func onDestroy() {
+        status.text = "destroy"
+    }
 	
 	func onError(_ error: SambaPlayerError) {
 		status.text = "\(error.code) (\(error.cause?.code ?? -1)): \(error.cause?.localizedDescription ?? error.localizedDescription)"
@@ -183,11 +215,28 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 	//MARK: actions
 	
 	@IBAction func playHandler() {
-		sambaPlayer?.play()
+//        sambaPlayer?.play()
+        
+        let req = SambaMediaRequest(projectHash: "964b56b4b184c2a29e3c2065a7a15038", mediaId: "935283d109b33a4f92e8762d64d47661")
+        
+        SambaApi().requestMedia(req, onComplete: { (media: SambaMedia?) in
+            guard let m = media else { return }
+            
+            self.configUI(m)
+            self.sambaPlayer?.destroy()
+            
+            
+            self.sambaPlayer?.media = m
+            self.sambaPlayer?.play()
+            
+           
+        }, onError: { (error, response) in
+         
+        })
 	}
 	
 	@IBAction func pauseHandler() {
-		sambaPlayer?.pause()
+        sambaPlayer?.pause()
 	}
 	
 	@IBAction func stopHandler() {
@@ -204,11 +253,20 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 	}
 	
 	@IBAction func swapHandler(_ sender: UIButton) {
-		sender.isHidden = true
+		sender.isHidden = false
 		sender.setNeedsDisplay()
+        
+//        MediaInfo mediaInfo3 = new MediaInfo();
+//
+//        mediaInfo3.setTitle("Teste Video Sem Bloqueio");
+//        mediaInfo3.setProjectHash("13a157b86aa27510d0c373e447dab6ea");
+//        mediaInfo3.setId("19310f3fcb5f515d1a44d5e709695c03");
+//        mediaInfo3.setEnvironment(SambaMediaRequest.Environment.PROD);
+//        mediaInfo3.setControlsEnabled(true);
+//        mediaInfo3.setAutoPlay(true);
 		
 		// live: "http://liveabr2.sambatech.com.br/abr/sbtabr_8fcdc5f0f8df8d4de56b22a2c6660470/livestreamabrsbtbkp.m3u8"
-		let req = SambaMediaRequest(projectHash: "25ce5b8513c18a9eae99a8af601d0943", mediaId: "5db4352a8618fbf794753d2f1170dbf8")
+		let req = SambaMediaRequest(projectHash: "13a157b86aa27510d0c373e447dab6ea", mediaId: "19310f3fcb5f515d1a44d5e709695c03")
 		
 		SambaApi().requestMedia(req, onComplete: { (media: SambaMedia?) in
 			guard let m = media else { return }
@@ -440,6 +498,10 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 		let s = Int(seconds)
 		return String(format: "%02d:%02d:%02d", s/3600%60, s/60%60, s%60)
 	}
+    
+    deinit {
+        print("deinit")
+    }
 }
 
 class XmlToDrmDelegate : NSObject, XMLParserDelegate {
