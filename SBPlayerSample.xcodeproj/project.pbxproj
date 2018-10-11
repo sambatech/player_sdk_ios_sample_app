@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6B310E45216F88F400817629 /* SambaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B5AFE202166462D006874D1 /* SambaPlayer.framework */; };
+		6B310E46216F88F400817629 /* SambaPlayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6B5AFE202166462D006874D1 /* SambaPlayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6B5AFE1D21664608006874D1 /* GoogleInteractiveMediaAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B5AFE1C21664608006874D1 /* GoogleInteractiveMediaAds.framework */; };
 		6B5AFE1E21664608006874D1 /* GoogleInteractiveMediaAds.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6B5AFE1C21664608006874D1 /* GoogleInteractiveMediaAds.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		6B5AFE212166462D006874D1 /* SambaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B5AFE202166462D006874D1 /* SambaPlayer.framework */; };
-		6B5AFE222166462D006874D1 /* SambaPlayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6B5AFE202166462D006874D1 /* SambaPlayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9A131E191F794770002A36AC /* CategoryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A131E181F794770002A36AC /* CategoryListViewController.swift */; };
 		9A131E1B1F794A32002A36AC /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A131E1A1F794A32002A36AC /* CategoryCell.swift */; };
 		9A34EB761E13E6F40028FA52 /* SP_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A34EB751E13E6F40028FA52 /* SP_UITests.swift */; };
@@ -50,7 +50,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				6B5AFE222166462D006874D1 /* SambaPlayer.framework in Embed Frameworks */,
+				6B310E46216F88F400817629 /* SambaPlayer.framework in Embed Frameworks */,
 				6B5AFE1E21664608006874D1 /* GoogleInteractiveMediaAds.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -117,7 +117,7 @@
 			files = (
 				6B5AFE1D21664608006874D1 /* GoogleInteractiveMediaAds.framework in Frameworks */,
 				9AE43F221F2A8C1A001DD6D2 /* WebKit.framework in Frameworks */,
-				6B5AFE212166462D006874D1 /* SambaPlayer.framework in Frameworks */,
+				6B310E45216F88F400817629 /* SambaPlayer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
