@@ -57,6 +57,13 @@ class MediaListViewController : UITableViewController {
 		refreshControl.tintColor = UIColor(0xCCCCCC)
 		self.refreshControl = refreshControl
 		
+        let castButton = SambaCastButton(frame: CGRect(x: CGFloat(0), y: CGFloat(0),
+                                                        width: CGFloat(24), height: CGFloat(24)))
+        castButton.tintColor = UIColor.black
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: castButton)
+        
+        SambaCast.sharedInstance.presentCastInstruction(with: castButton)
+        
 		makeInitialRequests()
 	}
 	
@@ -103,6 +110,13 @@ class MediaListViewController : UITableViewController {
 	
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		self.tableView.deselectRow(at: indexPath, animated: false)
+//        playerController
+        
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let playlistDetailViewController = storyBoard.instantiateViewController(withIdentifier: "playerController") as! PlayerViewController
+        playlistDetailViewController.mediaInfo =  mediaListFiltered[indexPath.row]
+        self.navigationController?.pushViewController(playlistDetailViewController, animated: true)
+
 	}
 	
 	private func makeInitialRequests() {
@@ -156,8 +170,6 @@ class MediaListViewController : UITableViewController {
 //                self.mediaList.append(m)
 //            }
 //
-//
-//
 //            self.filterData(self.currentFilterIndex)
 //
 //            DispatchQueue.main.async {
@@ -192,12 +204,19 @@ class MediaListViewController : UITableViewController {
             isLive: true))
         
         self.mediaList.append(MediaInfo(
-            title: "Live Teste Analytics",
+            title: "Teste Media Legenda",
             projectHash: "964b56b4b184c2a29e3c2065a7a15038",
-            mediaId: "46fe05239a330e011ea2d0f36b1f0702",
-            mediaAd: nil,
-            validationRequest: nil,
-            isLive: true))
+            mediaId: "935283d109b33a4f92e8762d64d47661"))
+        
+//        self.mediaList.append(MediaInfo(
+//            title: "Live Teste Analytics",
+//            projectHash: "964b56b4b184c2a29e3c2065a7a15038",
+//            mediaId: "46fe05239a330e011ea2d0f36b1f0702",
+//            mediaAd: nil,
+//            validationRequest: nil,
+//            isLive: true))
+
+
         
         self.mediaList.append(MediaInfo(
             title: "Media DRM",
@@ -273,7 +292,7 @@ class MediaInfo {
 	}
 	
 	init(title: String, description: String? = nil, thumb: String? = nil, projectHash: String? = nil, mediaId: String? = nil,
-	     mediaAd: String? = nil, validationRequest: ValidationRequest?, isLive: Bool = false, isAudio: Bool = false,
+	     mediaAd: String? = nil, validationRequest: ValidationRequest? = nil, isLive: Bool = false, isAudio: Bool = false,
 	     isLiveAudio: Bool? = false, env: SambaEnvironment? = nil, mediaUrl: String? = nil, _ backupUrls: [String]? = nil) {
 		self.title = title
 		self.description = description
