@@ -81,6 +81,7 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 			// VoD
 			else {
 				req = SambaMediaRequest(projectHash: ph, mediaId: mId)
+                req.apiProtocol = SambaProtocol.http
 			}
 		}
 		// Live
@@ -119,6 +120,12 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
 			//media.adsSettings.maxRedirects = 0
 			//media.adsSettings.playAdsAfterTime = 5
 		}
+        
+        let mediaConfig = media as! SambaMediaConfig
+        
+        if  mediaConfig.drmRequest != nil {
+            mediaConfig.drmRequest?.token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjA1MjMzZDZjLWUxZTEtNDMyYi04M2E3LTg5YTg5ODcwMjg3YSJ9.eyJzdWIiOiJnb211c2ljLXVzZXIiLCJpc3MiOiJkaWVnby5kdWFydGVAc2FtYmF0ZWNoLmNvbS5iciIsImp0aSI6IklIRzlKZk1aUFpIS29MeHNvMFhveS1BZG83bThzWkNmNW5OVWdWeFhWSTg9IiwiZXhwIjoxNTM5MzA2MTk5LCJpYXQiOjE1MzkyNjI5OTksImFpZCI6ImdvbXVzaWMifQ.AlE6J9HPsyoB2Bzg1I8W60mexkBY5IZ2Slz4WXVHS30"
+        }
 
 		configUI(media)
 		
