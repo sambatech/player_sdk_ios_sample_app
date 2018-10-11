@@ -217,7 +217,6 @@ class MediaListViewController : UITableViewController {
             isLive: true))
         
         self.mediaList.append(MediaInfo(
-<<<<<<< HEAD
             title: "Teste Media Legenda",
             projectHash: "964b56b4b184c2a29e3c2065a7a15038",
             mediaId: "935283d109b33a4f92e8762d64d47661"))
@@ -229,13 +228,8 @@ class MediaListViewController : UITableViewController {
 //            mediaAd: nil,
 //            validationRequest: nil,
 //            isLive: true))
-=======
-            title: "Live Teste Analytics",
-            projectHash: "964b56b4b184c2a29e3c2065a7a15038",
-            mediaId: "46fe05239a330e011ea2d0f36b1f0702",
-            mediaAd: nil,
-            validationRequest: nil,
-            isLive: true))
+
+
         
         self.mediaList.append(MediaInfo(
             title: "Media DRM",
@@ -244,7 +238,6 @@ class MediaListViewController : UITableViewController {
             mediaAd: nil,
             validationRequest: nil,
             isLive: false, env: SambaEnvironment.staging))
->>>>>>> origin/dev
         
         DispatchQueue.main.async {
             self.filterData(-1)
