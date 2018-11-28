@@ -11,6 +11,8 @@
 		6B15BE7E214FF417002C41CF /* GoogleCast.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6B15BE7C214FF416002C41CF /* GoogleCast.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6B172CF7216F9BB90041F2F5 /* SambaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B353CFD2167ABE5006FB683 /* SambaPlayer.framework */; };
 		6B172CF8216F9BB90041F2F5 /* SambaPlayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6B353CFD2167ABE5006FB683 /* SambaPlayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6BF484E521AEECE40014E371 /* OfflineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF484E421AEECE40014E371 /* OfflineViewController.swift */; };
+		6BF484E721AEF05B0014E371 /* MediaOfflineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF484E621AEF05B0014E371 /* MediaOfflineCell.swift */; };
 		9A131E191F794770002A36AC /* CategoryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A131E181F794770002A36AC /* CategoryListViewController.swift */; };
 		9A131E1B1F794A32002A36AC /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A131E1A1F794A32002A36AC /* CategoryCell.swift */; };
 		9A34EB761E13E6F40028FA52 /* SP_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A34EB751E13E6F40028FA52 /* SP_UITests.swift */; };
@@ -86,6 +88,8 @@
 		6B353CFD2167ABE5006FB683 /* SambaPlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SambaPlayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B3CC8C2214FDE0400FAC5A4 /* GoogleCast.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleCast.framework; path = ../player_sdk_ios/Frameworks/GoogleCast.framework; sourceTree = "<group>"; };
 		6BB42B32215AB46A007034A5 /* Player-swift.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Player-swift.entitlements"; sourceTree = "<group>"; };
+		6BF484E421AEECE40014E371 /* OfflineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineViewController.swift; sourceTree = "<group>"; };
+		6BF484E621AEF05B0014E371 /* MediaOfflineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaOfflineCell.swift; sourceTree = "<group>"; };
 		9A131E181F794770002A36AC /* CategoryListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryListViewController.swift; sourceTree = "<group>"; };
 		9A131E1A1F794A32002A36AC /* CategoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		9A34EB731E13E6F40028FA52 /* SP-UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SP-UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -165,6 +169,8 @@
 				9AC676441D66227700768524 /* MediaListViewController.swift */,
 				9A131E181F794770002A36AC /* CategoryListViewController.swift */,
 				9AC676461D66227700768524 /* PlayerViewController.swift */,
+				6BF484E421AEECE40014E371 /* OfflineViewController.swift */,
+				6BF484E621AEF05B0014E371 /* MediaOfflineCell.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -326,6 +332,9 @@
 							com.apple.AccessWiFi = {
 								enabled = 1;
 							};
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
 						};
 					};
 					9AD5AAE91D66489D0052E278 = {
@@ -398,9 +407,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6BF484E521AEECE40014E371 /* OfflineViewController.swift in Sources */,
 				9AC6764D1D66227700768524 /* MediaCell.swift in Sources */,
 				9AC6764A1D66227700768524 /* MediaListViewController.swift in Sources */,
 				9A131E191F794770002A36AC /* CategoryListViewController.swift in Sources */,
+				6BF484E721AEF05B0014E371 /* MediaOfflineCell.swift in Sources */,
 				9A131E1B1F794A32002A36AC /* CategoryCell.swift in Sources */,
 				9AC676331D66214A00768524 /* AppDelegate.swift in Sources */,
 				9AC6764B1D66227700768524 /* Helpers.swift in Sources */,
