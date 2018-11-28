@@ -220,8 +220,8 @@ class MediaListViewController : UITableViewController {
         
         self.mediaList.append(MediaInfo(
             title: "Media DRM",
-            projectHash: "61a1c1faa23eb27de9110368e551de73",
-            mediaId: "2e323f019ccc61f5bfac0a3be28b8f70",
+            projectHash: "ffd0b8a31839f239ae6b8b3c83eb10a2",
+            mediaId: "a1ed670cbb7f65402a685c19f808ca16",
             mediaAd: nil,
             validationRequest: nil,
             isLive: false, env: SambaEnvironment.staging))

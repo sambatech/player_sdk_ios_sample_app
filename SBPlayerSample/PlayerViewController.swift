@@ -135,7 +135,7 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
         let mediaConfig = media as! SambaMediaConfig
         
         if  mediaConfig.drmRequest != nil {
-            mediaConfig.drmRequest?.token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjA1MjMzZDZjLWUxZTEtNDMyYi04M2E3LTg5YTg5ODcwMjg3YSJ9.eyJzdWIiOiJnb211c2ljLXVzZXIiLCJpc3MiOiJkaWVnby5kdWFydGVAc2FtYmF0ZWNoLmNvbS5iciIsImp0aSI6IklIRzlKZk1aUFpIS29MeHNvMFhveS1BZG83bThzWkNmNW5OVWdWeFhWSTg9IiwiZXhwIjoxNTM5MzA2MTk5LCJpYXQiOjE1MzkyNjI5OTksImFpZCI6ImdvbXVzaWMifQ.AlE6J9HPsyoB2Bzg1I8W60mexkBY5IZ2Slz4WXVHS30"
+            mediaConfig.drmRequest?.token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjdlN2Q5YmE4LWUzNzctNGFkMi1iZGIzLTdmOWRiOWYzZGI2ZiJ9.eyJzdWIiOiJyZWNvcmQtdXNlciIsImlzcyI6ImRpZWdvLmR1YXJ0ZUBzYW1iYXRlY2guY29tLmJyIiwianRpIjoiSUhHOUpmTVpQWkhLb0x4c28wWG95LUFkbzdtOHNaQ2Y1bk5VZ1Z4WFZJOD0iLCJleHAiOjE1NDIyMTI5NjIsImlhdCI6MTU0MTYwODE2MiwiYWlkIjoicmVjb3JkIn0.4hNHhyfnLxuWf08Neb4pSGB_5KRrU7qld2AzGthPa1Y"
         }
 
 		configUI(media)
@@ -151,10 +151,10 @@ class PlayerViewController: UIViewController, SambaPlayerDelegate {
         
 		player.media = media
         
-        SambaCast.sharedInstance.loadMedia(with: media, currentTime: 0, captionTheme: nil, completion: { (completionType, error) in
-            
-            print("complete")
-        })
+//        SambaCast.sharedInstance.loadMedia(with: media, currentTime: 0, captionTheme: nil, completion: { (completionType, error) in
+//
+//            print("complete")
+//        })
 		
 		if mediaInfo.isAutoStart {
 			player.play()
