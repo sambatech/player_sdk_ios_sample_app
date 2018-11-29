@@ -405,15 +405,33 @@
                                     <outlet property="delegate" destination="nNx-MC-S7Y" id="TOu-yT-9Bn"/>
                                 </connections>
                             </tableView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QLR-dv-C3H">
+                                <rect key="frame" x="0.0" y="239" width="375" height="428"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Hjh-0i-nrQ">
+                                        <rect key="frame" x="177.5" y="204" width="20" height="20"/>
+                                        <color key="color" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="Hjh-0i-nrQ" firstAttribute="centerX" secondItem="QLR-dv-C3H" secondAttribute="centerX" id="JnF-hw-4nK"/>
+                                    <constraint firstItem="Hjh-0i-nrQ" firstAttribute="centerY" secondItem="QLR-dv-C3H" secondAttribute="centerY" id="Pph-bK-pUV"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="paj-gz-ado" firstAttribute="top" secondItem="QLR-dv-C3H" secondAttribute="bottom" id="2dh-Go-hGb"/>
                             <constraint firstItem="pEA-RH-yJj" firstAttribute="leading" secondItem="mzB-Pt-bvj" secondAttribute="leading" id="Aqb-hf-pDV"/>
+                            <constraint firstItem="QLR-dv-C3H" firstAttribute="leading" secondItem="mzB-Pt-bvj" secondAttribute="leading" id="Fkw-Na-UNh"/>
                             <constraint firstAttribute="trailing" secondItem="pEA-RH-yJj" secondAttribute="trailing" id="FwL-A4-Ixf"/>
                             <constraint firstItem="pEA-RH-yJj" firstAttribute="width" secondItem="pEA-RH-yJj" secondAttribute="height" multiplier="16:9" id="Ld4-rs-YUr"/>
                             <constraint firstItem="paj-gz-ado" firstAttribute="top" secondItem="CtS-kx-4CF" secondAttribute="bottom" id="O9u-r7-WmA"/>
                             <constraint firstItem="CtS-kx-4CF" firstAttribute="leading" secondItem="mzB-Pt-bvj" secondAttribute="leading" id="QSn-sR-dxV"/>
+                            <constraint firstAttribute="trailing" secondItem="QLR-dv-C3H" secondAttribute="trailing" id="bmg-2g-5Tu"/>
                             <constraint firstItem="CtS-kx-4CF" firstAttribute="top" secondItem="pEA-RH-yJj" secondAttribute="bottom" constant="8" id="coj-fK-hH0"/>
+                            <constraint firstItem="QLR-dv-C3H" firstAttribute="top" secondItem="pEA-RH-yJj" secondAttribute="bottom" constant="8" id="frb-Z0-r57"/>
                             <constraint firstAttribute="trailing" secondItem="CtS-kx-4CF" secondAttribute="trailing" id="xTt-aF-oKD"/>
                             <constraint firstItem="pEA-RH-yJj" firstAttribute="top" secondItem="Q52-D6-lVc" secondAttribute="bottom" id="ydm-q3-Ozj"/>
                         </constraints>
@@ -421,6 +439,7 @@
                     <connections>
                         <outlet property="containerPlayerView" destination="pEA-RH-yJj" id="0L9-a6-gsJ"/>
                         <outlet property="mediasTableView" destination="CtS-kx-4CF" id="7rB-O4-LM0"/>
+                        <outlet property="progressContainer" destination="QLR-dv-C3H" id="FBn-xC-oo3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="omc-Oj-577" userLabel="First Responder" sceneMemberID="firstResponder"/>

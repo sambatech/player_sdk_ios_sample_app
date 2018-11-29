@@ -18,6 +18,9 @@ class OfflineViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     @IBOutlet weak var mediasTableView: UITableView!
     
+    @IBOutlet weak var progressContainer: UIView!
+    
+    
     var mediaList: [MediaInfo] = []
     
     var sambaPlayer: SambaPlayer?
