@@ -122,13 +122,20 @@ class OfflineViewController: UIViewController, UITableViewDelegate, UITableViewD
             strongSelf.sambaPlayer?.media = sambaMedia!
             strongSelf.sambaPlayer?.play()
             
-        }) { (error, response) in
-            
+        }) { [weak self] (error, response) in
+            guard let strongSelf = self else {return}
+            strongSelf.showErrorDialog("Erro ao carregar a media.")
         }
         
     }
     
-    
+    func showErrorDialog(_ error: String) {
+        
+        let alert = UIAlertController(title: "Atenção", message: error, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+        
+    }
 
 }
 
