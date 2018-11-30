@@ -160,6 +160,21 @@ extension OfflineViewController: DownloadClickDelegate {
     
     func onDownloadClick(with mediaInfo: MediaInfo) {
         
+        let request = SambaDownloadRequest(mediaId: mediaInfo.mediaId!, projectHash: mediaInfo.projectHash!)
+
+        if let token = mediaInfo.drmToken, !token.isEmpty {
+
+            request.drmToken = token
+
+        }
+        
+        SambaDownloadManager.sharedInstance.prepareDownload(with: request, successCallback: { (sambaDownloadRequest) in
+            
+        }) { (error, msg) in
+            
+        }
+    
+        
     }
     
 }
