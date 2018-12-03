@@ -191,6 +191,16 @@ extension OfflineViewController: DownloadClickDelegate {
     
     func onDownloadClick(with mediaInfo: MediaInfo) {
         
+        guard !SambaDownloadManager.sharedInstance.isDownloaded(mediaInfo.mediaId!) else {
+            showErrorDialog("A media já foi baixada")
+            return
+        }
+        
+        guard !SambaDownloadManager.sharedInstance.isDownloading(mediaInfo.mediaId!) else {
+            showErrorDialog("O download da media já está sendo realizado")
+            return
+        }
+        
         enableProgress(true)
         
         let request = SambaDownloadRequest(mediaId: mediaInfo.mediaId!, projectHash: mediaInfo.projectHash!)
