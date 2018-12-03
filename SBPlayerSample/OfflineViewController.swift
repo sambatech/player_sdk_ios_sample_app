@@ -206,7 +206,9 @@ extension OfflineViewController: DownloadClickDelegate {
             
             strongSelf.enableProgress(false)
             strongSelf.buildResolutionsDialog(with: request, onClick: { (sambaTrack) in
-                print(sambaTrack)
+                
+                request.sambaTrackForDownload = sambaTrack
+                SambaDownloadManager.sharedInstance.performDownload(with: request)
             })
             
         }) { [weak self] (error, msg) in
