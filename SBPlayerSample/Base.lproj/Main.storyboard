@@ -408,8 +408,8 @@
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QLR-dv-C3H">
                                 <rect key="frame" x="0.0" y="239" width="375" height="428"/>
                                 <subviews>
-                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Hjh-0i-nrQ">
-                                        <rect key="frame" x="177.5" y="204" width="20" height="20"/>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Hjh-0i-nrQ">
+                                        <rect key="frame" x="169" y="195.5" width="37" height="37"/>
                                         <color key="color" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </activityIndicatorView>
                                 </subviews>
@@ -440,6 +440,7 @@
                         <outlet property="containerPlayerView" destination="pEA-RH-yJj" id="0L9-a6-gsJ"/>
                         <outlet property="mediasTableView" destination="CtS-kx-4CF" id="7rB-O4-LM0"/>
                         <outlet property="progressContainer" destination="QLR-dv-C3H" id="FBn-xC-oo3"/>
+                        <outlet property="progressView" destination="Hjh-0i-nrQ" id="2qn-W2-9f7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="omc-Oj-577" userLabel="First Responder" sceneMemberID="firstResponder"/>

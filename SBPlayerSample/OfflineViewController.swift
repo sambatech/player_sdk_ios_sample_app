@@ -20,6 +20,7 @@ class OfflineViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     @IBOutlet weak var progressContainer: UIView!
     
+    @IBOutlet weak var progressView: UIActivityIndicatorView!
     
     var mediaList: [MediaInfo] = []
     
@@ -136,6 +137,36 @@ class OfflineViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.present(alert, animated: true, completion: nil)
         
     }
+    
+    func enableProgress(_ enable: Bool) {
+        
+        if enable {
+            progressContainer.isHidden = false
+            progressView.startAnimating()
+        } else {
+            progressContainer.isHidden = true
+            progressView.stopAnimating()
+        }
+        
+    }
+    
+    func buildResolutionsDialog(with request: SambaDownloadRequest, onClick: @escaping (_ sambaTrack: SambaTrack) -> Void) {
+        let alert = UIAlertController(title: "Download Media", message: "Escolha a resolução desejada.", preferredStyle: .alert)
+        
+        var tracks: [SambaTrack] = []
+        
+        tracks.append(contentsOf: request.sambaVideoTracks ?? [] as! [SambaTrack])
+        tracks.append(contentsOf: request.sambaAudioTracks ?? [] as! [SambaTrack])
+        
+        tracks.forEach { (item) in
+            alert.addAction(UIAlertAction(title: String(format: "\(item.title) - %.0f MB", item.sizeInMb), style: .default, handler: { (action) in
+                onClick(item)
+            }))
+        }
+        
+        alert.addAction(UIAlertAction(title: "Cancelar", style: .destructive, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
 
 }
 
@@ -160,6 +191,8 @@ extension OfflineViewController: DownloadClickDelegate {
     
     func onDownloadClick(with mediaInfo: MediaInfo) {
         
+        enableProgress(true)
+        
         let request = SambaDownloadRequest(mediaId: mediaInfo.mediaId!, projectHash: mediaInfo.projectHash!)
 
         if let token = mediaInfo.drmToken, !token.isEmpty {
@@ -167,11 +200,19 @@ extension OfflineViewController: DownloadClickDelegate {
             request.drmToken = token
 
         }
-        
-        SambaDownloadManager.sharedInstance.prepareDownload(with: request, successCallback: { (sambaDownloadRequest) in
+    
+        SambaDownloadManager.sharedInstance.prepareDownload(with: request, successCallback: { [weak self](sambaDownloadRequest) in
+            guard let strongSelf = self else {return}
             
-        }) { (error, msg) in
+            strongSelf.enableProgress(false)
+            strongSelf.buildResolutionsDialog(with: request, onClick: { (sambaTrack) in
+                print(sambaTrack)
+            })
             
+        }) { [weak self] (error, msg) in
+            guard let strongSelf = self else {return}
+            strongSelf.enableProgress(false)
+            strongSelf.showErrorDialog("Error ao preparar o Download.")
         }
     
         
