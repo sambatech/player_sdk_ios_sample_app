@@ -80,8 +80,9 @@ class MediaOfflineCell: UITableViewCell {
                 indeterminateProgress.stopAnimating()
                 indeterminateProgress.isHidden = true
             
-                progressView.setProgress(downloadState.downloadPercentage, animated: true)
-                progressLabel.text = String(format: "%.1f%%", downloadState.downloadPercentage * 100)
+                let percentage = downloadState.downloadPercentage >= 0 ? downloadState.downloadPercentage: 0
+                progressView.setProgress(percentage, animated: true)
+                progressLabel.text = String(format: "%.1f%%", percentage * 100)
             
            case DownloadState.State.COMPLETED:
                 downloadButton.isHidden = false
