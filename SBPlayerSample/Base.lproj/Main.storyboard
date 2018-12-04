@@ -339,12 +339,12 @@
                                                     <rect key="frame" x="255" y="0.0" width="120" height="79.5"/>
                                                     <subviews>
                                                         <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="rI7-GZ-rb2">
-                                                            <rect key="frame" x="0.0" y="39" width="81" height="2"/>
+                                                            <rect key="frame" x="0.0" y="39" width="70" height="2"/>
                                                         </progressView>
                                                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="50%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CfT-N5-QOn">
-                                                            <rect key="frame" x="85" y="34" width="27" height="12"/>
+                                                            <rect key="frame" x="72" y="34" width="40" height="12"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="27" id="Aj2-ep-6R8"/>
+                                                                <constraint firstAttribute="width" constant="40" id="Aj2-ep-6R8"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
                                                             <nil key="textColor"/>
@@ -371,7 +371,7 @@
                                                         <constraint firstAttribute="width" constant="120" id="Anm-ge-3G6"/>
                                                         <constraint firstItem="tr0-bE-JCR" firstAttribute="top" secondItem="cYs-Y3-qYj" secondAttribute="top" id="FLW-Iq-0RY"/>
                                                         <constraint firstItem="rI7-GZ-rb2" firstAttribute="leading" secondItem="cYs-Y3-qYj" secondAttribute="leading" id="Pj5-0r-8Ko"/>
-                                                        <constraint firstAttribute="trailing" secondItem="rI7-GZ-rb2" secondAttribute="trailing" constant="39" id="QgY-1g-xng"/>
+                                                        <constraint firstAttribute="trailing" secondItem="rI7-GZ-rb2" secondAttribute="trailing" constant="50" id="QgY-1g-xng"/>
                                                         <constraint firstItem="CfT-N5-QOn" firstAttribute="centerY" secondItem="cYs-Y3-qYj" secondAttribute="centerY" id="RZp-C6-OgN"/>
                                                         <constraint firstItem="rI7-GZ-rb2" firstAttribute="centerY" secondItem="cYs-Y3-qYj" secondAttribute="centerY" id="TYn-GN-xlU"/>
                                                         <constraint firstAttribute="trailing" secondItem="tr0-bE-JCR" secondAttribute="trailing" id="bKT-bX-WR7"/>
