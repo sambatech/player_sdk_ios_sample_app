@@ -55,6 +55,7 @@ class MediaOfflineCell: UITableViewCell {
             downloadButton.setImage(UIImage(named: "downloadDone"), for: .normal)
             
         } else if SambaDownloadManager.sharedInstance.isDownloading((media?.mediaId)!) {
+            
             downloadButton.isHidden = true
             downloadButton.setImage(UIImage(named: "download"), for: .normal)
         } else {
