@@ -167,6 +167,18 @@ class OfflineViewController: UIViewController, UITableViewDelegate, UITableViewD
         alert.addAction(UIAlertAction(title: "Cancelar", style: .destructive, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
+    
+    func buildOptionDialog(_ msg: String, _ onClick: @escaping () -> ()) {
+        let alert = UIAlertController(title: "Download Media", message: msg, preferredStyle: .alert)
+
+
+        alert.addAction(UIAlertAction(title: "ok", style: .default, handler: { (action) in
+                onClick()
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Cancelar", style: .destructive, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
 
 }
 
@@ -192,12 +204,16 @@ extension OfflineViewController: DownloadClickDelegate {
     func onDownloadClick(with mediaInfo: MediaInfo) {
         
         guard !SambaDownloadManager.sharedInstance.isDownloaded(mediaInfo.mediaId!) else {
-            showErrorDialog("A media já foi baixada")
+            buildOptionDialog("Deseja apagar a media \(mediaInfo.title)?") {
+                SambaDownloadManager.sharedInstance.deleteMedia(for: mediaInfo.mediaId!)
+            }
             return
         }
         
         guard !SambaDownloadManager.sharedInstance.isDownloading(mediaInfo.mediaId!) else {
-            showErrorDialog("O download da media já está sendo realizado")
+            buildOptionDialog("Deseja cancelar o download de \(mediaInfo.title)?") {
+                SambaDownloadManager.sharedInstance.cancelDownload(for: mediaInfo.mediaId!)
+            }
             return
         }
         
