@@ -30,6 +30,12 @@ class OfflineViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let menuButton = UIBarButtonItem(title: "MENU", style: .plain, target: self, action: #selector(envButtonHandler))
+        
+        menuButton.tintColor = .black
+        
+        self.navigationItem.rightBarButtonItem = menuButton
+        
         self.mediasTableView.tableFooterView = UIView(frame: CGRect.zero)
         sambaPlayer = SambaPlayer(parentViewController: self, andParentView: containerPlayerView)
         sambaPlayer?.delegate = self
@@ -179,6 +185,35 @@ class OfflineViewController: UIViewController, UITableViewDelegate, UITableViewD
         alert.addAction(UIAlertAction(title: "Cancelar", style: .destructive, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
+    
+    func envButtonHandler(_ sender: UIBarButtonItem) {
+        let menu = UIAlertController(title: "Environment", message: "Choose a filter", preferredStyle: .actionSheet)
+    
+        menu.addAction(UIAlertAction(title: "Cancelar Todos Downloads", style: .default, handler: { action in
+            SambaDownloadManager.sharedInstance.cancelAllDownloads()
+        }))
+        
+        menu.addAction(UIAlertAction(title: "Pausar Todos Downloads", style: .default, handler: { action in
+            SambaDownloadManager.sharedInstance.pauseAllDownloads()
+        }))
+        
+        menu.addAction(UIAlertAction(title: "Retornar Todos Downloads Pausados", style: .default, handler: { action in
+            SambaDownloadManager.sharedInstance.resumeAllDownloads()
+        }))
+        
+        menu.addAction(UIAlertAction(title: "Deletar Todos Downloads Pausados", style: .default, handler: { action in
+            SambaDownloadManager.sharedInstance.deleteAllMedias()
+        }))
+        
+        menu.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
+        
+        if let view = sender.value(forKey: "view") as? UIView {
+            menu.popoverPresentationController?.sourceView = view
+            menu.popoverPresentationController?.sourceRect = view.bounds
+        }
+        
+        present(menu, animated: true, completion: nil)
+    }
 
 }
 
@@ -203,6 +238,12 @@ extension OfflineViewController: DownloadClickDelegate {
     
     func onDownloadClick(with mediaInfo: MediaInfo) {
         
+        
+        guard !SambaDownloadManager.sharedInstance.isPaused(mediaInfo.mediaId!) else {
+            SambaDownloadManager.sharedInstance.resumeDownload(for: mediaInfo.mediaId!)
+            return
+        }
+        
         guard !SambaDownloadManager.sharedInstance.isDownloaded(mediaInfo.mediaId!) else {
             buildOptionDialog("Deseja apagar a media \(mediaInfo.title)?") {
                 SambaDownloadManager.sharedInstance.deleteMedia(for: mediaInfo.mediaId!)
@@ -211,9 +252,21 @@ extension OfflineViewController: DownloadClickDelegate {
         }
         
         guard !SambaDownloadManager.sharedInstance.isDownloading(mediaInfo.mediaId!) else {
-            buildOptionDialog("Deseja cancelar o download de \(mediaInfo.title)?") {
+            
+            let alert = UIAlertController(title: "Download Media", message: "O que deseja fazer?", preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "Pausar Download", style: .default, handler: { (action) in
+                SambaDownloadManager.sharedInstance.pauseDownload(for: mediaInfo.mediaId!)
+            }))
+            
+            alert.addAction(UIAlertAction(title: "Cancelar Download", style: .default, handler: { (action) in
                 SambaDownloadManager.sharedInstance.cancelDownload(for: mediaInfo.mediaId!)
-            }
+            }))
+            
+            alert.addAction(UIAlertAction(title: "Cancelar", style: .destructive, handler: nil))
+            
+            self.present(alert, animated: true, completion: nil)
+            
             return
         }
         

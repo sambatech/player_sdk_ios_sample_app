@@ -50,7 +50,12 @@ class MediaOfflineCell: UITableViewCell {
     
     
     func updateViews()  {
-        if SambaDownloadManager.sharedInstance.isDownloaded((media?.mediaId)!) {
+        
+        if SambaDownloadManager.sharedInstance.isPaused((media?.mediaId)!) {
+            downloadButton.isHidden = false
+            downloadButton.setImage(UIImage(named: "pause"), for: .normal)
+            
+        } else if SambaDownloadManager.sharedInstance.isDownloaded((media?.mediaId)!) {
             downloadButton.isHidden = false
             downloadButton.setImage(UIImage(named: "downloadDone"), for: .normal)
             
@@ -67,7 +72,7 @@ class MediaOfflineCell: UITableViewCell {
     func updateProgress(_ downloadState: DownloadState)  {
        
         switch downloadState.state {
-            case DownloadState.State.WAITING:
+            case DownloadState.State.WAITING, DownloadState.State.RESUMED:
                 downloadButton.isHidden = true
                 progressView.isHidden = true
                 progressLabel.isHidden = true
