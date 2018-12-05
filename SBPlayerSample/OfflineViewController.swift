@@ -11,7 +11,7 @@ import SambaPlayer
 
 class OfflineViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    let TOKEN_DRM = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImY5NTRiMTIzLTI1YzctNDdmYy05MmRjLThkODY1OWVkNmYwMCJ9.eyJzdWIiOiJkYW1hc2lvLXVzZXIiLCJpc3MiOiJkaWVnby5kdWFydGVAc2FtYmF0ZWNoLmNvbS5iciIsImp0aSI6IklIRzlKZk1aUFpIS29MeHNvMFhveS1BZG83bThzWkNmNW5OVWdWeFhWSTg9IiwiZXhwIjoxNTQzNTE5MDMxLCJpYXQiOjE1NDM0MzMwMzEsImFpZCI6ImRhbWFzaW8ifQ.FqvQF0qRgiLsFdawSvqfeJVKfIp4obELjlOU7x64lug"
+    let TOKEN_DRM = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImY5NTRiMTIzLTI1YzctNDdmYy05MmRjLThkODY1OWVkNmYwMCJ9.eyJzdWIiOiJkYW1hc2lvLXVzZXIiLCJpc3MiOiJkaWVnby5kdWFydGVAc2FtYmF0ZWNoLmNvbS5iciIsImp0aSI6IklIRzlKZk1aUFpIS29MeHNvMFhveS1BZG83bThzWkNmNW5OVWdWeFhWSTg9IiwiZXhwIjoxNTQ0MTE3MTU0LCJpYXQiOjE1NDQwMzExNTQsImFpZCI6ImRhbWFzaW8ifQ.LCH6vyGXM6WiWmJLWkLIuy2fl0m0gB9oXhcRHD6ktys"
     
     
     @IBOutlet weak var containerPlayerView: UIView!
@@ -117,21 +117,43 @@ class OfflineViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         let mediaInfo = mediaList[indexPath.row]
         
-        SambaApi().requestMedia(SambaMediaRequest(projectHash: mediaInfo.projectHash!, mediaId: mediaInfo.mediaId!), onComplete: { [weak self] (sambaMedia) in
+        if let offlineMedia = SambaDownloadManager.sharedInstance.getDownloadedMedia(for: mediaInfo.mediaId!) {
             
-            guard let strongSelf = self else {return}
+            let mediaConfig = offlineMedia as! SambaMediaConfig
             
-            if let sambaConfig = sambaMedia as? SambaMediaConfig, let drmRequest = sambaConfig.drmRequest {
-                drmRequest.token = mediaInfo.drmToken
+            if mediaConfig.drmRequest != nil {
+                mediaConfig.drmRequest?.token = mediaInfo.drmToken
             }
             
-            strongSelf.sambaPlayer?.destroy()
-            strongSelf.sambaPlayer?.media = sambaMedia!
-            strongSelf.sambaPlayer?.play()
+            SambaApi().prepareOfflineMedia(media: mediaConfig, onComplete: { [weak self] (sambaMedia) in
+                
+                guard let strongSelf = self else {return}
+                strongSelf.sambaPlayer?.destroy()
+                strongSelf.sambaPlayer?.media = sambaMedia!
+                strongSelf.sambaPlayer?.play()
+                
+            }) { [weak self] (error, response) in
+                guard let strongSelf = self else {return}
+                strongSelf.showErrorDialog("Erro ao carregar a media.")
+            }
             
-        }) { [weak self] (error, response) in
-            guard let strongSelf = self else {return}
-            strongSelf.showErrorDialog("Erro ao carregar a media.")
+        } else {
+            SambaApi().requestMedia(SambaMediaRequest(projectHash: mediaInfo.projectHash!, mediaId: mediaInfo.mediaId!), onComplete: { [weak self] (sambaMedia) in
+                
+                guard let strongSelf = self else {return}
+                
+                if let sambaConfig = sambaMedia as? SambaMediaConfig, let drmRequest = sambaConfig.drmRequest {
+                    drmRequest.token = mediaInfo.drmToken
+                }
+                
+                strongSelf.sambaPlayer?.destroy()
+                strongSelf.sambaPlayer?.media = sambaMedia!
+                strongSelf.sambaPlayer?.play()
+                
+            }) { [weak self] (error, response) in
+                guard let strongSelf = self else {return}
+                strongSelf.showErrorDialog("Erro ao carregar a media.")
+            }
         }
         
     }
