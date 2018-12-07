@@ -11,7 +11,7 @@ import SambaPlayer
 
 class OfflineViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    let TOKEN_DRM = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImY5NTRiMTIzLTI1YzctNDdmYy05MmRjLThkODY1OWVkNmYwMCJ9.eyJzdWIiOiJkYW1hc2lvLXVzZXIiLCJpc3MiOiJkaWVnby5kdWFydGVAc2FtYmF0ZWNoLmNvbS5iciIsImp0aSI6IklIRzlKZk1aUFpIS29MeHNvMFhveS1BZG83bThzWkNmNW5OVWdWeFhWSTg9IiwiZXhwIjoxNTQ0MTE3MTU0LCJpYXQiOjE1NDQwMzExNTQsImFpZCI6ImRhbWFzaW8ifQ.LCH6vyGXM6WiWmJLWkLIuy2fl0m0gB9oXhcRHD6ktys"
+    let TOKEN_DRM = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImY5NTRiMTIzLTI1YzctNDdmYy05MmRjLThkODY1OWVkNmYwMCJ9.eyJzdWIiOiJkYW1hc2lvLXVzZXIiLCJpc3MiOiJkaWVnby5kdWFydGVAc2FtYmF0ZWNoLmNvbS5iciIsImp0aSI6IklIRzlKZk1aUFpIS29MeHNvMFhveS1BZG83bThzWkNmNW5OVWdWeFhWSTg9IiwiZXhwIjoxNTQ0MjgyMjM0LCJpYXQiOjE1NDQxOTYyMzQsImFpZCI6ImRhbWFzaW8ifQ.D_XkGKm1FeqWoQUS2OM-pWYS4bMiNRGBLbhGYTf0aRA"
     
     
     @IBOutlet weak var containerPlayerView: UIView!
@@ -223,7 +223,7 @@ class OfflineViewController: UIViewController, UITableViewDelegate, UITableViewD
             SambaDownloadManager.sharedInstance.resumeAllDownloads()
         }))
         
-        menu.addAction(UIAlertAction(title: "Deletar Todos Downloads Pausados", style: .default, handler: { action in
+        menu.addAction(UIAlertAction(title: "Deletar Todos Downloads", style: .default, handler: { action in
             SambaDownloadManager.sharedInstance.deleteAllMedias()
         }))
         
