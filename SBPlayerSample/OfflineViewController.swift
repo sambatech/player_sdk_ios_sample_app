@@ -11,7 +11,7 @@ import SambaPlayer
 
 class OfflineViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    let TOKEN_DRM = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImY5NTRiMTIzLTI1YzctNDdmYy05MmRjLThkODY1OWVkNmYwMCJ9.eyJzdWIiOiJkYW1hc2lvLXVzZXIiLCJpc3MiOiJkaWVnby5kdWFydGVAc2FtYmF0ZWNoLmNvbS5iciIsImp0aSI6IklIRzlKZk1aUFpIS29MeHNvMFhveS1BZG83bThzWkNmNW5OVWdWeFhWSTg9IiwiZXhwIjoxNTQ0MjgyMjM0LCJpYXQiOjE1NDQxOTYyMzQsImFpZCI6ImRhbWFzaW8ifQ.D_XkGKm1FeqWoQUS2OM-pWYS4bMiNRGBLbhGYTf0aRA"
+    let TOKEN_DRM = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImY5NTRiMTIzLTI1YzctNDdmYy05MmRjLThkODY1OWVkNmYwMCJ9.eyJzdWIiOiJkYW1hc2lvLXVzZXIiLCJpc3MiOiJkaWVnby5kdWFydGVAc2FtYmF0ZWNoLmNvbS5iciIsImp0aSI6IklIRzlKZk1aUFpIS29MeHNvMFhveS1BZG83bThzWkNmNW5OVWdWeFhWSTg9IiwiZXhwIjoxNTQ0NTQ2MTA1LCJpYXQiOjE1NDQ0NjAxMDUsImFpZCI6ImRhbWFzaW8ifQ.1RmldCPmNPJN9Lh1vyIVoFyDM1plk61Mx8-14S_qUm0"
     
     
     @IBOutlet weak var containerPlayerView: UIView!
@@ -309,6 +309,11 @@ extension OfflineViewController: DownloadClickDelegate {
             strongSelf.buildResolutionsDialog(with: request, onClick: { (sambaTrack) in
                 
                 request.sambaTrackForDownload = sambaTrack
+                
+                if let subtitles = request.sambaSubtitles, !subtitles.isEmpty {
+                     request.sambaSubtitleForDownload = subtitles[0]
+                }
+                
                 SambaDownloadManager.sharedInstance.performDownload(with: request)
             })
             
