@@ -59,8 +59,14 @@ class MediaListViewController : UITableViewController {
 		
         let castButton = SambaCastButton(frame: CGRect(x: CGFloat(0), y: CGFloat(0),
                                                         width: CGFloat(24), height: CGFloat(24)))
-        castButton.tintColor = UIColor.black
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: castButton)
+        castButton.tintColor = .black
+        
+        let offlineButton = UIBarButtonItem(title: "OFFLINE", style: .plain, target: self, action: #selector(onOfflineClick))
+        
+        offlineButton.tintColor = .black
+        
+        self.navigationItem.rightBarButtonItems = [offlineButton, UIBarButtonItem(customView: castButton)]
+        
         
         SambaCast.sharedInstance.presentCastInstruction(with: castButton)
         
@@ -253,6 +259,13 @@ class MediaListViewController : UITableViewController {
 		mediaList = [MediaInfo]()
 		makeInitialRequests()
 	}
+    
+    @objc func onOfflineClick() {
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let offlineViewController = storyBoard.instantiateViewController(withIdentifier: "offline") as! OfflineViewController
+         self.navigationController?.pushViewController(offlineViewController, animated: true)
+    }
+    
 }
 
 class MediaInfo {
@@ -270,6 +283,7 @@ class MediaInfo {
 	var environment: SambaEnvironment?
 	var mediaUrl: String?
 	var backupUrls: [String]
+    var drmToken: String?
 	
 	var thumb: UIImage? {
 		didSet {
@@ -293,7 +307,7 @@ class MediaInfo {
 	
 	init(title: String, description: String? = nil, thumb: String? = nil, projectHash: String? = nil, mediaId: String? = nil,
 	     mediaAd: String? = nil, validationRequest: ValidationRequest? = nil, isLive: Bool = false, isAudio: Bool = false,
-	     isLiveAudio: Bool? = false, env: SambaEnvironment? = nil, mediaUrl: String? = nil, _ backupUrls: [String]? = nil) {
+         isLiveAudio: Bool? = false, env: SambaEnvironment? = nil, mediaUrl: String? = nil, _ backupUrls: [String]? = nil, drmToken: String? = nil) {
 		self.title = title
 		self.description = description
 		self.projectHash = projectHash
@@ -306,6 +320,7 @@ class MediaInfo {
 		self.environment = env
 		self.mediaUrl = mediaUrl
 		self.backupUrls = backupUrls ?? [String]()
+        self.drmToken = drmToken
 		
 		load_image(thumb)
 	}
