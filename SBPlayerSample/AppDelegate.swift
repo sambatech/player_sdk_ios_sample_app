@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SambaCast.sharedInstance.enableSDKLogging = true
         SambaCast.sharedInstance.config()
         
-        SambaDownloadManager.sharedInstance.config()
+        SambaDownloadManager.sharedInstance.config(maximumDurationTimeForLicensesOfProtectedContentInMinutes: 28800)
         
 		return true
 	}
