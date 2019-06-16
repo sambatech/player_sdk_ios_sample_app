@@ -208,7 +208,7 @@ class OfflineViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.present(alert, animated: true, completion: nil)
     }
     
-    func envButtonHandler(_ sender: UIBarButtonItem) {
+    @objc func envButtonHandler(_ sender: UIBarButtonItem) {
         let menu = UIAlertController(title: "Menu", message: "Selecione a opção desejada", preferredStyle: .actionSheet)
     
         menu.addAction(UIAlertAction(title: "Cancelar Todos Downloads", style: .default, handler: { action in
