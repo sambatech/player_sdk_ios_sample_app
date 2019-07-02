@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		37E9301121BFF82C00661E4B /* SambaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B353CFD2167ABE5006FB683 /* SambaPlayer.framework */; };
-		37E9301221BFF82C00661E4B /* SambaPlayer.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6B353CFD2167ABE5006FB683 /* SambaPlayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		37E9301921BFF8B200661E4B /* GoogleInteractiveMediaAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37E9301721BFF8B100661E4B /* GoogleInteractiveMediaAds.framework */; };
-		37E9301A21BFF8B200661E4B /* GoogleInteractiveMediaAds.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 37E9301721BFF8B100661E4B /* GoogleInteractiveMediaAds.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		37E9301B21BFF8B200661E4B /* GoogleCast.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37E9301821BFF8B100661E4B /* GoogleCast.framework */; };
-		37E9301C21BFF8B200661E4B /* GoogleCast.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 37E9301821BFF8B100661E4B /* GoogleCast.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		37AE000822B5AF8400261B39 /* GoogleCast.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37AE000722B5AF8400261B39 /* GoogleCast.framework */; };
+		37AE000922B5AF8400261B39 /* GoogleCast.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 37AE000722B5AF8400261B39 /* GoogleCast.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		37AE001022B5B26400261B39 /* SambaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37AE000F22B5B26400261B39 /* SambaPlayer.framework */; };
+		37AE001122B5B26400261B39 /* SambaPlayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 37AE000F22B5B26400261B39 /* SambaPlayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		37AE001322B5B57500261B39 /* GoogleInteractiveMediaAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37AE001222B5B57400261B39 /* GoogleInteractiveMediaAds.framework */; };
+		37AE001422B5B57500261B39 /* GoogleInteractiveMediaAds.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 37AE001222B5B57400261B39 /* GoogleInteractiveMediaAds.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6BF484E521AEECE40014E371 /* OfflineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF484E421AEECE40014E371 /* OfflineViewController.swift */; };
 		6BF484E721AEF05B0014E371 /* MediaOfflineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF484E621AEF05B0014E371 /* MediaOfflineCell.swift */; };
 		9A131E191F794770002A36AC /* CategoryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A131E181F794770002A36AC /* CategoryListViewController.swift */; };
@@ -34,7 +34,6 @@
 		9AD5AAF71D66489E0052E278 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AD5AAF51D66489E0052E278 /* Main.storyboard */; };
 		9AD5AAF91D66489E0052E278 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9AD5AAF81D66489E0052E278 /* Assets.xcassets */; };
 		9AD5AAFC1D66489E0052E278 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AD5AAFA1D66489E0052E278 /* LaunchScreen.storyboard */; };
-		9AE43F221F2A8C1A001DD6D2 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AE43F211F2A8C1A001DD6D2 /* WebKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,16 +47,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		6B15BE78214FF115002C41CF /* CopyFiles */ = {
+		37AE000622B5AF6600261B39 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				37E9301C21BFF8B200661E4B /* GoogleCast.framework in CopyFiles */,
-				37E9301A21BFF8B200661E4B /* GoogleInteractiveMediaAds.framework in CopyFiles */,
-				37E9301221BFF82C00661E4B /* SambaPlayer.framework in CopyFiles */,
+				37AE001422B5B57500261B39 /* GoogleInteractiveMediaAds.framework in Embed Frameworks */,
+				37AE000922B5AF8400261B39 /* GoogleCast.framework in Embed Frameworks */,
+				37AE001122B5B26400261B39 /* SambaPlayer.framework in Embed Frameworks */,
 			);
+			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		9AA657EF1EB0E6EB00F455C4 /* Embed Frameworks */ = {
@@ -73,6 +73,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		37AE000122B5AF4500261B39 /* SambaPlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SambaPlayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		37AE000322B5AF6600261B39 /* SambaPlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SambaPlayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		37AE000722B5AF8400261B39 /* GoogleCast.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleCast.framework; path = ../player_sdk_ios/Frameworks/GoogleCast.framework; sourceTree = "<group>"; };
+		37AE000A22B5AF9200261B39 /* GoogleInteractiveMediaAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleInteractiveMediaAds.framework; path = ../player_sdk_ios/Frameworks/GoogleInteractiveMediaAds.framework; sourceTree = "<group>"; };
+		37AE000F22B5B26400261B39 /* SambaPlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SambaPlayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		37AE001222B5B57400261B39 /* GoogleInteractiveMediaAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleInteractiveMediaAds.framework; path = Carthage/Checkouts/player_sdk_ios/Frameworks/GoogleInteractiveMediaAds.framework; sourceTree = "<group>"; };
 		37E9300B21BFF82700661E4B /* GoogleInteractiveMediaAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleInteractiveMediaAds.framework; path = Carthage/Checkouts/player_sdk_ios/Frameworks/GoogleInteractiveMediaAds.framework; sourceTree = "<group>"; };
 		37E9300C21BFF82700661E4B /* GoogleCast.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleCast.framework; path = Carthage/Checkouts/player_sdk_ios/Frameworks/GoogleCast.framework; sourceTree = "<group>"; };
 		37E9301721BFF8B100661E4B /* GoogleInteractiveMediaAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleInteractiveMediaAds.framework; path = ../player_sdk_ios/Frameworks/GoogleInteractiveMediaAds.framework; sourceTree = "<group>"; };
@@ -128,10 +134,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				37E9301B21BFF8B200661E4B /* GoogleCast.framework in Frameworks */,
-				37E9301921BFF8B200661E4B /* GoogleInteractiveMediaAds.framework in Frameworks */,
-				37E9301121BFF82C00661E4B /* SambaPlayer.framework in Frameworks */,
-				9AE43F221F2A8C1A001DD6D2 /* WebKit.framework in Frameworks */,
+				37AE001322B5B57500261B39 /* GoogleInteractiveMediaAds.framework in Frameworks */,
+				37AE000822B5AF8400261B39 /* GoogleCast.framework in Frameworks */,
+				37AE001022B5B26400261B39 /* SambaPlayer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -172,6 +177,11 @@
 		9AC676261D66214A00768524 = {
 			isa = PBXGroup;
 			children = (
+				37AE001222B5B57400261B39 /* GoogleInteractiveMediaAds.framework */,
+				37AE000F22B5B26400261B39 /* SambaPlayer.framework */,
+				37AE000A22B5AF9200261B39 /* GoogleInteractiveMediaAds.framework */,
+				37AE000722B5AF8400261B39 /* GoogleCast.framework */,
+				37AE000322B5AF6600261B39 /* SambaPlayer.framework */,
 				37E9300C21BFF82700661E4B /* GoogleCast.framework */,
 				37E9301821BFF8B100661E4B /* GoogleCast.framework */,
 				37E9300B21BFF82700661E4B /* GoogleInteractiveMediaAds.framework */,
@@ -245,6 +255,7 @@
 			isa = PBXGroup;
 			children = (
 				9AE43F211F2A8C1A001DD6D2 /* WebKit.framework */,
+				37AE000122B5AF4500261B39 /* SambaPlayer.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -277,7 +288,7 @@
 				9AC6762B1D66214A00768524 /* Sources */,
 				9AC6762C1D66214A00768524 /* Frameworks */,
 				9AC6762D1D66214A00768524 /* Resources */,
-				6B15BE78214FF115002C41CF /* CopyFiles */,
+				37AE000622B5AF6600261B39 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -323,7 +334,7 @@
 					};
 					9AC6762E1D66214A00768524 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = K7KHBXSBN5;
+						DevelopmentTeam = R52K728KH9;
 						LastSwiftMigration = 0810;
 						SystemCapabilities = {
 							com.apple.AccessWiFi = {
@@ -482,7 +493,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.sambatech.SP-UITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.2;
 				TEST_TARGET_NAME = "SP-v0.2.3";
 			};
 			name = Debug;
@@ -496,7 +507,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.sambatech.SP-UITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.2;
 				TEST_TARGET_NAME = "SP-v0.2.3";
 			};
 			name = Release;
@@ -550,6 +561,7 @@
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -596,6 +608,7 @@
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -607,12 +620,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Player-swift.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = K7KHBXSBN5;
+				DEVELOPMENT_TEAM = R52K728KH9;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Carthage/Checkouts/player_sdk_ios/Frameworks",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = SBPlayerSample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -623,7 +634,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.sambatech.playerswift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -633,7 +644,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Player-swift.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = K7KHBXSBN5;
+				DEVELOPMENT_TEAM = R52K728KH9;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -649,7 +660,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.sambatech.playerswift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
